@@ -37,6 +37,8 @@
         
     var current_symbol = symbol.getCurrentSymbol();
     
+    var key_holding_count = 0;
+    
     // combination map that in future will be loading from file 
     // according languadge
     var combinations_map = {
@@ -66,16 +68,30 @@
     // if key is pressed or relissed add event to singleton
     if((condition == 'pressed'))
     {
-      current_symbol = current_symbol;
-      console.log(current_symbol);
-      
+      if(current_symbol == '')
+      {
+        
+      }
+      else
+      {
+        key_holding_count++;
+        console.log(1+current_symbol);
+
+      }
     }
     else if(condition == 'relised')
     {
-      current_symbol = current_symbol;
-      console.log(current_symbol);
-    }
+        key_holding_count--;
+
+        if(key_holding_count < 0)
+        {
+          current_symbol = symbol.getCurrentSymbol();
+          key_holding_count = 0;
+          console.log('2'+current_symbol); 
+        }
+        
+
+    }      
     
-    
-      
+
   }

@@ -25,7 +25,6 @@
     var line_number = options.object.current_line[options.index];
     var character_from_Buffer = options.object.symbol_buffer[options.index].value;
     var current_symbol = symbol.setCurrentSymbol(character_from_Buffer);
-
     var concrete_line = options.object.line[options.index][line_number];
     
     // initialization of words exloser 
