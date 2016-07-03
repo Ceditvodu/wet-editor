@@ -35,6 +35,10 @@
     
     var director = new Director(concrete_entity, 'wet-');
     
+    var symbol_from_buffer = data.symbol_buffer[index].value;
+    
+    var current_symbol = '';
+    
     // combination map that in future will be loading from file 
     // according languadge
     var combinations_map = {
@@ -61,8 +65,16 @@
       }
     }
     
-    // reaction:
-    console.log('works');
+    // if key is pressed or relissed add event to singleton
+    if((condition == 'pressed'))
+    {
+      current_symbol = symbol_from_buffer;
+    }
+    else if(condition == 'relised')
+    {
+      current_symbol = symbol_from_buffer;
+    }
     
     
+      
   }
