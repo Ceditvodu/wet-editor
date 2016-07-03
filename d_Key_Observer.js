@@ -17,7 +17,7 @@
   * @param {String} condition - condition of key: pressed or released 
   */
 
-  var Key_Observer = function(data, scope, index, event, condition)
+  var Key_Observer = function(data, scope, symbol, index, event, condition)
   {
     // initialization of new character class generator
     var class_generator = new Char_Class_Generator('wet-');
@@ -89,7 +89,7 @@
         'index': index
       });
       hotkey.runFunction(scope.getStringKeyMap());
-      scope.keyDown(event);
+      scope.keyDown(event);      
     }
     else if(condition == 'relised')
     {

@@ -17,7 +17,7 @@
   * @param {String} condition - condition of key: pressed or released 
   */
 
-  var Combination_Observer = function(data, scope, index, event, condition)
+  var Combination_Observer = function(data, scope, symbol, index, event, condition)
   {
     // initialization of new character class generator
     var class_generator = new Char_Class_Generator('wet-');
@@ -34,10 +34,8 @@
     var divider = new Divider();
     
     var director = new Director(concrete_entity, 'wet-');
-    
-    var symbol_from_buffer = data.symbol_buffer[index].value;
-    
-    var current_symbol = '';
+        
+    var current_symbol = symbol.getCurrentSymbol();
     
     // combination map that in future will be loading from file 
     // according languadge
@@ -68,11 +66,14 @@
     // if key is pressed or relissed add event to singleton
     if((condition == 'pressed'))
     {
-      current_symbol = symbol_from_buffer;
+      current_symbol = current_symbol;
+      console.log(current_symbol);
+      
     }
     else if(condition == 'relised')
     {
-      current_symbol = symbol_from_buffer;
+      current_symbol = current_symbol;
+      console.log(current_symbol);
     }
     
     
