@@ -2,6 +2,10 @@
   /*          SINGELTON            */
   ///////////////////////////////////
 
+	///////////////////////////////////
+  /*          Active Record        */
+  ///////////////////////////////////
+
 /**
   * @name Key_Scope
   * @version 1.0.0
@@ -19,14 +23,9 @@
     var instance;
     function createInstance() 
     {
-    /**
-      * @private
-      */
+      
       var key_map = new Array();
       
-    /**
-      * @private
-      */
       var key_flag = false;
       
     /**
@@ -167,7 +166,7 @@
       {
         key_map = [];
       }
- 		    
+       		    
       return {
         keyDown : keyDown,
         keyUp : keyUp,

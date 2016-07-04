@@ -37,6 +37,7 @@
         {
           Observable.apply(this, arguments);
           this.subscribe(Key_Observer);
+          this.subscribe(Combination_Observer);
         }
 
         // unic code for each editor by this class 
@@ -109,12 +110,13 @@
           this.symbol_buffer[i].object = this;
           this.symbol_buffer[i].index = i;
           this.symbol_buffer[i].key_scope = Key_Scope.getInstance();
+          this.symbol_buffer[i].symbol = Symbol.getInstance();
           this.symbol_buffer[i].onkeydown = function(event)
           {
             // observer innitialithation 
             if(Observable != undefined)
             {
-              this.object.publish(this.object, this.key_scope, this.index, event, 'pressed');
+              this.object.publish(this.object, this.key_scope, this.symbol, this.index, event, 'pressed');
             }
           };
 
@@ -126,7 +128,7 @@
           {
             if(Observable != undefined)
             {
-              this.object.publish(this.object, this.key_scope, this.index, event, 'relised');
+              this.object.publish(this.object, this.key_scope, this.symbol, this.index, event, 'relised');
             }
           };
 

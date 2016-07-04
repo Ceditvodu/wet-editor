@@ -61,10 +61,10 @@
     * @param {Object} data - some objects collection to do some actions with.
     * @param {int} counter - index of sub object in data collection.
     */
-    this.publish = function(data, scope, index, event, condition)
+    this.publish = function(data, scope, symbol, index, event, condition)
     {
       for (var i = 0; i < this.subscribers.length; i++) {
-        this.subscribers[i](data, scope, index, event, condition);
+        this.subscribers[i](data, scope, symbol, index, event, condition);
       };
     }
 
