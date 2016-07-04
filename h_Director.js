@@ -781,102 +781,7 @@ var Director = (function()
       element.parentNode.insertBefore(content, element.nextSibling);
     }
 
-  /**
-    * @function setCursorOnPosition
-    * @desc set cursor on some position on some line.
-    * @param {Number} position - position on which will be paste cursor. 
-    * @param {object} line - line in wich need to paste cursor.
-    * @mamberof Director
-    * @instance
-    */
-    this.setCursorOnPosition = function(position, line)
-    {       
-      var character_count = 0;
-      
-      if(position < 0)
-      {
-        if(line)
-        {
-          this.activate(line.childNodes[0]);
-        }
-      }
-      else
-      {
-        if(line)
-        {
-          var lines_elements = line.childNodes;
-
-          // separating all characters
-          for(var i=0; i<lines_elements.length; i++)
-          {
-            if((lines_elements[i].className.split(' ').indexOf('parent') < 0)
-               &&(lines_elements[i].className.split(' ').indexOf('wet-word') >= 0))
-            {
-              lines_elements[i].innerHTML = this.divider.divide(lines_elements[i])
-            }
-          }
-
-          // counting characters before cursor
-          for(var i=0; i<lines_elements.length; i++)
-          {
-            var stop = false;
-
-            if((lines_elements[i].childNodes.length == 1)
-               ||(lines_elements[i].className.split(" ").indexOf(this.prefix + "line-start") > 0))
-            {
-              if(character_count >= position)
-              {
-                stop = true;
-
-                this.activate(lines_elements[i]);
-
-                break;
-              }
-
-              character_count++;
-            }
-            else if(lines_elements[i].childNodes.length > 1)
-            {
-              var lines_elements_elements = lines_elements[i].childNodes;
-
-              for(var j=0; j<lines_elements_elements.length; j++)
-              {
-                console.log(lines_elements_elements[j])
-
-                if(character_count >= position)
-                {
-                  stop = true;
-
-                  this.makeItParentWord(lines_elements[i]);
-
-                  this.activate(lines_elements_elements[j]);
-
-                  break;
-                }
-
-                character_count++;
-              }
-            }
-
-            if(stop)
-            {
-              break;
-            }
-          }
-
-          // deseparating characters before cursor
-          for(var i=0; i<lines_elements.length; i++)
-          {
-            if(lines_elements[i].className.split(' ').indexOf('parent') < 0)
-            {
-              lines_elements[i].innerHTML = this.divider.concat(lines_elements[i]);
-            }
-          }
-
-        }         
-      }
-     
-    }
+ 
     
 //////////////////
 // Make section 
@@ -1313,6 +1218,105 @@ var Director = (function()
       }      
       
       return ++character_count;    
+    }
+    
+
+ /**
+    * @function setCursorOnPosition
+    * @desc set cursor on some position on some line.
+    * @param {Number} position - position on which will be paste cursor. 
+    * @param {object} line - line in wich need to paste cursor.
+    * @mamberof Director
+    * @instance
+    */
+    this.setCursorOnPosition = function(position, line)
+    {       
+      var character_count = 0;
+      
+      // if we have position less then 0 or equils 0:
+      if((position < 0)|(position == 0))
+      {
+        if(line)
+        {
+          this.activate(line.childNodes[0]);
+        }
+      }
+      else
+      {
+        if(line)
+        {
+          var lines_elements = line.childNodes;
+
+          // separating all characters
+          for(var i=0; i<lines_elements.length; i++)
+          {
+            if((lines_elements[i].className.split(' ').indexOf('parent') < 0)
+               &&(lines_elements[i].className.split(' ').indexOf('wet-word') >= 0))
+            {
+              lines_elements[i].innerHTML = this.divider.divide(lines_elements[i])
+            }
+          }
+
+          // counting characters before cursor
+          for(var i=0; i<lines_elements.length; i++)
+          {
+            var stop = false;
+
+            if((lines_elements[i].childNodes.length == 1)
+               ||(lines_elements[i].className.split(" ").indexOf(this.prefix + "line-start") > 0))
+            {
+              if(character_count >= position)
+              {
+                stop = true;
+
+                this.activate(lines_elements[i]);
+
+                break;
+              }
+
+              character_count++;
+            }
+            else if(lines_elements[i].childNodes.length > 1)
+            {
+              var lines_elements_elements = lines_elements[i].childNodes;
+
+              for(var j=0; j<lines_elements_elements.length; j++)
+              {
+                console.log(lines_elements_elements[j])
+
+                if(character_count >= position)
+                {
+                  stop = true;
+
+                  this.makeItParentWord(lines_elements[i]);
+
+                  this.activate(lines_elements_elements[j]);
+
+                  break;
+                }
+
+                character_count++;
+              }
+            }
+
+            if(stop)
+            {
+              break;
+            }
+          }
+
+          // deseparating characters before cursor
+          for(var i=0; i<lines_elements.length; i++)
+          {
+            if(lines_elements[i].className.split(' ').indexOf('parent') < 0)
+            {
+              lines_elements[i].innerHTML = this.divider.concat(lines_elements[i]);
+            }
+          }
+
+        }         
+      }
+     
     }
         
 //////////////////
