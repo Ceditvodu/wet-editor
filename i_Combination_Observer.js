@@ -75,8 +75,6 @@
       else
       {
         key_holding_count++;
-        console.log(1+current_symbol);
-
       }
     }
     else if(condition == 'relised')
@@ -87,7 +85,6 @@
         {
           current_symbol = symbol.getCurrentSymbol();
           key_holding_count = 0;
-          console.log('2'+current_symbol); 
         }
         
 

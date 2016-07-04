@@ -19,7 +19,7 @@ Module.getInstance().down_arrow = function(options)
   var word = director.getParentWord();
   var cursor_entity = director.getCursorEntity('active');
   var after_cursor = director.getNextEntity(cursor_entity);
-  var before_cursor = director.getBeforeEntity(cursor_entity);
+  var before_cursor = director.getNextEntity(cursor_entity);
   var cursor_parent = cursor_entity.parentNode;
   
   // must be fixed !!!!!!!!!
@@ -58,7 +58,7 @@ Module.getInstance().down_arrow = function(options)
     {
       if(previouse_line_length < cursor_position)
       {
-        cursor_position = previouse_line_length;
+        cursor_position = --previouse_line_length;
       }
 
       director.deactivate(cursor_entity);
@@ -82,7 +82,6 @@ Module.getInstance().down_arrow = function(options)
       // index of created line !!!!!!
       options.object.current_line[options.index]++;
     }
-    
     
   }
     

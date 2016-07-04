@@ -821,7 +821,8 @@ var Director = (function()
           {
             var stop = false;
 
-            if(lines_elements[i].childNodes.length == 1)
+            if((lines_elements[i].childNodes.length == 1)
+               ||(lines_elements[i].className.split(" ").indexOf(this.prefix + "line-start") > 0))
             {
               if(character_count >= position)
               {

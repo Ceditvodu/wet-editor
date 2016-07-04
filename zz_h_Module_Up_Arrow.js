@@ -39,6 +39,7 @@ Module.getInstance().up_arrow = function(options)
   {
     console.log('bad')
   }
+  // if next line is:
   else
   {
     var cursor_position = director.findCursorPosition(cursor_entity);
@@ -62,6 +63,7 @@ Module.getInstance().up_arrow = function(options)
 
       director.deactivate(cursor_entity);
 
+      // if we going from a word:
       if(word)
       {
         word.innerHTML = divider.concat(word);
