@@ -75,9 +75,7 @@ Module.getInstance().down_arrow = function(options)
       }
       // if we going not from word:
       else
-      {
-          
-        
+      {        
         director.setCursorOnPosition(++cursor_position, next_line);
       }
 
