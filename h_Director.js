@@ -1171,6 +1171,7 @@ var Director = (function()
         {
           var stop = false;
           
+          
           if(lines_elements[i].childNodes.length == 1)
           {
             if(lines_elements[i].className.split(' ').indexOf('active') >= 0)
@@ -1180,6 +1181,10 @@ var Director = (function()
               character_count--;
               
               break;
+            }
+            else if((i+1)== lines_elements.length)
+            {
+              character_count--;
             }
             
             character_count++;
@@ -1261,14 +1266,23 @@ var Director = (function()
           for(var i=0; i<lines_elements.length; i++)
           {
             var stop = false;
-
+            
+            // if
             if((lines_elements[i].childNodes.length == 1)
-               ||(lines_elements[i].className.split(" ").indexOf(this.prefix + "line-start") > 0))
+               |(lines_elements[i].className.split(" ").indexOf(this.prefix + "line-start") >= 0))
             {
               if(character_count >= position)
               {
                 stop = true;
 
+                this.activate(lines_elements[i]);
+
+                break;
+              }
+              else if((i+1)== lines_elements.length)
+              {
+                character_count--;
+                                
                 this.activate(lines_elements[i]);
 
                 break;
@@ -1291,6 +1305,18 @@ var Director = (function()
                   this.makeItParentWord(lines_elements[i]);
 
                   this.activate(lines_elements_elements[j]);
+
+                  break;
+                }
+                else if((i+1)== lines_elements.length)
+                {
+                  stop = true;
+                  
+                  character_count--;
+                  
+                  this.makeItParentWord(lines_elements[i]);
+
+                  this.activate(lines_elements[i]);
 
                   break;
                 }

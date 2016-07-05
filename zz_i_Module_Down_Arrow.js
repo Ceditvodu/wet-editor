@@ -56,27 +56,29 @@ Module.getInstance().down_arrow = function(options)
     // if cursor not on a line start:
     else
     {
-      if(previouse_line_length < cursor_position)
-      {
-        cursor_position = --previouse_line_length;
-      }
-
       director.deactivate(cursor_entity);
       
       // if we going from a word:
       if(word)
       {
+        if(previouse_line_length < cursor_position)
+        {
+          cursor_position = previouse_line_length-1;
+        }
+        
         word.innerHTML = divider.concat(word);
 
         director.makeItWord(word);
         
         // with word going something wrong so i must make decremating for prevent it
-        director.setCursorOnPosition(--cursor_position, next_line);
+        director.setCursorOnPosition(cursor_position, next_line);
       }
       // if we going not from word:
       else
       {
-        director.setCursorOnPosition(cursor_position, next_line);
+          
+        
+        director.setCursorOnPosition(++cursor_position, next_line);
       }
 
       // index of created line !!!!!!
