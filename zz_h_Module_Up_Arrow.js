@@ -39,6 +39,7 @@ Module.getInstance().up_arrow = function(options)
   {
     console.log('bad')
   }
+  // if next line is:
   else
   {
     var cursor_position = director.findCursorPosition(cursor_entity);
@@ -57,11 +58,12 @@ Module.getInstance().up_arrow = function(options)
     {
       if(previouse_line_length < cursor_position)
       {
-        cursor_position = --previouse_line_length;
+        cursor_position = previouse_line_length-1;
       }
 
       director.deactivate(cursor_entity);
 
+      // if we going from a word:
       if(word)
       {
         word.innerHTML = divider.concat(word);
@@ -69,12 +71,12 @@ Module.getInstance().up_arrow = function(options)
         director.makeItWord(word);
         
         // with word going something wrong so i must make decremating for prevent it
-        director.setCursorOnPosition(--cursor_position, previose_line);
+        director.setCursorOnPosition(cursor_position, previose_line);
       }
       // if we going not from word:
       else
       {
-        director.setCursorOnPosition(cursor_position, previose_line);
+        director.setCursorOnPosition(++cursor_position, previose_line);
       }
       
       // index of created line !!!!!!
