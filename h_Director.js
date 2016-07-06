@@ -1325,7 +1325,68 @@ var Director = (function()
         // or this.implodeAllChildLess('concat', line);
         
       }      
-      
+      return character_count;    
+    }
+    
+ /**
+    * @function setCursorOnPosition
+    * @desc seting cursor on som position.
+    * @param {object} position - entity of cursor. 
+    * @param {object} line - line on which we must search a cursor. 
+    * @mamberof Director
+    * @instance
+    */
+    this.setCursorOnPosition = function(position, line)
+    {
+      var character_count = 0;
+            
+      if(line)
+      {
+        var lines_elements = line.childNodes;
+        
+        // separating all characters
+        this.explodeAllChildLess(line);
+        
+        // counting characters before cursor
+        for(var i=0; i<lines_elements.length; i++)
+        {
+          if(this.isWord(lines_elements[i]))
+          {
+            var elements_elements = lines_elements[i].childNodes;
+            
+            var count_shot = character_count;
+            
+            character_count += elements_elements.length;
+            
+            if(character_count > position)
+            {
+              character_count = position - count_shot;
+              
+              this.makeItParentWord(lines_elements[i]);
+              
+              this.activate(lines_elements[i].childNodes[character_count-1]);
+                            
+              break;
+            }
+          }
+          else
+          {
+            if(character_count == position)
+            {
+              this.activate(lines_elements[i]);
+              
+              break;
+            }
+            
+            character_count++;
+          }
+        }
+        
+        // deseparating characters before cursor
+        this.makeAllChildLess('concat', line);
+        // or this.implodeAllChildLess('concat', line);
+        
+      }      
       return character_count;    
     }
         
