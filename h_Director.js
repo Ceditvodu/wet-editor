@@ -619,24 +619,24 @@ var Director = (function()
     }
 
   /**
-    * @function getAllAfter 
-    * @desc return array of elements, that lie after current element
-    * @param {object} element - after that element we starting to searching another
-    * @return {Array} - elements that will be cutted from a linne
+    * @function getIndexOfElement 
+    * @desc get index of element with some className.
+    * @param {String} class_of_element - class of searching element.
+    * @param {object} parent - parent in which we ned to get position of cursor.
+    * @return {numeral} - index of serching element.
     * @mamberof Director
     * @instance
     */
-    
-                  
-                            // the element you're looking for
-              var target = lines_elements[i].getElementsByClassName("active")[0];
+    this.getIndexOfElement = function(class_of_element, parent)
+    {
 
-              var index = [].indexOf.call(lines_elements[i].childNodes, target);
-              
-              console.dir(lines_elements[i].childNodes)
-              //console.log(lines_elements[i].childNodes.indexOf('active'));
-              console.log(target);
-              console.log(index)
+      var target = parent.getElementsByClassName(class_of_element)[0];
+
+      var index = [].indexOf.call(parent.childNodes, target);
+      
+      return index*1;
+    }
+                  
 //////////////////
 // Getting section 
 //////////////////
@@ -1292,18 +1292,31 @@ var Director = (function()
         {
           if(this.isWord(lines_elements[i]))
           {
+            var elements_elements = lines_elements[i].childNodes;
+            
             if(this.isParentWord(lines_elements[i]))
             {
-
+              character_count += this.getIndexOfElement('active', lines_elements[i]);
+              
+              break;
             }
             else
             {
-              
+              character_count += elements_elements.length;
             }
           }
-          else
+          else if(!(this.isWord(lines_elements[i])))
           {
-
+            if(this.isCursor(lines_elements[i]))
+            {              
+              break;
+              
+              character_count++;
+            }
+            else
+            {
+              character_count++;
+            }
           }
         }
         
