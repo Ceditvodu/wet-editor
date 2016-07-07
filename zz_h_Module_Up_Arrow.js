@@ -33,6 +33,10 @@ Module.getInstance().up_arrow = function(options)
   var previose_line = director.getBeforeEntity(line);
   
   var previouse_line_length = director.findCursorPosition(cursor_entity, previose_line);
+  
+
+  console.log(director.findCursorPosition(cursor_entity, line));
+  console.log(divider.concat(line));
     
   // if cursor on first line:
   if(!previose_line)
@@ -44,28 +48,28 @@ Module.getInstance().up_arrow = function(options)
   {
     var cursor_position = director.findCursorPosition(cursor_entity);
     
-    console.log(cursor_position, previouse_line_length);
+//    console.log(cursor_position, previouse_line_length);
     
     // if cursor on a line start:
-    if(director.isCursorFirstOnALine('active'))
-    {
-      director.deactivate(cursor_entity);
-      
-      director.setCursorOnPosition(-1, previose_line);      
-    }
+//    if(director.isCursorFirstOnALine('active'))
+//    {
+//      director.deactivate(cursor_entity);
+//      
+//      director.setCursorOnPosition(-1, previose_line);      
+//    }
     // if cursor not on a line start:
-    else
-    {
-      if(previouse_line_length < cursor_position)
-      {
-        cursor_position = previouse_line_length-1;
-      }
-
+//    else
+//    {
       director.deactivate(cursor_entity);
 
       // if we going from a word:
       if(word)
       {
+        if(previouse_line_length < cursor_position)
+        {
+          cursor_position = previouse_line_length-1;
+        }
+        
         word.innerHTML = divider.concat(word);
 
         director.makeItWord(word);
@@ -76,12 +80,12 @@ Module.getInstance().up_arrow = function(options)
       // if we going not from word:
       else
       {
-        director.setCursorOnPosition(++cursor_position, previose_line);
+        director.setCursorOnPosition(cursor_position, previose_line);
       }
       
       // index of created line !!!!!!
       options.object.current_line[options.index]--;
-    }
+//    }
      
   }
   

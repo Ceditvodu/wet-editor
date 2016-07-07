@@ -33,6 +33,9 @@ Module.getInstance().down_arrow = function(options)
   var next_line = director.getNextEntity(line);
   
   var previouse_line_length = director.findCursorPosition(cursor_entity, next_line);
+  
+  console.log(director.findCursorPosition(cursor_entity, line));
+  console.log(divider.concat(line));
     
   // If next line is not:
   if(!next_line)
@@ -43,19 +46,19 @@ Module.getInstance().down_arrow = function(options)
   else
   {
     var cursor_position = director.findCursorPosition(cursor_entity);
-    
-    console.log(cursor_position, previouse_line_length);
-    
-    // if cursor on a line start:
-    if(director.isCursorFirstOnALine('active'))
-    {
-      director.deactivate(cursor_entity);
-      
-      director.setCursorOnPosition(-1, next_line);      
-    }
-    // if cursor not on a line start:
-    else
-    {
+//    
+//    console.log(cursor_position, previouse_line_length);
+//    
+//    // if cursor on a line start:
+//    if(director.isCursorFirstOnALine('active'))
+//    {
+//      director.deactivate(cursor_entity);
+//      
+//      director.setCursorOnPosition(-1, next_line);      
+//    }
+//    // if cursor not on a line start:
+//    else
+//    {
       director.deactivate(cursor_entity);
       
       // if we going from a word:
@@ -75,17 +78,15 @@ Module.getInstance().down_arrow = function(options)
       }
       // if we going not from word:
       else
-      {
-          
-        
-        director.setCursorOnPosition(++cursor_position, next_line);
+      {        
+        director.setCursorOnPosition(cursor_position, next_line);
       }
 
       // index of created line !!!!!!
       options.object.current_line[options.index]++;
     }
     
-  }
+//  }
     
 }
 
