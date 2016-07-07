@@ -32,10 +32,8 @@ Module.getInstance().down_arrow = function(options)
   
   var next_line = director.getNextEntity(line);
   
-  var previouse_line_length = director.findCursorPosition(cursor_entity, next_line);
-  
-  console.log(director.findCursorPosition(cursor_entity, line));
-  console.log(divider.concat(line));
+  var next_line_length = director.findCursorPosition(cursor_entity, next_line);
+  next_line_length--;
     
   // If next line is not:
   if(!next_line)
@@ -46,47 +44,38 @@ Module.getInstance().down_arrow = function(options)
   else
   {
     var cursor_position = director.findCursorPosition(cursor_entity);
-//    
-//    console.log(cursor_position, previouse_line_length);
-//    
-//    // if cursor on a line start:
-//    if(director.isCursorFirstOnALine('active'))
-//    {
-//      director.deactivate(cursor_entity);
-//      
-//      director.setCursorOnPosition(-1, next_line);      
-//    }
-//    // if cursor not on a line start:
-//    else
-//    {
-      director.deactivate(cursor_entity);
-      
-      // if we going from a word:
-      if(word)
-      {
-        if(previouse_line_length < cursor_position)
-        {
-          cursor_position = previouse_line_length-1;
-        }
-        
-        word.innerHTML = divider.concat(word);
 
-        director.makeItWord(word);
-        
-        // with word going something wrong so i must make decremating for prevent it
-        director.setCursorOnPosition(cursor_position, next_line);
-      }
-      // if we going not from word:
-      else
-      {        
-        director.setCursorOnPosition(cursor_position, next_line);
-      }
-
-      // index of created line !!!!!!
-      options.object.current_line[options.index]++;
-    }
+    director.deactivate(cursor_entity);
     
-//  }
+    // if we going from a word:
+    if(word)
+    {
+      if(next_line_length < cursor_position)
+      {
+        cursor_position = next_line_length;
+      }
+      
+      word.innerHTML = divider.concat(word);
+
+      director.makeItWord(word);
+      
+      // with word going something wrong so i must make decremating for prevent it
+      director.setCursorOnPosition(cursor_position, next_line);
+    }
+    // if we going not from word:
+    else
+    {    
+      if(next_line_length < cursor_position)
+      {
+        cursor_position = next_line_length;
+      }
+      
+      director.setCursorOnPosition(cursor_position, next_line);
+    }
+
+    // index of created line !!!!!!
+    options.object.current_line[options.index]++;
+  }
     
 }
 
