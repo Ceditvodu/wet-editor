@@ -1358,18 +1358,18 @@ var Director = (function()
             
             character_count += elements_elements.length;
             
-            if(character_count > position)
+            if(character_count >= position)
             {
-              character_count = position - count_shot;
+              character_count = position - count_shot-1;
               
               this.makeItParentWord(lines_elements[i]);
               
-              this.activate(lines_elements[i].childNodes[character_count-1]);
+              this.activate(lines_elements[i].childNodes[character_count]);
                             
               break;
             }
           }
-          else
+          else if(this.isStart(lines_elements[i]))
           {
             if(character_count == position)
             {
@@ -1377,8 +1377,20 @@ var Director = (function()
               
               break;
             }
+          }
+          else
+          {
             
             character_count++;
+            
+            if(character_count == position)
+            {
+              this.activate(lines_elements[i]);
+              
+              break;
+            }
+
+
           }
         }
         
