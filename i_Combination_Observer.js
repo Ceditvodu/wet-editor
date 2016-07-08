@@ -64,7 +64,7 @@
         }
       }
     }
-    
+          
     // if key is pressed or relissed add event to singleton
     if((condition == 'pressed'))
     {
@@ -75,6 +75,8 @@
       else
       {
         key_holding_count++;
+        
+        this.init();
       }
     }
     else if(condition == 'relised')
@@ -84,11 +86,22 @@
         if(key_holding_count < 0)
         {
           current_symbol = symbol.getCurrentSymbol();
+          
+          this.init();
+          
           key_holding_count = 0;
         }
-        
+    }
 
-    }      
-    
+  /**
+    * @function init
+    * @desc start process of combination manipulations.
+    * @mamberof Director
+    * @instance
+    */
+    this.init = function()
+    {
+      console.log(combinations_map.string);
+    }
 
   }
