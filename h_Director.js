@@ -504,12 +504,19 @@ var Director = (function()
     * @instance
     */
     this.getNextEntity = function(entity)
-    {      
-      var next = entity.nextSibling || false;
-      
-      if(next)
+    {
+      if(entity)
       {
-        return next;
+        var next = entity.nextSibling;
+
+        if(next)
+        {
+          return next;
+        }
+        else
+        {
+          return false;
+        }
       }
       else
       {

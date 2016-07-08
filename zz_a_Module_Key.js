@@ -55,7 +55,7 @@
       // director.deactivate(previouse_element);
       if(previouse_element)
       {
-        var previouse_element_class = previouse_element.className.split(" ")[0]; 
+
       }
       else
       {
@@ -110,9 +110,7 @@
             
             director.plus(active_entity, new_word);
             
-            director.deactivate(active_entity);        
-            
-            
+            director.deactivate(active_entity);
           }
         }
         // if we in the word:
