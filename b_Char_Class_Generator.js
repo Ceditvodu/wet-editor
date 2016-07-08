@@ -89,6 +89,7 @@
 
         // signifires and uppercase code map 
         var codes = [
+          {'start_code':9, 'end_code':9, 'desc':'tab'}, // tab 
           {'start_code':32, 'end_code':32, 'desc':'space'}, //
           {'start_code':33, 'end_code':33, 'desc':'exclamation'}, // !
           {'start_code':34, 'end_code':34, 'desc':'quotation '}, // "

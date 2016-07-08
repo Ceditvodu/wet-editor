@@ -21,15 +21,22 @@
 	}
 	.wet-space{
 		display: inline-block;
+/*
 		width: 10px;
 		height: 10px;
+*/
+    white-space: pre;  
 		/*height: 20px;*/
 	}
 
 	.wet-tab{
 		display: inline-block;
+/*
 		width: 20px;
 		height: 10px;
+*/
+    white-space: pre;
+    tab-size: 2;
 		/*height: 20px;*/
 	}
 
