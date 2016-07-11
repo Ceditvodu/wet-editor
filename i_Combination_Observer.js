@@ -39,6 +39,8 @@
     
     var key_holding_count = 0;
     
+    var editors_combination_map = {};
+        
     // combination map that in future will be loading from file 
     // according languadge
     var combinations_map = {
@@ -61,6 +63,11 @@
         'type':{
           'start':'"',
           'end':'"'
+        }
+      },
+      'function':{
+        'type':{
+          'start':"function"          
         }
       }
     }
@@ -101,7 +108,70 @@
     */
     this.init = function()
     {
-      console.log(combinations_map.string);
+      // loop for combination map
+      // converting from human readable type to some
+      for(var type in combinations_map)
+      {
+//        combinations_map[type].type.start
+//        combinations_map[type].type.end
+        if(combinations_map[type].type.start)
+        {
+          this.addCombination(type, 'start', combinations_map);
+        }
+        if(combinations_map[type].type.end)
+        {
+          this.addCombination(type, 'end', combinations_map);
+        }
+      }
+      
+      console.log(editors_combination_map.f.u.n.c.t.i.o.n);
+      console.log(editors_combination_map['/']['*']);
+      console.log(editors_combination_map['*']['/']);
+        
     }
+    
+  /**
+    * @function addCombination
+    * @desc adding combination to collection graph.
+    * @param {String} combination - the word that must be compaired with combination map.
+    * @param {String} dirapction - the role of word, is it start or is it end.
+    * @param {object} collection - combination map with element of what must be compared words.
+    * @mamberof Director
+    * @instance
+    */
+    this.addCombination = function(combination, diraction, collection)
+    {
+      var combination_symbols = collection[combination].type[diraction].split('');
+            
+      var current_position = editors_combination_map;
+      
+      for(var i=0; i<combination_symbols.length; i++)
+      {
+        if(current_position.name)
+        {
+          if(current_position.name == combination_symbols[i])
+          {
+            current_position = current_position[combination_symbols[i]];
+          }
+          else
+          {
+            current_position.name = combination_symbols[i];
+            current_position[combination_symbols[i]] ={};
+            current_position = current_position[combination_symbols[i]];
+          }
 
+        }
+        else
+        {
+          current_position.name = combination_symbols[i];
+          current_position[combination_symbols[i]] ={};
+          current_position = current_position[combination_symbols[i]];
+        }
+        
+        if(i==combination_symbols.length-1)
+        {
+          current_position.func = combination+'_'+diraction;
+        }
+      }
+    }
   }
