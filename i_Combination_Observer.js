@@ -44,30 +44,30 @@
     // combination map that in future will be loading from file 
     // according languadge
     var combinations_map = {
-      "lineComment":{
-        "type":{
-          "start":"//"
+      'lineComment':{
+        'type':{
+          'start':'//'
         }
       },
-      "comment":{
-        "type":{
-          "start":"/*",
-          "end":"*/"
+      'comment':{
+        'type':{
+          'start':'/*',
+          'end':'*/'
         }
       },
-      "string":{
-        "type":{
-          "start":"'",
-          "end":"'"
+      'string':{
+        'type':{
+          'start':"'",
+          'end':"'"
         },
-        "type":{
-          "start":'"',
-          "end":'"'
+        'type':{
+          'start':'"',
+          'end':'"'
         }
       },
-      "function":{
-        "type":{
-          "start":"function"          
+      'function':{
+        'type':{
+          'start':'function'          
         }
       }
     }
@@ -83,7 +83,7 @@
       {
         key_holding_count++;
         
-        this.init();
+       // //this.init();
       }
     }
     else if(condition == 'relised')
@@ -94,7 +94,7 @@
         {
           current_symbol = symbol.getCurrentSymbol();
           
-          this.init();
+         // this.init();
           
           key_holding_count = 0;
         }
@@ -124,6 +124,7 @@
         }
       }
       
+      console.log(editors_combination_map)
 //      console.log(editors_combination_map.f.u.n.c.t.i.o.n);
 //      console.log(editors_combination_map['/']['*']);
 //      console.log(editors_combination_map['*']['/']);
@@ -149,7 +150,7 @@
       {
         if(current_position.name)
         {
-          if(current_position.name == combination_symbols[i])
+          if(current_position.name === combination_symbols[i])
           {
             current_position = current_position[combination_symbols[i]];
           }

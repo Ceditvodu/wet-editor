@@ -140,6 +140,8 @@
             this.key_scope.clearKeyMap();
           }
         };
+        
+        var keywords = new Combination_Init.getInstance();
       }
       else
       {
