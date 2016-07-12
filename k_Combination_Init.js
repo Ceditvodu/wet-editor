@@ -3,22 +3,16 @@
 ///////////////////////////////////	
 
 /**
-  * @name Module
+  * @name Combination_Init
   * @author Ivan Kaduk
   * @copyright Ivan Kaduk 2016.
   * @license cc-by-nc-sa 4.0
   * @class
-  * @classdesc it is solution that helps to create additional mudules more 
-    easely and implement it to application.
-  * @namespace Module
-  * @constructs Module
-  * @example     Module.getInstance().modules_name = function(options)
-                  {
-                  // some code
-                  }
-                  var module = new Module.getInstance();
-                  module.addFunction('8', 'modules_name');
-  *
+  * @classdesc it is class that help to work with reserved by specific language keywords
+  and operands
+  * @namespace Combination_Init
+  * @constructs Combination_Init
+  * @example Combination_Init.getInstance();
   */
   var Combination_Init = (function()
   {
@@ -65,7 +59,7 @@
     /**
       * @function init
       * @desc start process of combination manipulations.
-      * @mamberof Director
+      * @mamberof Combination_Init
       * @instance
       */
       function init()
@@ -73,25 +67,24 @@
         // loop for combination map
         // converting from human readable type to some
         for(var type in combinations_map)
-        {
-          
+        { 
           if(combinations_map[type].type.start)
           {
-            addCombination(type, 'start', combinations_map);
+            addCombination(type, 'start');
           }
           if(combinations_map[type].type.end)
           {
-            addCombination(type, 'end', combinations_map);
+            addCombination(type, 'end');
           }
           if(combinations_map[type].type.startEnd)
           {
-            addCombination(type, 'startEnd', combinations_map);
+            addCombination(type, 'startEnd');
           }
         }
-            console.log(editors_combination_map.f.u.n.c.t.i.o.n);
-            console.log(editors_combination_map['/']['*']);
-            console.log(editors_combination_map['*']['/']);
-            console.log(editors_combination_map['"']);
+//            console.log(editors_combination_map.f.u.n.c.t.i.o.n);
+//            console.log(editors_combination_map['/']['*']);
+//            console.log(editors_combination_map['*']['/']);
+//            console.log(editors_combination_map['"']);
       }
 
     /**
@@ -100,12 +93,12 @@
       * @param {String} combination - the word that must be compaired with combination map.
       * @param {String} dirapction - the role of word, is it start or is it end.
       * @param {object} collection - combination map with element of what must be compared words.
-      * @mamberof Director
+      * @mamberof Combination_Init
       * @instance
       */
-      function addCombination(combination, diraction, collection)
+      function addCombination(combination, diraction)
       {
-        var combination_symbols = collection[combination].type[diraction].split('');
+        var combination_symbols = combinations_map[combination].type[diraction].split('');
 
         var current_position = editors_combination_map;
 
@@ -120,15 +113,14 @@
             else
             {
               current_position.name = combination_symbols[i];
-              current_position[combination_symbols[i]] ={};
+              current_position[combination_symbols[i]] = {};
               current_position = current_position[combination_symbols[i]];
             }
-
           }
           else
           {
             current_position.name = combination_symbols[i];
-            current_position[combination_symbols[i]] ={};
+            current_position[combination_symbols[i]] = {};
             current_position = current_position[combination_symbols[i]];
           }
 
@@ -140,7 +132,9 @@
       }
     
       return {
-        //addFunction: addFunction			
+        //addFunction: addFunction
+        addCombination: addCombination
+        
       }
     }
 
