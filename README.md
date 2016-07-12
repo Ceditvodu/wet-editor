@@ -20,5 +20,5 @@ This early version hase next features:
 [demo](http://codepen.io/Ceditvodu/full/ZWgOrO/)
 
 [Licence](https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode) [(short)](https://creativecommons.org/licenses/by-nc-sa/4.0/) ![cc by nc sa](https://licensebuttons.net/l/by-nc-sa/3.0/88x31.png)
-
+_______________________
 |class|type|dependence|
