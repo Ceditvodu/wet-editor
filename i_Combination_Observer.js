@@ -44,30 +44,30 @@
     // combination map that in future will be loading from file 
     // according languadge
     var combinations_map = {
-      'lineComment':{
-        'type':{
-          'start':'//'
+      "lineComment":{
+        "type":{
+          "start":"//"
         }
       },
-      'comment':{
-        'type':{
-          'start':'/*',
-          'end':'*/'
+      "comment":{
+        "type":{
+          "start":"/*",
+          "end":"*/"
         }
       },
-      'string':{
-        'type':{
-          'start':"'",
-          'end':"'"
+      "string":{
+        "type":{
+          "start":"'",
+          "end":"'"
         },
-        'type':{
-          'start':'"',
-          'end':'"'
+        "type":{
+          "start":'"',
+          "end":'"'
         }
       },
-      'function':{
-        'type':{
-          'start':"function"          
+      "function":{
+        "type":{
+          "start":"function"          
         }
       }
     }
@@ -124,9 +124,9 @@
         }
       }
       
-      console.log(editors_combination_map.f.u.n.c.t.i.o.n);
-      console.log(editors_combination_map['/']['*']);
-      console.log(editors_combination_map['*']['/']);
+//      console.log(editors_combination_map.f.u.n.c.t.i.o.n);
+//      console.log(editors_combination_map['/']['*']);
+//      console.log(editors_combination_map['*']['/']);
         
     }
     
