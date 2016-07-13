@@ -28,6 +28,8 @@
     var current_symbol = symbol.getCurrentSymbol();
     
     var key_holding_count = 0;
+    
+    var combination = Combination_Init.getInstance();
           
     // if key is pressed or relissed add event to singleton
     if((condition == 'pressed'))
@@ -40,23 +42,32 @@
       {
         key_holding_count++;
         
-        this.doActionForCombination();
+        if(key_holding_count != 1)
+        {
+          this.doActionForCombination(); 
+            
+        }
+  
       }
     }
     else if(condition == 'relised')
     {
-        key_holding_count--;
+      key_holding_count--;
 
-        if(key_holding_count < 0)
-        {
-          current_symbol = symbol.getCurrentSymbol();
-          
-          this.doActionForCombination();
-          
-          key_holding_count = 0;
-        }
+      if((key_holding_count > 0)|(key_holding_count < 0))
+      {
+        current_symbol = symbol.getCurrentSymbol();
+        
+        this.doActionForCombination();
+        
+        key_holding_count++;
+      }
+      
     }
-
+    
+    //this.doActionForCombination();
+    
+    //console.log(key_holding_count)
   /**
     * @function init
     * @desc start process of combination manipulations.
@@ -65,8 +76,17 @@
     */
     this.doActionForCombination = function()
     {
-      var curent_word = director.getParentWord(); 
+      var cursor = director.getCursorEntity('active');
       
-      console.log(curent_word);
+      var previouse_element = director.getBeforeEntity(cursor);
+      
+      var next_element = director.getNextEntity(cursor);
+      
+      var parent = director.getParentWord();
+      
+      var parents_content = divider.concat(parent);
+      
+      combination.runCombination(parents_content);
+
     }
   }

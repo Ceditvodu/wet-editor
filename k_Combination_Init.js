@@ -35,19 +35,29 @@
             "end":"*/"
           }
         },
-        "stringOne":{
+        "string-1":{
           "type":{
             "startEnd":"'"
           }
         },
-        "stringTwo":{
+        "string-2":{
           "type":{
             "startEnd":'"'
           }
         },
-        "function":{
+        "keyword-1":{
           "type":{
             "start":"function"          
+          }
+        },
+        "keyword-2":{
+          "type":{
+            "start":"var"
+          }
+        },        
+        "keyword-3":{
+          "type":{
+            "start":"void"
           }
         }
       }
@@ -130,10 +140,30 @@
           }
         }
       }
+      
+      function runCombination(combination)
+      {
+        if(combination != undefined)
+        {
+          var generated_code = '';
+
+          combination = combination.split('');
+
+          for(var i=0; i<combination.length; i++)
+          {
+            generated_code += '["'+combination[i]+'"]';
+          }
+
+          generated_code = 'editors_combination_map'+generated_code+'["func"]';
+
+          console.log(eval(generated_code)); 
+        }
+      }
     
       return {
         //addFunction: addFunction
-        addCombination: addCombination
+        addCombination: addCombination,
+        runCombination: runCombination
         
       }
     }
