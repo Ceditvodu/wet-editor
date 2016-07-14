@@ -30,6 +30,8 @@
     var key_holding_count = 0;
     
     var combination = Combination_Init.getInstance();
+    // add some values to combination
+    combination.setUp(concrete_entity, 'wet-', 'active');
           
     // if key is pressed or relissed add event to singleton
     if((condition == 'pressed'))
@@ -65,9 +67,6 @@
       
     }
     
-    //this.doActionForCombination();
-    
-    //console.log(key_holding_count)
   /**
     * @function init
     * @desc start process of combination manipulations.

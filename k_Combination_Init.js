@@ -21,6 +21,15 @@
     function createInstance() 
     {
       var editors_combination_map = {};
+      
+      var concrete_entity;
+      
+      var prefix = '';
+      
+      var active = '';
+      
+      var action;
+                  
       // combination map that in future will be loading from file 
       // according languadge
       var combinations_map = {
@@ -97,6 +106,18 @@
 //            console.log(editors_combination_map['"']);
       }
 
+      function setUp(concrete_entity, prefix, active)
+      {
+        concrete_entity = concrete_entity;
+        
+        prefix = prefix;
+        
+        active = active;
+        
+        action = new Combination_Actions(concrete_entity, prefix, active);
+      }
+      
+      
     /**
       * @function addCombination
       * @desc adding combination to collection graph.
@@ -136,7 +157,7 @@
 
           if(i==combination_symbols.length-1)
           {
-            current_position.func = combination+'_'+diraction;
+            current_position.func = combination+'-'+diraction;
           }
         }
       }
@@ -145,26 +166,56 @@
       {
         if(combination != undefined)
         {
-          var generated_code = '';
+          var func = new Array(); 
+          
+          var function_name = '';
+          
+          var argument = '';
+          
+          var current_position = editors_combination_map || false;
 
-          combination = combination.split('');
-
-          for(var i=0; i<combination.length; i++)
+          var combination_item = combination.split('');
+          
+          if(current_position != false)
           {
-            generated_code += '["'+combination[i]+'"]';
+            for(var i=0; i<combination.length; i++)
+            {
+              try
+              {
+                current_position = current_position[combination_item[i]]; 
+              }
+              catch(e)
+              {
+                
+              }
+            }
+            
+            try
+            {
+              if(current_position['func'] != undefined)
+              {
+                func = current_position['func'].split('-');
+                
+                function_name = func[0];
+                
+                argument = func[2];
+                
+                action[function_name](argument)
+              }
+            }
+            catch(e)
+            {
+              
+            }
           }
-
-          generated_code = 'editors_combination_map'+generated_code+'["func"]';
-
-          console.log(eval(generated_code)); 
         }
       }
     
       return {
         //addFunction: addFunction
+        setUp: setUp,
         addCombination: addCombination,
         runCombination: runCombination
-        
       }
     }
 

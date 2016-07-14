@@ -690,8 +690,8 @@ var Director = (function()
     this.makeItWord = function(element)
     { 
       if(element)
-      {
-        element.className = this.prefix + 'word';
+      {        
+        element.classList.toggle('parent');
       }
     }
     
