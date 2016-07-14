@@ -468,7 +468,7 @@ var javascript_keywords = {
     }
   },
   
-    "lineComment":{
+  "lineComment":{
     "type":{
       "start":"//"
     }

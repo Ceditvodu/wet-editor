@@ -28,7 +28,7 @@ var Combination_Actions = (function()
       
       var parent = director.getParentWord();
       
-      parent.classList.toggle('keyword');
+      parent.classList.add('keyword');
     }
   }
   return Combination_Actions;
