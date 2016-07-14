@@ -32,44 +32,7 @@
                   
       // combination map that in future will be loading from file 
       // according languadge
-      var combinations_map = {
-        "lineComment":{
-          "type":{
-            "start":"//"
-          }
-        },
-        "comment":{
-          "type":{
-            "start":"/*",
-            "end":"*/"
-          }
-        },
-        "string-1":{
-          "type":{
-            "startEnd":"'"
-          }
-        },
-        "string-2":{
-          "type":{
-            "startEnd":'"'
-          }
-        },
-        "keyword-1":{
-          "type":{
-            "start":"function"          
-          }
-        },
-        "keyword-2":{
-          "type":{
-            "start":"var"
-          }
-        },        
-        "keyword-3":{
-          "type":{
-            "start":"void"
-          }
-        }
-      }
+      var combinations_map = javascript_keywords;      
       
       init();
       

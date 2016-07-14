@@ -1,0 +1,13 @@
+.wet-line{
+  border:1px solid #12aaee;
+}
+.active{
+  border-right: 1px solid black; 
+}
+.result{
+  background: #1477B2;
+  font-family: 'Inconsolata', monospace;
+}
+.keyword{
+  color: #00ffff;
+}
