@@ -100,20 +100,20 @@
         {
           if(current_position.name)
           {
-            if(current_position.name == combination_symbols[i])
+            if(current_position.name.indexOf(combination_symbols[i]) >= 0)
             {
               current_position = current_position[combination_symbols[i]];
             }
             else
             {
-              current_position.name = combination_symbols[i];
+              current_position.name.push(combination_symbols[i]);
               current_position[combination_symbols[i]] = {};
               current_position = current_position[combination_symbols[i]];
             }
           }
           else
           {
-            current_position.name = combination_symbols[i];
+            current_position.name = [combination_symbols[i]];
             current_position[combination_symbols[i]] = {};
             current_position = current_position[combination_symbols[i]];
           }
@@ -124,7 +124,15 @@
           }
         }
       }
-      
+    /**
+      * @function addCombination
+      * @desc adding combination to collection graph.
+      * @param {String} combination - the word that must be compaired with combination map.
+      * @param {String} dirapction - the role of word, is it start or is it end.
+      * @param {object} collection - combination map with element of what must be compared words.
+      * @mamberof Combination_Init
+      * @instance
+      */
       function runCombination(combination)
       {
         if(combination != undefined)
