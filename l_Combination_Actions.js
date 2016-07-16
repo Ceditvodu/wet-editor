@@ -31,23 +31,15 @@ var Combination_Actions = (function()
       parent.classList.add('keyword');
     }
 
-    this.clearfFromParent = function()
+    this.clear = function()
     {
       var cursor = director.getCursorEntity("active");
       
       var parent = director.getParentWord();
       
-      director.makeItWord(parent,['keyword']);
+      director.makeItWord(parent,['parent']);
     }
     
-    this.clearfFromKeywords = function()
-    {
-      var cursor = director.getCursorEntity("active");
-      
-      var parent = director.getParentWord();
-      
-      director.makeItWord(parent,['keyword']);
-    }
   }
   return Combination_Actions;
 })()

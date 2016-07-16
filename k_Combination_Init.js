@@ -177,12 +177,12 @@
               }
               else
               {
-                //action['clearFrom'];
+                action['clear']();
               }
             }
             catch(e)
             {
-              //action['clear'];
+              action['clear']();
             }
           }
         }

@@ -164,7 +164,7 @@
             {
               director.deactivate(active_char);
               
-              director.makeItWord(parent_node);
+              director.makeItWord(parent_node, ['keyword']);
               
               parent_node.innerHTML = divider.concat(parent_node);
 
