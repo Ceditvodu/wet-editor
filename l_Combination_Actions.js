@@ -30,6 +30,24 @@ var Combination_Actions = (function()
       
       parent.classList.add('keyword');
     }
+
+    this.clearfFromParent = function()
+    {
+      var cursor = director.getCursorEntity("active");
+      
+      var parent = director.getParentWord();
+      
+      director.makeItWord(parent,['keyword']);
+    }
+    
+    this.clearfFromKeywords = function()
+    {
+      var cursor = director.getCursorEntity("active");
+      
+      var parent = director.getParentWord();
+      
+      director.makeItWord(parent,['keyword']);
+    }
   }
   return Combination_Actions;
 })()

@@ -684,14 +684,26 @@ var Director = (function()
     * @function makeItWord 
     * @desc give the class name of word.
     * @param {object} element - element that must became a word.
+    * @param {Array} parameter - it is an additional parameter (keyword, parent)
     * @mamberof Director
     * @instance
     */
-    this.makeItWord = function(element)
+    this.makeItWord = function(element, parameter)
     { 
-      if(element)
-      {        
-        element.classList.toggle('parent');
+      if(parameter)
+      {
+        if(parameter.indexOf('keyword') < 0 )
+        {
+          element.classList.remove('keyword'); 
+        }
+        if(parameter.indexOf('parent') < 0)
+        {
+          element.classList.remove('parent');
+        } 
+      }
+      else if(!parameter)
+      {
+        element.className = this.prefix+('word');
       }
     }
     

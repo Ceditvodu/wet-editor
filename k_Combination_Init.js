@@ -153,16 +153,18 @@
             {
               try
               {
-                current_position = current_position[combination_item[i]]; 
+                current_position = current_position[combination_item[i]];
               }
               catch(e)
               {
                 
               }
             }
+//                console.log(current_position)
             
             try
             {
+//              console.log(current_position['func'])
               if(current_position['func'] != undefined)
               {
                 func = current_position['func'].split('-');
@@ -173,10 +175,14 @@
                 
                 action[function_name](argument)
               }
+              else
+              {
+                //action['clearFrom'];
+              }
             }
             catch(e)
             {
-              
+              //action['clear'];
             }
           }
         }
