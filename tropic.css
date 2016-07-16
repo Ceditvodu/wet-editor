@@ -7,7 +7,11 @@
 .result{
   background: #1477B2;
   font-family: 'Inconsolata', monospace;
+  color: #FF735C;
 }
 .keyword{
-  color: #00ffff;
+  color: #1DFFDA;/* // 00ffff*/
+}
+.wet-signifier{
+  color: #CC0307;
 }
