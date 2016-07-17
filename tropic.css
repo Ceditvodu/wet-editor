@@ -1,11 +1,34 @@
+@keyframes cursor {
+    0% {opacity: 0 ;}
+    
+    50% {opacity: 1 ;}
+  
+    100% {opacity: 0 ;}
+}
+
 .wet-line{
-  border:1px solid #12aaee;
+  border:1px solid #000099;
+}
+.wet-line-start::after{
+  content: "*";
+  color: #000099;
+}
+.wet-space:nth-of-type(odd){
+  border-right: 1px solid #000099;
+}
+.wet-word ~ .wet-space{
+  border-right: none;
 }
 .active{
-  border-right: 1px solid black; 
+}
+.active:after{
+  content: "";
+  border-right: 1px solid #fff;
+  animation: cursor 1s infinite;
+  
 }
 .result{
-  background: #1477B2;
+  background: #000040;
   font-family: 'Inconsolata', monospace;
   color: #FF735C;
 }
@@ -15,3 +38,4 @@
 .wet-signifier{
   color: #CC0307;
 }
+
