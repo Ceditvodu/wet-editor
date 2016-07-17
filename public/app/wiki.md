@@ -29,19 +29,34 @@
 <dt><a href="#Director">Director</a></dt>
 <dd><p>This class need for manipulating objects on code editors work space.</p>
 </dd>
+<dt><a href="#Key_Observer">Key_Observer</a></dt>
+<dd><p>it is reaction under some code combinations.</p>
+</dd>
+<dt><a href="#Symbol">Symbol</a></dt>
+<dd><p>it is singelton which contain current symbol, 
+    and have functional to work with it.</p>
+</dd>
+<dt><a href="#Combination_Init">Combination_Init</a></dt>
+<dd><p>it is class that help to work with reserved by specific language keywords
+  and operands</p>
+</dd>
+<dt><a href="#Director">Director</a></dt>
+<dd><p>This class need for manipulating objects on code editors work space.</p>
+</dd>
 </dl>
 
-<a name="isWord"></a>
+<a name="getCursorEntity"></a>
 
-## .isWord(element) ⇒ <code>bool</code>
-chacking element is it word.
+## .getCursorEntity(cursor_marker) ⇒ <code>object</code>
+geting cursor entity from code.
 
 **Kind**: instance function  
+**Returns**: <code>object</code> - - entity of active element.  
 **Mamberof**: Director  
 
 | Param | Type | Description |
 | --- | --- | --- |
-| element | <code>object</code> | html element for checking. |
+| cursor_marker | <code>String</code> | marker of active element. |
 
 <a name="Editor"></a>
 
@@ -186,6 +201,23 @@ it is reaction of observer on key event
 **Author:** Ivan Kaduk  
 **License**: cc-by-nc-sa 4.0  
 **Copyright**: Ivan Kaduk 2016.  
+
+* [Key_Observer](#Key_Observer)
+    * [new Key_Observer(data, scope, index, event, condition)](#new_Key_Observer_new)
+    * [new Key_Observer(data, scope, index, event, condition)](#new_Key_Observer_new)
+
+<a name="new_Key_Observer_new"></a>
+
+### new Key_Observer(data, scope, index, event, condition)
+
+| Param | Type | Description |
+| --- | --- | --- |
+| data | <code>[Editor](#Editor)</code> | getting main object |
+| scope | <code>[Key_Scope](#Key_Scope)</code> | key map singelton |
+| index | <code>int</code> | index of current active editor element |
+| event | <code>event</code> | object that contain event data |
+| condition | <code>String</code> | condition of key: pressed or released |
+
 <a name="new_Key_Observer_new"></a>
 
 ### new Key_Observer(data, scope, index, event, condition)
@@ -540,6 +572,25 @@ This class need for manipulating objects on code editors work space.
 **Author:** Ivan Kaduk  
 **License**: cc-by-nc-sa 4.0  
 **Copyright**: Ivan Kaduk 2016.  
+
+* [Director](#Director)
+    * [new Director(concrete_entity, prefix, active)](#new_Director_new)
+    * [new Director(concrete_entity, prefix, active)](#new_Director_new)
+
+<a name="new_Director_new"></a>
+
+### new Director(concrete_entity, prefix, active)
+
+| Param | Type | Description |
+| --- | --- | --- |
+| concrete_entity | <code>object</code> | object with work space. |
+| prefix | <code>String</code> | prefix for elements classes. |
+| active | <code>String</code> | cursors active class name. |
+
+**Example**  
+```js
+director.getCursorEntity('active');
+```
 <a name="new_Director_new"></a>
 
 ### new Director(concrete_entity, prefix, active)
@@ -603,6 +654,30 @@ chacking element, is it start one.
 
 ## .isSignifier(element) ⇒ <code>bool</code>
 chacking element is signifer.
+
+**Kind**: instance function  
+**Mamberof**: Director  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| element | <code>object</code> | html element for checking. |
+
+<a name="isNumerial"></a>
+
+## .isNumerial(element) ⇒ <code>bool</code>
+chacking element is numeral.
+
+**Kind**: instance function  
+**Mamberof**: Director  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| element | <code>object</code> | html element for checking. |
+
+<a name="isWord"></a>
+
+## .isWord(element) ⇒ <code>bool</code>
+chacking element is it word.
 
 **Kind**: instance function  
 **Mamberof**: Director  
@@ -695,19 +770,6 @@ checking is the element is cursor.
 | --- | --- | --- |
 | element | <code>object</code> | html element for checking. |
 
-<a name="getCursorEntity"></a>
-
-## .getCursorEntity(cursor_marker) ⇒ <code>object</code>
-geting cursor entity from code.
-
-**Kind**: instance function  
-**Returns**: <code>object</code> - - entity of active element.  
-**Mamberof**: Director  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| cursor_marker | <code>String</code> | marker of active element. |
-
 <a name="getBeforeEntity"></a>
 
 ## .getBeforeEntity(entity) ⇒ <code>object</code>
@@ -781,6 +843,20 @@ return array of elements, that lie after current element
 | --- | --- | --- |
 | element | <code>object</code> | after that element we starting to searching another |
 
+<a name="getIndexOfElement"></a>
+
+## .getIndexOfElement(class_of_element, parent) ⇒ <code>numeral</code>
+get index of element with some className.
+
+**Kind**: instance function  
+**Returns**: <code>numeral</code> - - index of serching element.  
+**Mamberof**: Director  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| class_of_element | <code>String</code> | class of searching element. |
+| parent | <code>object</code> | parent in which we ned to get position of cursor. |
+
 <a name="makeItParentWord"></a>
 
 ## .makeItParentWord(before_entity)
@@ -795,7 +871,7 @@ making a word an a parent word.
 
 <a name="makeItWord"></a>
 
-## .makeItWord(element)
+## .makeItWord(element, parameter)
 give the class name of word.
 
 **Kind**: instance function  
@@ -804,6 +880,7 @@ give the class name of word.
 | Param | Type | Description |
 | --- | --- | --- |
 | element | <code>object</code> | element that must became a word. |
+| parameter | <code>Array</code> | it is an additional parameter (keyword, parent) |
 
 <a name="activate"></a>
 
@@ -854,18 +931,42 @@ add some element after this, if this have a next element.
 | element | <code>object</code> | element after wich will be added content. |
 | content | <code>String</code> | content wich will be added after element. |
 
-<a name="setCursorOnPosition"></a>
+<a name="makeAllChildLess"></a>
 
-## .setCursorOnPosition(position, line)
-set cursor on some position on some line.
+## .makeAllChildLess(action, line)
+divide all elements in childless words.
 
 **Kind**: instance function  
 **Mamberof**: Director  
 
 | Param | Type | Description |
 | --- | --- | --- |
-| position | <code>Number</code> | position on which will be paste cursor. |
-| line | <code>object</code> | line in wich need to paste cursor. |
+| action | <code>string</code> | what we whant to do with line: divide, concat. |
+| line | <code>object</code> | line wich must be exploded. |
+
+<a name="explodeAllChildLess"></a>
+
+## .explodeAllChildLess(line)
+divide all elements in childless words.
+
+**Kind**: instance function  
+**Mamberof**: Director  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| line | <code>object</code> | line wich must be exploded. |
+
+<a name="implodeAllChildLess"></a>
+
+## .implodeAllChildLess(line)
+divide all elements in childless words.
+
+**Kind**: instance function  
+**Mamberof**: Director  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| line | <code>object</code> | line wich must be imploded. |
 
 <a name="deactivatePreviouse"></a>
 
@@ -1009,3 +1110,181 @@ searching for an number of char position on wich cursor is stand on
 | cursor | <code>object</code> | entity of cursor. |
 | line | <code>object</code> | line on which we must search a cursor. |
 
+<a name="setCursorOnPosition"></a>
+
+## .setCursorOnPosition(position, line)
+seting cursor on som position.
+
+**Kind**: instance function  
+**Mamberof**: Director  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| position | <code>object</code> | entity of cursor. |
+| line | <code>object</code> | line on which we must search a cursor. |
+
+<a name="Key_Observer"></a>
+
+## Key_Observer
+it is reaction under some code combinations.
+
+**Kind**: global class  
+**Author:** Ivan Kaduk  
+**License**: cc-by-nc-sa 4.0  
+**Copyright**: Ivan Kaduk 2016.  
+
+* [Key_Observer](#Key_Observer)
+    * [new Key_Observer(data, scope, index, event, condition)](#new_Key_Observer_new)
+    * [new Key_Observer(data, scope, index, event, condition)](#new_Key_Observer_new)
+
+<a name="new_Key_Observer_new"></a>
+
+### new Key_Observer(data, scope, index, event, condition)
+
+| Param | Type | Description |
+| --- | --- | --- |
+| data | <code>[Editor](#Editor)</code> | getting main object |
+| scope | <code>[Key_Scope](#Key_Scope)</code> | key map singelton |
+| index | <code>int</code> | index of current active editor element |
+| event | <code>event</code> | object that contain event data |
+| condition | <code>String</code> | condition of key: pressed or released |
+
+<a name="new_Key_Observer_new"></a>
+
+### new Key_Observer(data, scope, index, event, condition)
+
+| Param | Type | Description |
+| --- | --- | --- |
+| data | <code>[Editor](#Editor)</code> | getting main object |
+| scope | <code>[Key_Scope](#Key_Scope)</code> | key map singelton |
+| index | <code>int</code> | index of current active editor element |
+| event | <code>event</code> | object that contain event data |
+| condition | <code>String</code> | condition of key: pressed or released |
+
+<a name="init"></a>
+
+## .init()
+start process of combination manipulations.
+
+**Kind**: instance function  
+**Mamberof**: Director  
+<a name="Symbol"></a>
+
+## Symbol
+it is singelton which contain current symbol, 
+    and have functional to work with it.
+
+**Kind**: global class  
+**Author:** Ivan Kaduk  
+**License**: cc-by-nc-sa 4.0  
+**Copyright**: Ivan Kaduk 2016.  
+<a name="setCurrentSymbol"></a>
+
+## .setCurrentSymbol(symbol)
+setting symbol.
+
+**Kind**: instance function  
+**Access:** public  
+**Mamberof**: Key_Scope  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| symbol | <code>String</code> | symbol from symbol buffer. |
+
+<a name="getCurrentSymbol"></a>
+
+## .getCurrentSymbol() ⇒ <code>String</code>
+getting symbol.
+
+**Kind**: instance function  
+**Returns**: <code>String</code> - symbol from symbol buffer.  
+**Access:** public  
+**Mamberof**: Key_Scope  
+<a name="Combination_Init"></a>
+
+## Combination_Init
+it is class that help to work with reserved by specific language keywords
+  and operands
+
+**Kind**: global class  
+**Author:** Ivan Kaduk  
+**License**: cc-by-nc-sa 4.0  
+**Copyright**: Ivan Kaduk 2016.  
+<a name="init"></a>
+
+## .init()
+start process of combination manipulations.
+
+**Kind**: instance function  
+**Mamberof**: Combination_Init  
+<a name="addCombination"></a>
+
+## .addCombination(combination, dirapction, collection)
+adding combination to collection graph.
+
+**Kind**: instance function  
+**Mamberof**: Combination_Init  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| combination | <code>String</code> | the word that must be compaired with combination map. |
+| dirapction | <code>String</code> | the role of word, is it start or is it end. |
+| collection | <code>object</code> | combination map with element of what must be compared words. |
+
+<a name="addCombination"></a>
+
+## .addCombination(combination, dirapction, collection)
+adding combination to collection graph.
+
+**Kind**: instance function  
+**Mamberof**: Combination_Init  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| combination | <code>String</code> | the word that must be compaired with combination map. |
+| dirapction | <code>String</code> | the role of word, is it start or is it end. |
+| collection | <code>object</code> | combination map with element of what must be compared words. |
+
+<a name="Director"></a>
+
+## Director
+This class need for manipulating objects on code editors work space.
+
+**Kind**: global class  
+**Version**: 1.0.0  
+**Author:** Ivan Kaduk  
+**License**: cc-by-nc-sa 4.0  
+**Copyright**: Ivan Kaduk 2016.  
+
+* [Director](#Director)
+    * [new Director(concrete_entity, prefix, active)](#new_Director_new)
+    * [new Director(concrete_entity, prefix, active)](#new_Director_new)
+
+<a name="new_Director_new"></a>
+
+### new Director(concrete_entity, prefix, active)
+
+| Param | Type | Description |
+| --- | --- | --- |
+| concrete_entity | <code>object</code> | object with work space. |
+| prefix | <code>String</code> | prefix for elements classes. |
+| active | <code>String</code> | cursors active class name. |
+
+**Example**  
+```js
+director.getCursorEntity('active');
+```
+<a name="new_Director_new"></a>
+
+### new Director(concrete_entity, prefix, active)
+
+| Param | Type | Description |
+| --- | --- | --- |
+| concrete_entity | <code>object</code> | object with work space. |
+| prefix | <code>String</code> | prefix for elements classes. |
+| active | <code>String</code> | cursors active class name. |
+
+**Example**  
+```js
+director.getCursorEntity('active');
+```

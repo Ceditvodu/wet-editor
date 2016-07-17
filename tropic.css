@@ -9,7 +9,7 @@
 .wet-line{
   border:1px solid #000099;
 }
-.wet-line-start::after{
+.wet-line-start::before{
   content: "*";
   color: #000099;
 }

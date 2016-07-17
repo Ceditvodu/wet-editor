@@ -37,6 +37,7 @@
         {
           Observable.apply(this, arguments);
           this.subscribe(Key_Observer);
+          this.subscribe(Combination_Observer);
         }
 
         // unic code for each editor by this class 
@@ -109,12 +110,13 @@
           this.symbol_buffer[i].object = this;
           this.symbol_buffer[i].index = i;
           this.symbol_buffer[i].key_scope = Key_Scope.getInstance();
+          this.symbol_buffer[i].symbol = Symbol.getInstance();
           this.symbol_buffer[i].onkeydown = function(event)
           {
             // observer innitialithation 
             if(Observable != undefined)
             {
-              this.object.publish(this.object, this.key_scope, this.index, event, 'pressed');
+              this.object.publish(this.object, this.key_scope, this.symbol, this.index, event, 'pressed');
             }
           };
 
@@ -126,7 +128,7 @@
           {
             if(Observable != undefined)
             {
-              this.object.publish(this.object, this.key_scope, this.index, event, 'relised');
+              this.object.publish(this.object, this.key_scope, this.symbol, this.index, event, 'relised');
             }
           };
 
@@ -138,6 +140,8 @@
             this.key_scope.clearKeyMap();
           }
         };
+        
+        var keywords = new Combination_Init.getInstance();
       }
       else
       {
@@ -237,6 +241,7 @@
 
         // signifires and uppercase code map 
         var codes = [
+          {'start_code':9, 'end_code':9, 'desc':'tab'}, // tab 
           {'start_code':32, 'end_code':32, 'desc':'space'}, //
           {'start_code':33, 'end_code':33, 'desc':'exclamation'}, // !
           {'start_code':34, 'end_code':34, 'desc':'quotation '}, // "
@@ -403,10 +408,10 @@
     * @param {Object} data - some objects collection to do some actions with.
     * @param {int} counter - index of sub object in data collection.
     */
-    this.publish = function(data, scope, index, event, condition)
+    this.publish = function(data, scope, symbol, index, event, condition)
     {
       for (var i = 0; i < this.subscribers.length; i++) {
-        this.subscribers[i](data, scope, index, event, condition);
+        this.subscribers[i](data, scope, symbol, index, event, condition);
       };
     }
 
@@ -430,7 +435,7 @@
   * @param {String} condition - condition of key: pressed or released 
   */
 
-  var Key_Observer = function(data, scope, index, event, condition)
+  var Key_Observer = function(data, scope, symbol, index, event, condition)
   {
     // initialization of new character class generator
     var class_generator = new Char_Class_Generator('wet-');
@@ -502,7 +507,7 @@
         'index': index
       });
       hotkey.runFunction(scope.getStringKeyMap());
-      scope.keyDown(event);
+      scope.keyDown(event);      
     }
     else if(condition == 'relised')
     {
@@ -516,7 +521,6 @@
     // adding pressed keys combinations to console
     if(data.console[index] != undefined)
     {
-      console.log(scope.getKeyMap());
       data.console[index].innerHTML = (scope.getKeyMap());
     }
   }
@@ -529,6 +533,10 @@
   // active_char.parentNode.insertBefore(character_holder,active_char.nextSibling);
 	///////////////////////////////////
   /*          SINGELTON            */
+  ///////////////////////////////////
+
+	///////////////////////////////////
+  /*          Active Record        */
   ///////////////////////////////////
 
 /**
@@ -548,14 +556,9 @@
     var instance;
     function createInstance() 
     {
-    /**
-      * @private
-      */
+      
       var key_map = new Array();
       
-    /**
-      * @private
-      */
       var key_flag = false;
       
     /**
@@ -696,7 +699,7 @@
       {
         key_map = [];
       }
- 		    
+       		    
       return {
         keyDown : keyDown,
         keyUp : keyUp,
@@ -715,7 +718,7 @@
       }
     };
   })();
-	///////////////////////////////////
+///////////////////////////////////
 /*           SINGLETON		       */
 ///////////////////////////////////	
 
@@ -1252,6 +1255,34 @@ var Director = (function()
       }
       
     }
+    
+  /**
+    * @function isNumerial 
+    * @desc chacking element is numeral.
+    * @param {object} element - html element for checking.
+    * @return {bool}
+    * @mamberof Director
+    * @instance
+    */
+    this.isNumeral = function(element)
+    { 
+      if(element)
+      {
+        if(element.className.split(" ").indexOf(this.prefix + 'numeral') >= 0)
+        {
+          return true;
+        }
+        else
+        {
+          return false;
+        }
+      }
+      else
+      {
+        return false;
+      }
+      
+    }
 
   /**
     * @function isWord
@@ -1562,12 +1593,19 @@ var Director = (function()
     * @instance
     */
     this.getNextEntity = function(entity)
-    {      
-      var next = entity.nextSibling || false;
-      
-      if(next)
+    {
+      if(entity)
       {
-        return next;
+        var next = entity.nextSibling;
+
+        if(next)
+        {
+          return next;
+        }
+        else
+        {
+          return false;
+        }
       }
       else
       {
@@ -1675,6 +1713,39 @@ var Director = (function()
         return [];
       }
     }
+
+  /**
+    * @function getIndexOfElement 
+    * @desc get index of element with some className.
+    * @param {String} class_of_element - class of searching element.
+    * @param {object} parent - parent in which we ned to get position of cursor.
+    * @return {numeral} - index of serching element.
+    * @mamberof Director
+    * @instance
+    */
+    this.getIndexOfElement = function(class_of_element, parent)
+    {
+      try
+      {
+        var target = parent.getElementsByClassName(class_of_element)[0];
+      }
+      catch(e)
+      {
+        var target = false;
+      }
+
+      if(target)
+      {
+        var index = [].indexOf.call(parent.childNodes, target);
+
+        return index*1;        
+      }
+      else
+      {
+        return -1;
+      }
+    }
+                  
 //////////////////
 // Getting section 
 //////////////////
@@ -1702,14 +1773,26 @@ var Director = (function()
     * @function makeItWord 
     * @desc give the class name of word.
     * @param {object} element - element that must became a word.
+    * @param {Array} parameter - it is an additional parameter (keyword, parent)
     * @mamberof Director
     * @instance
     */
-    this.makeItWord = function(element)
+    this.makeItWord = function(element, parameter)
     { 
-      if(element)
+      if(parameter)
       {
-        element.className = this.prefix + 'word';
+        if(parameter.indexOf('keyword') < 0 )
+        {
+          element.classList.remove('keyword'); 
+        }
+        if(parameter.indexOf('parent') < 0)
+        {
+          element.classList.remove('parent');
+        } 
+      }
+      else if(!parameter)
+      {
+        element.className = this.prefix+('word');
       }
     }
     
@@ -1839,101 +1922,115 @@ var Director = (function()
       element.parentNode.insertBefore(content, element.nextSibling);
     }
 
-  /**
-    * @function setCursorOnPosition
-    * @desc set cursor on some position on some line.
-    * @param {Number} position - position on which will be paste cursor. 
-    * @param {object} line - line in wich need to paste cursor.
+    /**
+    * @function makeAllChildLess 
+    * @desc divide all elements in childless words.
+    * @param {string} action - what we whant to do with line: divide, concat.
+    * @param {object} line - line wich must be exploded.
     * @mamberof Director
     * @instance
     */
-    this.setCursorOnPosition = function(position, line)
-    {       
-      var character_count = 0;
-      
-      if(position < 0)
+    this.makeAllChildLess = function(action, line)
+    {
+      if(line)
       {
-        if(line)
+        var line_elements = line.childNodes || false;
+
+        if(line_elements)
         {
-          this.activate(line.childNodes[0]);
+          for(var i=0; i<line_elements.length; i++)
+          {
+            if((line_elements[i].className.split(' ').indexOf('parent') < 0)
+               &&(line_elements[i].className.split(' ').indexOf(this.prefix+'word') >= 0))
+            {
+              if((action == 'divide')|(action == 'concat'))
+              {
+                line_elements[i].innerHTML = this.divider[action](line_elements[i]);
+              }
+            }
+          }  
+        }
+        else
+        {
+          return false;
         }
       }
       else
       {
-        if(line)
-        {
-          var lines_elements = line.childNodes;
-
-          // separating all characters
-          for(var i=0; i<lines_elements.length; i++)
-          {
-            if((lines_elements[i].className.split(' ').indexOf('parent') < 0)
-               &&(lines_elements[i].className.split(' ').indexOf('wet-word') >= 0))
-            {
-              lines_elements[i].innerHTML = this.divider.divide(lines_elements[i])
-            }
-          }
-
-          // counting characters before cursor
-          for(var i=0; i<lines_elements.length; i++)
-          {
-            var stop = false;
-
-            if(lines_elements[i].childNodes.length == 1)
-            {
-              if(character_count >= position)
-              {
-                stop = true;
-
-                this.activate(lines_elements[i]);
-
-                break;
-              }
-
-              character_count++;
-            }
-            else if(lines_elements[i].childNodes.length > 1)
-            {
-              var lines_elements_elements = lines_elements[i].childNodes;
-
-              for(var j=0; j<lines_elements_elements.length; j++)
-              {
-                console.log(lines_elements_elements[j])
-
-                if(character_count >= position)
-                {
-                  stop = true;
-
-                  this.makeItParentWord(lines_elements[i]);
-
-                  this.activate(lines_elements_elements[j]);
-
-                  break;
-                }
-
-                character_count++;
-              }
-            }
-
-            if(stop)
-            {
-              break;
-            }
-          }
-
-          // deseparating characters before cursor
-          for(var i=0; i<lines_elements.length; i++)
-          {
-            if(lines_elements[i].className.split(' ').indexOf('parent') < 0)
-            {
-              lines_elements[i].innerHTML = this.divider.concat(lines_elements[i]);
-            }
-          }
-
-        }         
+        return false;
       }
-     
+    }  
+    
+  /**
+    * @function explodeAllChildLess 
+    * @desc divide all elements in childless words.
+    * @param {object} line - line wich must be exploded.
+    * @mamberof Director
+    * @instance
+    */
+    this.explodeAllChildLess = function(line)
+    {
+      if(line)
+      {
+        var line_elements = line.childNodes || false;
+
+        if(line_elements)
+        {
+          for(var i=0; i<line_elements.length; i++)
+          {
+            if((line_elements[i].className.split(' ').indexOf('parent') < 0)
+               &&(line_elements[i].className.split(' ').indexOf(this.prefix+'word') >= 0))
+            {
+              line_elements[i].innerHTML = this.divider.divide(line_elements[i])
+            }
+          }  
+        }
+        else
+        {
+          return false;
+        }
+      }
+      else
+      {
+        return false;
+      }
     }
+
+  /**
+    * @function implodeAllChildLess 
+    * @desc divide all elements in childless words.
+    * @param {object} line - line wich must be imploded.
+    * @mamberof Director
+    * @instance
+    */
+    this.implodeAllChildLess = function(line)
+    {
+      if(line)
+      {
+        var line_elements = line.childNodes || false;
+
+        if(line_elements)
+        {
+          for(var i=0; i<line_elements.length; i++)
+          {
+            if((line_elements[i].className.split(' ').indexOf('parent') < 0)
+               &&(line_elements[i].className.split(' ').indexOf(this.prefix+'word') >= 0))
+            {
+              line_elements[i].innerHTML = this.divider.concat(line_elements[i]);
+            }
+          }
+        }
+        else
+        {
+          return false;
+        }
+      }
+      else
+      {
+        return false;
+      }
+    }
+    
     
 //////////////////
 // Make section 
@@ -2309,67 +2406,117 @@ var Director = (function()
         var lines_elements = line.childNodes;
         
         // separating all characters
-        for(var i=0; i<lines_elements.length; i++)
-        {
-          if((lines_elements[i].className.split(' ').indexOf('parent') < 0)
-             &&(lines_elements[i].className.split(' ').indexOf(this.prefix+'word') >= 0))
-          {
-            lines_elements[i].innerHTML = this.divider.divide(lines_elements[i])
-          }
-        }
+        this.explodeAllChildLess(line);
         
         // counting characters before cursor
         for(var i=0; i<lines_elements.length; i++)
         {
-          var stop = false;
-          
-          if(lines_elements[i].childNodes.length == 1)
+          if(this.isWord(lines_elements[i]))
           {
-            if(lines_elements[i].className.split(' ').indexOf('active') >= 0)
+            var elements_elements = lines_elements[i].childNodes;
+            
+            if(this.isParentWord(lines_elements[i]))
             {
-              stop = true;
-              
-              character_count--;
+              character_count += this.getIndexOfElement('active', lines_elements[i]);
               
               break;
             }
-            
-            character_count++;
-          }
-          else if(lines_elements[i].childNodes.length > 1)
-          {
-            var lines_elements_elements = lines_elements[i].childNodes;
-            
-            for(var j=0; j<lines_elements_elements.length; j++)
+            else
             {
-              if(lines_elements_elements[j].className.split(' ').indexOf('active') >= 0)
-              {
-                stop = true;
-                break;
-              }
+              character_count += elements_elements.length;
+            }
+          }
+          else if(!(this.isWord(lines_elements[i])))
+          {
+            if(this.isCursor(lines_elements[i]))
+            {              
+              break;
               
               character_count++;
             }
+            else
+            {
+              character_count++;
+            }
           }
-          
-          if(stop)
+        }
+                
+        // deseparating characters before cursor
+        this.makeAllChildLess('concat', line);
+        // or this.implodeAllChildLess('concat', line);
+      }      
+      return character_count;    
+    }
+    
+ /**
+    * @function setCursorOnPosition
+    * @desc seting cursor on som position.
+    * @param {object} position - entity of cursor. 
+    * @param {object} line - line on which we must search a cursor. 
+    * @mamberof Director
+    * @instance
+    */
+    this.setCursorOnPosition = function(position, line)
+    {
+      var character_count = 0;
+            
+      if(line)
+      {
+        var lines_elements = line.childNodes;
+        
+        // separating all characters
+        this.explodeAllChildLess(line);
+        
+        // counting characters before cursor
+        for(var i=0; i<lines_elements.length; i++)
+        {
+          if(this.isWord(lines_elements[i]))
           {
-            break;
+            var elements_elements = lines_elements[i].childNodes;
+            
+            var count_shot = character_count;
+            
+            character_count += elements_elements.length;
+            
+            if(character_count >= position)
+            {
+              character_count = position - count_shot-1;
+              
+              this.makeItParentWord(lines_elements[i]);
+              
+              this.activate(lines_elements[i].childNodes[character_count]);
+                            
+              break;
+            }
+          }
+          else if(this.isStart(lines_elements[i]))
+          {
+            if(character_count == position)
+            {
+              this.activate(lines_elements[i]);
+              
+              break;
+            }
+          }
+          else
+          {
+            character_count++;
+            
+            if(character_count == position)
+            {
+              this.activate(lines_elements[i]);
+              
+              break;
+            }
           }
         }
         
         // deseparating characters before cursor
-        for(var i=0; i<lines_elements.length; i++)
-        {
-          if(lines_elements[i].className.split(' ').indexOf('parent') < 0)
-          {
-            lines_elements[i].innerHTML = this.divider.concat(lines_elements[i]);
-          }
-        }
+        this.makeAllChildLess('concat', line);
+        // or this.implodeAllChildLess('concat', line);
         
       }      
-      
-      return ++character_count;    
+      return character_count;    
     }
         
 //////////////////
@@ -2380,6 +2527,1361 @@ var Director = (function()
   }  
   return Director;
 })() 
+  ///////////////////////////////////
+	/*          OBSERVERS            */
+	///////////////////////////////////
+/**
+  * @name Combination_Observer
+  * @author Ivan Kaduk
+  * @copyright Ivan Kaduk 2016.
+  * @license cc-by-nc-sa 4.0
+  * @class
+  * @classdesc it is reaction under some code combinations.
+  * @namespace Key_Observer
+  * @constructs
+  * @param {Editor} data - getting main object
+  * @param {Key_Scope} scope - key map singelton 
+  * @param {int} index - index of current active editor element
+  * @param {event} event - object that contain event data
+  * @param {String} condition - condition of key: pressed or released 
+  */
+
+  var Combination_Observer = function(data, scope, symbol, index, event, condition)
+  {
+    var concrete_entity = data.container[index];
+    
+    var director = new Director(concrete_entity, 'wet-', 'active');
+    
+    var divider = new Divider();
+      
+    var current_symbol = symbol.getCurrentSymbol();
+    
+    var key_holding_count = 0;
+    
+    var combination = Combination_Init.getInstance();
+    // add some values to combination
+    combination.setUp(concrete_entity, 'wet-', 'active');
+          
+    // if key is pressed or relissed add event to singleton
+    if((condition == 'pressed'))
+    {
+      if(current_symbol == '')
+      {
+        
+      }
+      else
+      {
+        key_holding_count++;
+        
+        if(key_holding_count != 1)
+        {
+          this.doActionForCombination(); 
+            
+        }
+  
+      }
+    }
+    else if(condition == 'relised')
+    {
+      key_holding_count--;
+
+      if((key_holding_count > 0)|(key_holding_count < 0))
+      {
+        current_symbol = symbol.getCurrentSymbol();
+        
+        this.doActionForCombination();
+        
+        key_holding_count++;
+      }
+      
+    }
+    
+  /**
+    * @function init
+    * @desc start process of combination manipulations.
+    * @mamberof Director
+    * @instance
+    */
+    this.doActionForCombination = function()
+    {
+      var cursor = director.getCursorEntity('active');
+      
+      var previouse_element = director.getBeforeEntity(cursor);
+      
+      var next_element = director.getNextEntity(cursor);
+      
+      var parent = director.getParentWord();
+      
+      var parents_content = divider.concat(parent);
+      
+      combination.runCombination(parents_content);
+
+    }
+  }
+
+// you need to add them all
+// http://www.w3schools.com/js/js_reserved.asp
+var javascript_keywords = {
+  "keyword-1":{
+    "type":{
+      "start":"abstract"          
+    }
+  },
+  "keyword-2":{
+    "type":{
+      "start":"arguments"          
+    }
+  },
+  "keyword-3":{
+    "type":{
+      "start":"break"          
+    }
+  },
+  "keyword-4":{
+    "type":{
+      "start":"byte"          
+    }
+  },
+  "keyword-5":{
+    "type":{
+      "start":"case"          
+    }
+  },
+  "keyword-6":{
+    "type":{
+      "start":"catch"          
+    }
+  },
+  "keyword-7":{
+    "type":{
+      "start":"char"          
+    }
+  },
+  "keyword-8":{
+    "type":{
+      "start":"class"          
+    }
+  },
+  "keyword-9":{
+    "type":{
+      "start":"const"          
+    }
+  },
+  "keyword-10":{
+    "type":{
+      "start":"continue"          
+    }
+  },
+  "keyword-11":{
+    "type":{
+      "start":"debugger"          
+    }
+  },
+  "keyword-12":{
+    "type":{
+      "start":"default"          
+    }
+  },
+  "keyword-13":{
+    "type":{
+      "start":"delete"          
+    }
+  },
+  "keyword-14":{
+    "type":{
+      "start":"do"          
+    }
+  },
+  "keyword-15":{
+    "type":{
+      "start":"double"          
+    }
+  },
+  "keyword-16":{
+    "type":{
+      "start":"else"          
+    }
+  },
+  "keyword-17":{
+    "type":{
+      "start":"enum"          
+    }
+  },
+  "keyword-18":{
+    "type":{
+      "start":"eval"          
+    }
+  },
+  "keyword-19":{
+    "type":{
+      "start":"export"          
+    }
+  },
+  "keyword-20":{
+    "type":{
+      "start":"extends"
+    }
+  },       
+  "keyword-21":{
+    "type":{
+      "start":"false"
+    }
+  },       
+  "keyword-22":{
+    "type":{
+      "start":"final"
+    }
+  },       
+  "keyword-23":{
+    "type":{
+      "start":"finally"
+    }
+  },       
+  "keyword-24":{
+    "type":{
+      "start":"float"
+    }
+  },       
+  "keyword-25":{
+    "type":{
+      "start":"for"
+    }
+  },       
+  "keyword-26":{
+    "type":{
+      "start":"function"
+    }
+  },       
+  "keyword-27":{
+    "type":{
+      "start":"goto"
+    }
+  },       
+  "keyword-28":{
+    "type":{
+      "start":"if"
+    }
+  },       
+  "keyword-29":{
+    "type":{
+      "start":"implements"
+    }
+  },       
+  "keyword-30":{
+    "type":{
+      "start":"in"
+    }
+  },       
+  "keyword-31":{
+    "type":{
+      "start":"instanceof"
+    }
+  },       
+  "keyword-32":{
+    "type":{
+      "start":"int"
+    }
+  },       
+  "keyword-33":{
+    "type":{
+      "start":"interface"
+    }
+  },       
+  "keyword-34":{
+    "type":{
+      "start":"let"
+    }
+  },       
+  "keyword-35":{
+    "type":{
+      "start":"long"
+    }
+  },   
+  "keyword-36":{
+    "type":{
+      "start":"native"
+    }
+  },   
+  "keyword-37":{
+    "type":{
+      "start":"new"
+    }
+  },   
+  "keyword-38":{
+    "type":{
+      "start":"null"
+    }
+  },   
+  "keyword-39":{
+    "type":{
+      "start":"package"
+    }
+  },   
+  "keyword-40":{
+    "type":{
+      "start":"private"
+    }
+  },
+  "keyword-41":{
+    "type":{
+      "start":"protected"
+    }
+  },
+  "keyword-42":{
+    "type":{
+      "start":"public"
+    }
+  },
+  "keyword-43":{
+    "type":{
+      "start":"return"
+    }
+  },
+  "keyword-44":{
+    "type":{
+      "start":"short"
+    }
+  },
+  "keyword-45":{
+    "type":{
+      "start":"static"
+    }
+  },
+  "keyword-46":{
+    "type":{
+      "start":"super"
+    }
+  },
+  "keyword-47":{
+    "type":{
+      "start":"switch"
+    }
+  },
+  "keyword-48":{
+    "type":{
+      "start":"synchronized"
+    }
+  },
+  "keyword-49":{
+    "type":{
+      "start":"this"
+    }
+  },
+  "keyword-50":{
+    "type":{
+      "start":"throw"
+    }
+  },
+  "keyword-51":{
+    "type":{
+      "start":"throws"
+    }
+  },
+  "keyword-52":{
+    "type":{
+      "start":"true"
+    }
+  },
+  "keyword-53":{
+    "type":{
+      "start":"try"
+    }
+  },
+  "keyword-54":{
+    "type":{
+      "start":"typeof"
+    }
+  },
+  "keyword-55":{
+    "type":{
+      "start":"var"
+    }
+  },
+  "keyword-56":{
+    "type":{
+      "start":"void"
+    }
+  },
+  "keyword-57":{
+    "type":{
+      "start":"volatile"
+    }
+  },
+  "keyword-58":{
+    "type":{
+      "start":"while"
+    }
+  },
+  "keyword-59":{
+    "type":{
+      "start":"with"
+    }
+  },
+  "keyword-60":{
+    "type":{
+      "start":"yield"
+    }
+  },
+  //
+  // JavaScript Objects, Properties, and Methods
+  //
+  "keyword-61":{
+    "type":{
+      "start":"Array"
+    }
+  },
+  "keyword-62":{
+    "type":{
+      "start":"Date"
+    }
+  },
+  "keyword-65":{
+    "type":{
+      "start":"hasOwnProperty"
+    }
+  },
+  "keyword-66":{
+    "type":{
+      "start":"Infinity"
+    }
+  },
+  "keyword-67":{
+    "type":{
+      "start":"isFinite"
+    }
+  },
+  "keyword-68":{
+    "type":{
+      "start":"isNaN"
+    }
+  },
+  "keyword-69":{
+    "type":{
+      "start":"isPrototypeOf"
+    }
+  },
+  "keyword-70":{
+    "type":{
+      "start":"length"
+    }
+  },
+  "keyword-71":{
+    "type":{
+      "start":"Math"
+    }
+  },
+  "keyword-72":{
+    "type":{
+      "start":"NaN"
+    }
+  },
+  "keyword-73":{
+    "type":{
+      "start":"name"
+    }
+  },
+  "keyword-74":{
+    "type":{
+      "start":"Number"
+    }
+  },
+  "keyword-75":{
+    "type":{
+      "start":"Object"
+    }
+  },
+  "keyword-76":{
+    "type":{
+      "start":"prototype"
+    }
+  },
+  "keyword-77":{
+    "type":{
+      "start":"String"
+    }
+  },
+  "keyword-78":{
+    "type":{
+      "start":"toString"
+    }
+  },
+  "keyword-79":{
+    "type":{
+      "start":"undefined"
+    }
+  },
+  "keyword-80":{
+    "type":{
+      "start":"valueOf"
+    }
+  },
+   //
+  // Java Reserved Words
+  //
+  "keyword-81":{
+    "type":{
+      "start":"getClass"
+    }
+  },
+  "keyword-82":{
+    "type":{
+      "start":"java"
+    }
+  },
+  "keyword-83":{
+    "type":{
+      "start":"JavaArray"
+    }
+  },
+  "keyword-84":{
+    "type":{
+      "start":"javaClass"
+    }
+  },
+  "keyword-85":{
+    "type":{
+      "start":"JavaObject"
+    }
+  },
+  "keyword-86":{
+    "type":{
+      "start":"JavaPackage"
+    }
+  },
+  //
+  // Windows Reserved Words
+  //
+  "keyword-87":{
+    "type":{
+      "start":"alert"
+    }
+  },
+  "keyword-88":{
+    "type":{
+      "start":"all"
+    }
+  },
+  "keyword-89":{
+    "type":{
+      "start":"anchor"
+    }
+  },
+  "keyword-90":{
+    "type":{
+      "start":"anchors"
+    }
+  },
+  "keyword-91":{
+    "type":{
+      "start":"area"
+    }
+  },
+  "keyword-92":{
+    "type":{
+      "start":"assign"
+    }
+  },
+  "keyword-93":{
+    "type":{
+      "start":"blur"
+    }
+  },
+  "keyword-94":{
+    "type":{
+      "start":"button"
+    }
+  },
+  "keyword-95":{
+    "type":{
+      "start":"checkbox"
+    }
+  },
+  "keyword-96":{
+    "type":{
+      "start":"clearInterval"
+    }
+  },
+  "keyword-97":{
+    "type":{
+      "start":"clearTimeout"
+    }
+  },
+  "keyword-98":{
+    "type":{
+      "start":"clientInformation"
+    }
+  },
+  "keyword-99":{
+    "type":{
+      "start":"close"
+    }
+  },
+  "keyword-100":{
+    "type":{
+      "start":"closed"
+    }
+  },
+  "keyword-101":{
+    "type":{
+      "start":"confirm"
+    }
+  },
+  "keyword-102":{
+    "type":{
+      "start":"constructor"
+    }
+  },
+  "keyword-103":{
+    "type":{
+      "start":"crypto"
+    }
+  },
+  "keyword-104":{
+    "type":{
+      "start":"decodeURI"
+    }
+  },
+  "keyword-105":{
+    "type":{
+      "start":"decodeURIComponent"
+    }
+  },
+  "keyword-106":{
+    "type":{
+      "start":"defaultStatus"
+    }
+  },
+  "keyword-107":{
+    "type":{
+      "start":"document"
+    }
+  },
+  "keyword-108":{
+    "type":{
+      "start":"element"
+    }
+  },
+  "keyword-109":{
+    "type":{
+      "start":"elements"
+    }
+  },
+  "keyword-110":{
+    "type":{
+      "start":"embed"
+    }
+  },
+  "keyword-111":{
+    "type":{
+      "start":"embeds"
+    }
+  },
+  "keyword-112":{
+    "type":{
+      "start":"encodeURI"
+    }
+  },
+  "keyword-113":{
+    "type":{
+      "start":"encodeURIComponent"
+    }
+  },
+  "keyword-114":{
+    "type":{
+      "start":"escape"
+    }
+  },
+  "keyword-115":{
+    "type":{
+      "start":"event"
+    }
+  },
+  "keyword-116":{
+    "type":{
+      "start":"fileUpload"
+    }
+  },
+  "keyword-117":{
+    "type":{
+      "start":"focus"
+    }
+  },
+  "keyword-118":{
+    "type":{
+      "start":"form"
+    }
+  },
+  "keyword-119":{
+    "type":{
+      "start":"forms"
+    }
+  },
+  "keyword-120":{
+    "type":{
+      "start":"frame"
+    }
+  },
+  "keyword-121":{
+    "type":{
+      "start":"innerHeight"
+    }
+  },
+  "keyword-122":{
+    "type":{
+      "start":"innerWidth"
+    }
+  },
+  "keyword-123":{
+    "type":{
+      "start":"layer"
+    }
+  },
+  "keyword-124":{
+    "type":{
+      "start":"layers"
+    }
+  },
+  "keyword-125":{
+    "type":{
+      "start":"link"
+    }
+  },
+  "keyword-126":{
+    "type":{
+      "start":"location"
+    }
+  },
+  "keyword-127":{
+    "type":{
+      "start":"mimeTypes"
+    }
+  },
+  "keyword-128":{
+    "type":{
+      "start":"navigate"
+    }
+  },
+  "keyword-129":{
+    "type":{
+      "start":"navigator"
+    }
+  },
+  "keyword-130":{
+    "type":{
+      "start":"frames"
+    }
+  },
+  "keyword-131":{
+    "type":{
+      "start":"frameRate"
+    }
+  },
+  "keyword-132":{
+    "type":{
+      "start":"hidden"
+    }
+  },
+  "keyword-133":{
+    "type":{
+      "start":"history"
+    }
+  },
+  "keyword-134":{
+    "type":{
+      "start":"image"
+    }
+  },
+  "keyword-135":{
+    "type":{
+      "start":"images"
+    }
+  },
+  "keyword-136":{
+    "type":{
+      "start":"offscreenBuffering"
+    }
+  },
+  "keyword-137":{
+    "type":{
+      "start":"open"
+    }
+  },
+  "keyword-138":{
+    "type":{
+      "start":"opener"
+    }
+  },
+  "keyword-139":{
+    "type":{
+      "start":"option"
+    }
+  },
+  "keyword-140":{
+    "type":{
+      "start":"outerHeight"
+    }
+  },
+  "keyword-141":{
+    "type":{
+      "start":"outerWidth"
+    }
+  },
+  "keyword-142":{
+    "type":{
+      "start":"packages"
+    }
+  },
+  "keyword-143":{
+    "type":{
+      "start":"pageXOffset"
+    }
+  },
+  "keyword-144":{
+    "type":{
+      "start":"pageYOffset"
+    }
+  },
+  "keyword-145":{
+    "type":{
+      "start":"parent"
+    }
+  },
+  "keyword-146":{
+    "type":{
+      "start":"parseFloat"
+    }
+  },
+  "keyword-147":{
+    "type":{
+      "start":"parseInt"
+    }
+  },
+  "keyword-148":{
+    "type":{
+      "start":"password"
+    }
+  },
+  "keyword-149":{
+    "type":{
+      "start":"pkcs11"
+    }
+  },
+  "keyword-150":{
+    "type":{
+      "start":"plugin"
+    }
+  },
+  "keyword-151":{
+    "type":{
+      "start":"prompt"
+    }
+  },
+  "keyword-152":{
+    "type":{
+      "start":"propertyIsEnum"
+    }
+  },
+  "keyword-153":{
+    "type":{
+      "start":"radio"
+    }
+  },
+  "keyword-154":{
+    "type":{
+      "start":"reset"
+    }
+  },
+  "keyword-155":{
+    "type":{
+      "start":"screenX"
+    }
+  },
+  "keyword-156":{
+    "type":{
+      "start":"screenY"
+    }
+  },
+  "keyword-157":{
+    "type":{
+      "start":"scroll"
+    }
+  },
+  "keyword-158":{
+    "type":{
+      "start":"secure"
+    }
+  },
+  "keyword-159":{
+    "type":{
+      "start":"select"
+    }
+  },
+  "keyword-160":{
+    "type":{
+      "start":"self"
+    }
+  },
+  "keyword-161":{
+    "type":{
+      "start":"setInterval"
+    }
+  },
+  "keyword-162":{
+    "type":{
+      "start":"setTimeout"
+    }
+  },
+  "keyword-163":{
+    "type":{
+      "start":"status"
+    }
+  },
+  "keyword-164":{
+    "type":{
+      "start":"submit"
+    }
+  },
+  "keyword-165":{
+    "type":{
+      "start":"taint"
+    }
+  },
+  "keyword-166":{
+    "type":{
+      "start":"text"
+    }
+  },
+  "keyword-167":{
+    "type":{
+      "start":"textarea"
+    }
+  },
+  "keyword-168":{
+    "type":{
+      "start":"top"
+    }
+  },
+  "keyword-169":{
+    "type":{
+      "start":"unescape"
+    }
+  },
+  "keyword-170":{
+    "type":{
+      "start":"untaint"
+    }
+  },
+  "keyword-171":{
+    "type":{
+      "start":"window"
+    }
+  },
+  //
+  // HTML Event Handlers
+  //
+  "keyword-172":{
+    "type":{
+      "start":"onblur"
+    }
+  },
+  "keyword-173":{
+    "type":{
+      "start":"onclick"
+    }
+  },
+  "keyword-174":{
+    "type":{
+      "start":"onerror"
+    }
+  },
+  "keyword-175":{
+    "type":{
+      "start":"onfocus"
+    }
+  },
+  "keyword-176":{
+    "type":{
+      "start":"onkeydown"
+    }
+  },
+  "keyword-177":{
+    "type":{
+      "start":"onkeypress"
+    }
+  },
+  "keyword-178":{
+    "type":{
+      "start":"onkeyup"
+    }
+  },
+  "keyword-179":{
+    "type":{
+      "start":"onmouseover"
+    }
+  },
+  "keyword-180":{
+    "type":{
+      "start":"onload"
+    }
+  },
+  "keyword-181":{
+    "type":{
+      "start":"onmouseup"
+    }
+  },
+  "keyword-182":{
+    "type":{
+      "start":"onmousedown"
+    }
+  },
+  "keyword-183":{
+    "type":{
+      "start":"onsubmit"
+    }
+  },
+  
+  "lineComment":{
+    "type":{
+      "start":"//"
+    }
+  },
+  "comment":{
+    "type":{
+      "start":"/*",
+      "end":"*/"
+    }
+  },
+  "string-1":{
+    "type":{
+      "startEnd":"'"
+    }
+  },
+  "string-2":{
+    "type":{
+      "startEnd":'"'
+    }
+  }
+}
+	///////////////////////////////////
+  /*          SINGELTON            */
+  ///////////////////////////////////
+
+	///////////////////////////////////
+  /*          Active Record        */
+  ///////////////////////////////////
+
+/**
+  * @name Symbol
+  * @author Ivan Kaduk
+  * @copyright Ivan Kaduk 2016.
+  * @license cc-by-nc-sa 4.0
+  * @class
+  * @classdesc it is singelton which contain current symbol, 
+    and have functional to work with it.
+  * @namespace Symbol
+  * @constructs Symbol
+  * @example var Symbol = Symbol.getInstance();
+  */
+  var Symbol = (function () {
+    var instance;
+    function createInstance() 
+    {
+          
+      var current_symbol = '';
+      
+    /**
+      * @public
+      * @function
+      * @name setCurrentSymbol
+      * @desc setting symbol.
+      * @mamberof Key_Scope
+      * @instance
+      * @param {String} symbol - symbol from symbol buffer.
+      */
+      function setCurrentSymbol(symbol) {
+        current_symbol = symbol;
+      }
+      
+    /**
+      * @public
+      * @function
+      * @name getCurrentSymbol
+      * @desc getting symbol.
+      * @mamberof Key_Scope
+      * @instance
+      * @return {String} symbol from symbol buffer.
+      */
+      function getCurrentSymbol() {
+        return current_symbol;
+      }
+ 		    
+      return {
+        setCurrentSymbol: setCurrentSymbol,
+        getCurrentSymbol: getCurrentSymbol
+      };
+    }
+
+    return {
+      getInstance: function () {
+        if (!instance) {
+          instance = createInstance();
+        }
+        return instance;
+      }
+    };
+  })();
+///////////////////////////////////
+/*           SINGLETON		       */
+///////////////////////////////////	
+
+/**
+  * @name Combination_Init
+  * @author Ivan Kaduk
+  * @copyright Ivan Kaduk 2016.
+  * @license cc-by-nc-sa 4.0
+  * @class
+  * @classdesc it is class that help to work with reserved by specific language keywords
+  and operands
+  * @namespace Combination_Init
+  * @constructs Combination_Init
+  * @example Combination_Init.getInstance();
+  */
+  var Combination_Init = (function()
+  {
+    var instance;
+
+    function createInstance() 
+    {
+      var editors_combination_map = {};
+      
+      var concrete_entity;
+      
+      var prefix = '';
+      
+      var active = '';
+      
+      var action;
+                  
+      // combination map that in future will be loading from file 
+      // according languadge
+      var combinations_map = javascript_keywords;      
+      
+      init();
+      
+      console.log(editors_combination_map);
+
+    /**
+      * @function init
+      * @desc start process of combination manipulations.
+      * @mamberof Combination_Init
+      * @instance
+      */
+      function init()
+      {
+        // loop for combination map
+        // converting from human readable type to some
+        for(var type in combinations_map)
+        { 
+          if(combinations_map[type].type.start)
+          {
+            addCombination(type, 'start');
+          }
+          if(combinations_map[type].type.end)
+          {
+            addCombination(type, 'end');
+          }
+          if(combinations_map[type].type.startEnd)
+          {
+            addCombination(type, 'startEnd');
+          }
+        }
+//            console.log(editors_combination_map.f.u.n.c.t.i.o.n);
+//            console.log(editors_combination_map['/']['*']);
+//            console.log(editors_combination_map['*']['/']);
+//            console.log(editors_combination_map['"']);
+      }
+
+      function setUp(concrete_entity, prefix, active)
+      {
+        concrete_entity = concrete_entity;
+        
+        prefix = prefix;
+        
+        active = active;
+        
+        action = new Combination_Actions(concrete_entity, prefix, active);
+      }
+      
+      
+    /**
+      * @function addCombination
+      * @desc adding combination to collection graph.
+      * @param {String} combination - the word that must be compaired with combination map.
+      * @param {String} dirapction - the role of word, is it start or is it end.
+      * @param {object} collection - combination map with element of what must be compared words.
+      * @mamberof Combination_Init
+      * @instance
+      */
+      function addCombination(combination, diraction)
+      {
+        var combination_symbols = combinations_map[combination].type[diraction].split('');
+
+        var current_position = editors_combination_map;
+
+        for(var i=0; i<combination_symbols.length; i++)
+        {
+          if(current_position.name)
+          {
+            if(current_position.name.indexOf(combination_symbols[i]) >= 0)
+            {
+              current_position = current_position[combination_symbols[i]];
+            }
+            else
+            {
+              current_position.name.push(combination_symbols[i]);
+              current_position[combination_symbols[i]] = {};
+              current_position = current_position[combination_symbols[i]];
+            }
+          }
+          else
+          {
+            current_position.name = [combination_symbols[i]];
+            current_position[combination_symbols[i]] = {};
+            current_position = current_position[combination_symbols[i]];
+          }
+
+          if(i==combination_symbols.length-1)
+          {
+            current_position.func = combination+'-'+diraction;
+          }
+        }
+      }
+    /**
+      * @function addCombination
+      * @desc adding combination to collection graph.
+      * @param {String} combination - the word that must be compaired with combination map.
+      * @param {String} dirapction - the role of word, is it start or is it end.
+      * @param {object} collection - combination map with element of what must be compared words.
+      * @mamberof Combination_Init
+      * @instance
+      */
+      function runCombination(combination)
+      {
+        if(combination != undefined)
+        {
+          var func = new Array(); 
+          
+          var function_name = '';
+          
+          var argument = '';
+          
+          var current_position = editors_combination_map || false;
+
+          var combination_item = combination.split('');
+          
+          if(current_position != false)
+          {
+            for(var i=0; i<combination.length; i++)
+            {
+              try
+              {
+                current_position = current_position[combination_item[i]];
+              }
+              catch(e)
+              {
+                
+              }
+            }
+//                console.log(current_position)
+            
+            try
+            {
+//              console.log(current_position['func'])
+              if(current_position['func'] != undefined)
+              {
+                func = current_position['func'].split('-');
+                
+                function_name = func[0];
+                
+                argument = func[2];
+                
+                action[function_name](argument)
+              }
+              else
+              {
+                action['clear']();
+              }
+            }
+            catch(e)
+            {
+              action['clear']();
+            }
+          }
+        }
+      }
+    
+      return {
+        //addFunction: addFunction
+        setUp: setUp,
+        addCombination: addCombination,
+        runCombination: runCombination
+      }
+    }
+
+    return {
+      getInstance: function () {
+        if (!instance) {
+          instance = createInstance();
+        }
+        return instance;
+      }
+    };
+  })()
+	///////////////////////////////////
+	/*          CUSTOM CLASS         */
+	///////////////////////////////////
+/**
+  * @name Combination_Actions
+  * @version 1.0.0
+  * @author Ivan Kaduk
+  * @copyright Ivan Kaduk 2016.
+  * @license cc-by-nc-sa 4.0
+  * @class
+  * @classdesc This class need for manipulating objects on code editors work space.
+  * @param {object} concrete_entity - object with work space.
+  * @param {String} prefix - prefix for elements classes.
+  * @param {String} active - cursors active class name.
+  * @namespace Director
+  * @constructs Director
+  * @example director.getCursorEntity('active');
+  */
+var Combination_Actions = (function()
+{
+  function Combination_Actions(concrete_entity, prefix, active)
+  {
+    var director = new Director(concrete_entity, prefix, active);
+        
+    this.keyword = function(argument)
+    {
+      var cursor = director.getCursorEntity("active");
+      
+      var parent = director.getParentWord();
+      
+      parent.classList.add('keyword');
+    }
+
+    this.clear = function()
+    {
+      var cursor = director.getCursorEntity("active");
+      
+      var parent = director.getParentWord();
+      
+      director.makeItWord(parent,['parent']);
+    }
+    
+  }
+  return Combination_Actions;
+})()
 
 	///////////////////////////////////
 	/*           MAIN SCRIPT         */
@@ -2413,10 +3915,13 @@ var Director = (function()
     // initialization of module that make action according pressed keys
     var hotkey = new Module.getInstance();
     
+    var symbol = new Symbol.getInstance();
+    
     // current entity of editor
     var concrete_entity = options.object.container[options.index];
     var line_number = options.object.current_line[options.index];
     var character_from_Buffer = options.object.symbol_buffer[options.index].value;
+    var current_symbol = symbol.setCurrentSymbol(character_from_Buffer);
     var concrete_line = options.object.line[options.index][line_number];
     
     // initialization of words exloser 
@@ -2447,7 +3952,7 @@ var Director = (function()
       // director.deactivate(previouse_element);
       if(previouse_element)
       {
-        var previouse_element_class = previouse_element.className.split(" ")[0]; 
+
       }
       else
       {
@@ -2502,9 +4007,7 @@ var Director = (function()
             
             director.plus(active_entity, new_word);
             
-            director.deactivate(active_entity);        
-            
-            
+            director.deactivate(active_entity);
           }
         }
         // if we in the word:
@@ -2558,7 +4061,7 @@ var Director = (function()
             {
               director.deactivate(active_char);
               
-              director.makeItWord(parent_node);
+              director.makeItWord(parent_node, ['keyword']);
               
               parent_node.innerHTML = divider.concat(parent_node);
 
@@ -3674,6 +5177,13 @@ Module.getInstance().right_arrow = function(options)
     
     director.activate(after_cursore);
   }  
+  // if next element - numerial:
+  if(director.isNumeral(after_cursore))
+  {
+    director.deactivate(cursore_entity);
+    
+    director.activate(after_cursore);
+  }  
   // if next element - character:
   else if(director.isCharacter(after_cursore))
   {
@@ -3699,7 +5209,7 @@ Module.getInstance().right_arrow = function(options)
     var parent_for_parent = cursore_parent.parentNode || false;
     var next_to_parent_for_parent = parent_for_parent.nextSibling || false;
     
-    // if next element - signifire:
+    // if next to parent element - signifire:
     if(director.isSignifier(next_to_parent))
     {
       director.deactivate(cursore_entity);
@@ -3784,54 +5294,48 @@ Module.getInstance().up_arrow = function(options)
   var previose_line = director.getBeforeEntity(line);
   
   var previouse_line_length = director.findCursorPosition(cursor_entity, previose_line);
-    
+  previouse_line_length--;
+  
   // if cursor on first line:
   if(!previose_line)
   {
     console.log('bad')
   }
+  // if next line is:
   else
   {
-    var cursor_position = director.findCursorPosition(cursor_entity);
-    
-    console.log(cursor_position, previouse_line_length);
-    
-    // if cursor on a line start:
-    if(director.isCursorFirstOnALine('active'))
+    var cursor_position = director.findCursorPosition(cursor_entity, line);
+
+    director.deactivate(cursor_entity);
+
+    // if we going from a word:
+    if(word)
     {
-      director.deactivate(cursor_entity);
+      if(previouse_line_length < cursor_position)
+      {
+        cursor_position = previouse_line_length;
+      }
       
-      director.setCursorOnPosition(-1, previose_line);      
+      word.innerHTML = divider.concat(word);
+
+      director.makeItWord(word);
+      
+      // with word going something wrong so i must make decremating for prevent it
+      director.setCursorOnPosition(cursor_position, previose_line);
     }
-    // if cursor not on a line start:
+    // if we going not from word:
     else
     {
       if(previouse_line_length < cursor_position)
       {
         cursor_position = previouse_line_length;
       }
-
-      director.deactivate(cursor_entity);
-
-      if(word)
-      {
-        word.innerHTML = divider.concat(word);
-
-        director.makeItWord(word);
-        
-        // with word going something wrong so i must make decremating for prevent it
-        director.setCursorOnPosition(--cursor_position, previose_line);
-      }
-      // if we going not from word:
-      else
-      {
-        director.setCursorOnPosition(cursor_position, previose_line);
-      }
       
-      // index of created line !!!!!!
-      options.object.current_line[options.index]--;
+      director.setCursorOnPosition(cursor_position, previose_line);
     }
-     
+    
+    // index of created line !!!!!!
+    options.object.current_line[options.index]--;
   }
   
 }
@@ -3859,7 +5363,7 @@ Module.getInstance().down_arrow = function(options)
   var word = director.getParentWord();
   var cursor_entity = director.getCursorEntity('active');
   var after_cursor = director.getNextEntity(cursor_entity);
-  var before_cursor = director.getBeforeEntity(cursor_entity);
+  var before_cursor = director.getNextEntity(cursor_entity);
   var cursor_parent = cursor_entity.parentNode;
   
   // must be fixed !!!!!!!!!
@@ -3872,7 +5376,8 @@ Module.getInstance().down_arrow = function(options)
   
   var next_line = director.getNextEntity(line);
   
-  var previouse_line_length = director.findCursorPosition(cursor_entity, next_line);
+  var next_line_length = director.findCursorPosition(cursor_entity, next_line);
+  next_line_length--;
     
   // If next line is not:
   if(!next_line)
@@ -3883,47 +5388,37 @@ Module.getInstance().down_arrow = function(options)
   else
   {
     var cursor_position = director.findCursorPosition(cursor_entity);
+
+    director.deactivate(cursor_entity);
     
-    console.log(cursor_position, previouse_line_length);
-    
-    // if cursor on a line start:
-    if(director.isCursorFirstOnALine('active'))
+    // if we going from a word:
+    if(word)
     {
-      director.deactivate(cursor_entity);
+      if(next_line_length < cursor_position)
+      {
+        cursor_position = next_line_length;
+      }
       
-      director.setCursorOnPosition(-1, next_line);      
+      word.innerHTML = divider.concat(word);
+
+      director.makeItWord(word);
+      
+      // with word going something wrong so i must make decremating for prevent it
+      director.setCursorOnPosition(cursor_position, next_line);
     }
-    // if cursor not on a line start:
+    // if we going not from word:
     else
-    {
-      if(previouse_line_length < cursor_position)
+    {    
+      if(next_line_length < cursor_position)
       {
-        cursor_position = previouse_line_length;
+        cursor_position = next_line_length;
       }
-
-      director.deactivate(cursor_entity);
       
-      // if we going from a word:
-      if(word)
-      {
-        word.innerHTML = divider.concat(word);
-
-        director.makeItWord(word);
-        
-        // with word going something wrong so i must make decremating for prevent it
-        director.setCursorOnPosition(--cursor_position, next_line);
-      }
-      // if we going not from word:
-      else
-      {
-        director.setCursorOnPosition(cursor_position, next_line);
-      }
-
-      // index of created line !!!!!!
-      options.object.current_line[options.index]++;
+      director.setCursorOnPosition(cursor_position, next_line);
     }
-    
-    
+
+    // index of created line !!!!!!
+    options.object.current_line[options.index]++;
   }
     
 }
