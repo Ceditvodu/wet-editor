@@ -412,6 +412,37 @@ var Director = (function()
     }
     
   /**
+    * @function isCursorAtTheStartOfWord
+    * @desc checking is cursor at the start of word.
+    * @param {object} word - html element for checking.
+    * @return {bool}
+    * @mamberof Director
+    * @instance
+    */
+    this.isCursorAtTheStartOfWord = function(word)
+    { 
+      if(word)
+      {
+        var first_elements_index = 0;
+        
+        var first_element = word.childNodes[first_elements_index];
+        
+        if(this.isCursor(first_element))
+        {
+          return true;
+        }
+        else
+        {
+          return false;
+        }
+      }
+      else
+      {
+        return false;
+      }
+    }
+    
+  /**
     * @function isCursor
     * @desc checking is the element is cursor.
     * @param {object} element - html element for checking.

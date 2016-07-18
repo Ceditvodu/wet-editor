@@ -73,6 +73,21 @@ Module.getInstance().backspase = function(options)
       director.activate(previous_entity);
     }
   }
+  else if((director.getParentWord() != false)
+          &&(director.isCursorAtTheStartOfWord(director.getParentWord())))
+  {
+    // deleting active element
+    director.delete(active_char);
+    
+    var word = director.getParentWord();
+    
+    word.innerHTML = divider.concat(word);
+    
+    var previous_entity = director.getBeforeEntity(word);
+    
+    director.activate(previous_entity);
+
+  }
   // deleting word when it not on start of line
   // !!!!!!!!!!!!!!!!!!!!!!!!!!!
   else if((director.getParentWord() != false)
