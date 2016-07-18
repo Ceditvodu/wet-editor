@@ -30,6 +30,13 @@ var Combination_Actions = (function()
       
       parent.classList.add('keyword');
     }
+    
+    this.lineComment = function(argument)
+    {
+      var cursor = director.getCursorEntity("active");
+      
+      
+    }
 
     this.clear = function()
     {

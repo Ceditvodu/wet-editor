@@ -24,6 +24,8 @@
     var director = new Director(concrete_entity, 'wet-', 'active');
     
     var divider = new Divider();
+    
+    var class_generator = new Char_Class_Generator();
       
     var current_symbol = symbol.getCurrentSymbol();
     
@@ -77,6 +79,8 @@
     {
       var cursor = director.getCursorEntity('active');
       
+      var cursor_class = class_generator.mainClass(cursor.innerHTML).generate();
+      
       var previouse_element = director.getBeforeEntity(cursor);
       
       var next_element = director.getNextEntity(cursor);
@@ -85,7 +89,17 @@
       
       var parents_content = divider.concat(parent);
       
-      combination.runCombination(parents_content);
 
+      
+      if(cursor_class == 'signifier')
+      {
+        console.log(director.collectSignifier(cursor));
+        
+        
+      }
+      else if((cursor_class == 'numeral')|(cursor_class == 'character'))
+      {
+        combination.runCombination(parents_content);
+      }
     }
   }

@@ -470,6 +470,34 @@ var Director = (function()
       
     }
     
+    /**
+    * @function isSpace
+    * @desc checking is the element is space.
+    * @param {object} element - html element for checking.
+    * @return {bool}
+    * @mamberof Director
+    * @instance
+    */
+    this.isSpace = function(element)
+    {
+      if(element)
+      {        
+        if(element.className.split(" ").indexOf(this.prefix+'space') >= 0)
+        {
+          return true;
+        }
+        else
+        {
+          return false;
+        }
+      }
+      else
+      {
+        return false;
+      }
+      
+    }
+    
 
     
 //////////////////////
@@ -660,7 +688,7 @@ var Director = (function()
     * @function getIndexOfElement 
     * @desc get index of element with some className.
     * @param {String} class_of_element - class of searching element.
-    * @param {object} parent - parent in which we ned to get position of cursor.
+    * @param {object} parent - parent in which we need to get position of cursor.
     * @return {numeral} - index of serching element.
     * @mamberof Director
     * @instance
@@ -685,6 +713,50 @@ var Director = (function()
       else
       {
         return -1;
+      }
+    }
+    
+  /**
+    * @function collectSignifier 
+    * @desc get signifier neighbor.
+    * @param {String} element - class of searching element.
+    * @return {numeral} - string with signifier.
+    * @mamberof Director
+    * @instance
+    */
+    this.collectSignifier = function(element)
+    {
+      if(element)
+      {
+        var final_string = element.innerHTML;
+        
+        var current_position = element;
+        
+        // going to the left:
+        while((this.isSignifier(this.getBeforeEntity(current_position)))
+              &(!this.isSpace(this.getBeforeEntity(current_position))))
+        {
+          current_position = this.getBeforeEntity(current_position);
+          
+          final_string = current_position.innerHTML + final_string;
+        }
+        
+        current_position = element;
+        
+        // going to the right:
+        while((this.isSignifier(this.getNextEntity(current_position)))
+              &(!this.isSpace(this.getNextEntity(current_position))))
+        {
+          current_position = this.getNextEntity(current_position);
+          
+          final_string = final_string + current_position.innerHTML;
+        }
+        
+        return final_string;
+      }
+      else
+      {
+        return false;
       }
     }
                   
