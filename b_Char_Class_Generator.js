@@ -44,7 +44,7 @@
       // adding class to result variable
       if((code <= 47)||((code >= 58)
       &&(code <= 64))||((code >= 91)
-      &&(code <= 96))||((code >= 122)
+      &&(code <= 96))||((code >= 123)
       &&(code <= 126)))
       {
         result_class = prefix + 'signifier';
