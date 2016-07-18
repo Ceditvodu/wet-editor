@@ -93,7 +93,9 @@
       
       if(cursor_class == 'signifier')
       {
-        console.log(director.collectSignifier(cursor));
+        var signifiers = director.collectSignifier(cursor);
+        
+        combination.runCombination(signifiers);
         
         
       }

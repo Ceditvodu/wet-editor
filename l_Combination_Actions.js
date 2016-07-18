@@ -35,16 +35,19 @@ var Combination_Actions = (function()
     {
       var cursor = director.getCursorEntity("active");
       
-      
+      console.log(cursor);
     }
 
     this.clear = function()
     {
       var cursor = director.getCursorEntity("active");
-      
+        
       var parent = director.getParentWord();
       
-      director.makeItWord(parent,['parent']);
+      if(director.isWord(parent))
+      {
+        director.makeItWord(parent,['parent']);
+      }
     }
     
   }
