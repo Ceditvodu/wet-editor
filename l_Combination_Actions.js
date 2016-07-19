@@ -33,7 +33,14 @@ var Combination_Actions = (function()
     
     this.lineComment = function(argument)
     {
+      if(!argument)
+      {
+        argument = '';
+      }
+
       var cursor = director.getCursorEntity("active");
+      
+      director.makeAllUniqueWith(cursor, 'lineComment'+argument);
       
       console.log(cursor);
     }

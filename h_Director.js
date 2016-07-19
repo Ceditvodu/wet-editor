@@ -719,18 +719,18 @@ var Director = (function()
   /**
     * @function collectSignifier 
     * @desc get signifier neighbor.
-    * @param {String} element - class of searching element.
+    * @param {Object} element - class of searching element.
     * @return {numeral} - string with signifier.
     * @mamberof Director
     * @instance
     */
-    this.collectSignifier = function(element)
+    this.collectSignifier = function(cursor)
     {
-      if(element)
+      if(cursor)
       {
-        var final_string = element.innerHTML;
+        var final_string = cursor.innerHTML;
         
-        var current_position = element;
+        var current_position = cursor;
         
         // going to the left:
         while((this.isSignifier(this.getBeforeEntity(current_position)))
@@ -741,7 +741,7 @@ var Director = (function()
           final_string = current_position.innerHTML + final_string;
         }
         
-        current_position = element;
+        current_position = cursor;
         
         // going to the right:
         while((this.isSignifier(this.getNextEntity(current_position)))
@@ -753,6 +753,55 @@ var Director = (function()
         }
         
         return final_string;
+      }
+      else
+      {
+        return false;
+      }
+    }
+    
+  /**
+    * @function getLastNonSpaceSignifier 
+    * @desc get last in row signifier that not space.
+    * @param {Object} cursor - class of cursor.
+    * @param {String} position - class of searching element ('left', 'right').
+    * @return {Object} - position where must make something.
+    * @mamberof Director
+    * @instance
+    */
+    this.getLastNonSpaceSignifier = function(cursor, position)
+    {
+      if(cursor)
+      {
+        var final_object = cursor;
+        
+        var current_position = cursor;
+        
+        // going to the left:
+        if(position == 'left')
+        {
+          while((this.isSignifier(this.getBeforeEntity(current_position)))
+                &(!this.isSpace(this.getBeforeEntity(current_position))))
+          {
+            current_position = this.getBeforeEntity(current_position);
+
+            final_object = final_object;
+          }
+        }
+        else if(position == 'right')
+        {
+          // going to the right:
+          while((this.isSignifier(this.getNextEntity(current_position)))
+                &(!this.isSpace(this.getNextEntity(current_position))))
+          {
+            current_position = this.getNextEntity(current_position);
+
+            final_object = final_object;
+          }  
+        }
+        
+        
+        return final_object;
       }
       else
       {
@@ -1043,6 +1092,122 @@ var Director = (function()
       {
         return false;
       }
+    }
+    
+  /**
+    * @function makeItUniqueWith 
+    * @desc activate a cursor for an element.
+    * @param {object} element - html element for wich will be generated unique class name.
+    * @param {staring} name - the name wich will be unique.
+    * @mamberof Director
+    * @instance
+    */
+    this.makeItUniqueWith = function(element, name)
+    { 
+      if(element)
+      {
+        element.className = this.class_generator
+                                .setPrefix('wet-')
+                                .mainClass(element.innerHTML)
+                                .space()
+                                .subClass(element.innerHTML)
+                                .space()
+                                .unique(name)
+                                .generate();  
+      }
+      else
+      {
+        console.log('activate - has error');
+        return false;
+      }
+    }
+    
+  /**
+    * @function makeAllUniqueWith 
+    * @desc activate a cursor for an element.
+    * @param {object} element - html element from what wich will be generated unique 
+      class name.
+    * @param {staring} name - the name wich will be unique.
+    * @mamberof Director
+    * @instance
+    */
+    this.makeAllUniqueWith = function(element, name)
+    { 
+      if(element)
+      {   
+        var current_position = element;
+        
+        if(this.isCursor(current_position))
+        {
+          var active = ' ' + this.active;
+        }
+        else
+        {
+          var active = '';
+        }
+        
+        current_position.className = this.class_generator
+                                          .setPrefix('wet-')
+                                          .mainClass(current_position.innerHTML)
+                                          .space()
+                                          .subClass(current_position.innerHTML)
+                                          .space()
+                                          .unique(name)
+                                          .generate()
+                                          + active;
+        
+        // going to the left:
+        while((this.isSignifier(this.getBeforeEntity(current_position)))
+              &(!this.isSpace(this.getBeforeEntity(current_position))))
+        {
+          current_position = this.getBeforeEntity(current_position);
+
+          current_position.className = this.class_generator
+                                            .setPrefix('wet-')
+                                            .mainClass(current_position.innerHTML)
+                                            .space()
+                                            .subClass(current_position.innerHTML)
+                                            .space()
+                                            .unique(name)
+                                            .generate()
+                                            + active;
+        }
+        
+        current_position = element;
+
+        if(this.isCursor(current_position))
+        {
+          var active = ' ' + this.active;
+        }
+        else
+        {
+          var active = '';
+        }
+      
+        // going to the right:
+        while((this.isSignifier(this.getNextEntity(current_position)))
+              &(!this.isSpace(this.getNextEntity(current_position))))
+        {
+          current_position = this.getNextEntity(current_position);
+          
+          current_position.className = this.class_generator
+                                            .setPrefix('wet-')
+                                            .mainClass(current_position.innerHTML)
+                                            .space()
+                                            .subClass(current_position.innerHTML)
+                                            .space()
+                                            .unique(name)
+                                            .generate()
+                                            + active;
+        }  
+        
+        return true;
+      }
+      else
+      {
+        return false;
+      }
+    
     }
     
     

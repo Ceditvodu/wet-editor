@@ -171,6 +171,22 @@
         result_class += ' ';
         return this;
       }
+    
+    /**
+      * @public
+      * @function
+      * @name space
+      * @mamberof Char_Class_Generator
+      * @instance
+      * @desc adding space between classes.
+      * @param {String} class_name - class name thet will be unique.
+      */
+      function unique(class_name)
+      {
+        var unique_code = Math.round(Math.random()*1000000);
+        result_class += prefix + class_name + "-" + unique_code;
+        return this;
+      }
 
     /**
       * @public
@@ -190,6 +206,7 @@
         subClass: subClass,
         generate: generate,
         setPrefix: setPrefix,
+        unique: unique,
         space: space
       }
     }
