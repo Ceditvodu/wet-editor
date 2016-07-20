@@ -18,42 +18,98 @@
   * @constructs Symbol
   * @example var Symbol = Symbol.getInstance();
   */
-  var Unique_index = (function () {
+  var Unique_index = (function () 
+  {
     var instance;
     function createInstance() 
     {
           
-      var current_symbol = '';
+      var indexes = [];
+      var current_index = [];
       
     /**
       * @public
       * @function
-      * @name setCurrentSymbol
-      * @desc setting symbol.
+      * @name addIndex
+      * @desc adding index to collection.
       * @mamberof Key_Scope
       * @instance
-      * @param {String} symbol - symbol from symbol buffer.
+      * @param {numeral} index - unique index.
+      * @param {String} name - name of class to wich will be added this index.
       */
-      function setCurrentSymbol(symbol) {
-        current_symbol = symbol;
+      function addIndex(index, name) 
+      {
+        if(indexes.length > 0)
+        {
+          if(_compareIndexes(index, indexes) < 0)
+          {
+            indexes.push([index, name]);
+          }
+        }
+        else
+        {
+          indexes.push([index, name]);
+        }
       }
       
     /**
       * @public
       * @function
-      * @name getCurrentSymbol
-      * @desc getting symbol.
+      * @name setCurrentIndex
+      * @desc setting index as a curent.
       * @mamberof Key_Scope
       * @instance
-      * @return {String} symbol from symbol buffer.
+      * @param {numeral} index - unique index.
+      * @param {String} name - name of class to wich will be added this index.
       */
-      function getCurrentSymbol() {
-        return current_symbol;
+      function setCurrentIndex(index, name) 
+      {
+        current_index = [index, name];
+      }
+      
+    /**
+      * @public
+      * @function
+      * @name getCurrentIndex
+      * @desc getting current index.
+      * @mamberof Key_Scope
+      * @instance
+      */
+      function getCurrentIndex() 
+      {
+        console.log(current_index);
+        
+        return current_index;
+        
+      }
+    
+    /**
+      * @private
+      * @function
+      * @name _compareIndexes
+      * @desc comparing two unique indexes.
+      * @mamberof Key_Scope
+      * @instance
+      * @param {Array} index - unique index.
+      * @param {Array} collection - Array with indexes - name of class to wich will.
+        be added this index.
+      * @return {numeral} index of arrays element.
+      */
+      function _compareIndexes(index, collection) 
+      {
+        for(var i=0; i < collection.length; i++)
+        {
+          if(collection[i][0] == index[0])
+          {
+            return i;
+          }
+          
+          return -1
+        }
       }
  		    
       return {
-        setCurrentSymbol: setCurrentSymbol,
-        getCurrentSymbol: getCurrentSymbol
+        addIndex: addIndex
       };
     }
 

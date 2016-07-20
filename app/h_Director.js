@@ -1106,6 +1106,15 @@ var Director = (function()
     { 
       if(element)
       {
+        if(this.isCursor(element))
+        {
+          var active = ' ' + this.active;
+        }
+        else
+        {
+          var active = '';
+        }
+        
         element.className = this.class_generator
                                 .setPrefix('wet-')
                                 .mainClass(element.innerHTML)
@@ -1113,7 +1122,46 @@ var Director = (function()
                                 .subClass(element.innerHTML)
                                 .space()
                                 .unique(name)
-                                .generate();  
+                                .generate()
+                                + active;  
+      }
+      else
+      {
+        console.log('activate - has error');
+        return false;
+      }
+    }
+    
+  /**
+    * @function makeItUniqueWith 
+    * @desc activate a cursor for an element.
+    * @param {object} element - html element for wich will be generated unique class name.
+    * @param {staring} name - the name wich will be unique.
+    * @mamberof Director
+    * @instance
+    */
+    this.InheriteUniqueWith = function(element, name)
+    { 
+      if(element)
+      {
+        if(this.isCursor(element))
+        {
+          var active = ' ' + this.active;
+        }
+        else
+        {
+          var active = '';
+        }
+        
+        element.className = this.class_generator
+                                .setPrefix('wet-')
+                                .mainClass(element.innerHTML)
+                                .space()
+                                .subClass(element.innerHTML)
+                                .space()
+                                .inherite(name)
+                                .generate()
+                                + active;  
       }
       else
       {
@@ -1137,68 +1185,28 @@ var Director = (function()
       {   
         var current_position = element;
         
-        if(this.isCursor(current_position))
-        {
-          var active = ' ' + this.active;
-        }
-        else
-        {
-          var active = '';
-        }
-        
-        current_position.className = this.class_generator
-                                          .setPrefix('wet-')
-                                          .mainClass(current_position.innerHTML)
-                                          .space()
-                                          .subClass(current_position.innerHTML)
-                                          .space()
-                                          .unique(name)
-                                          .generate()
-                                          + active;
+        this.makeItUniqueWith(current_position, name);
         
         // going to the left:
         while((this.isSignifier(this.getBeforeEntity(current_position)))
               &(!this.isSpace(this.getBeforeEntity(current_position))))
         {
+          
           current_position = this.getBeforeEntity(current_position);
 
-          current_position.className = this.class_generator
-                                            .setPrefix('wet-')
-                                            .mainClass(current_position.innerHTML)
-                                            .space()
-                                            .subClass(current_position.innerHTML)
-                                            .space()
-                                            .unique(name)
-                                            .generate()
-                                            + active;
+          this.InheriteUniqueWith(current_position, name);
         }
         
         current_position = element;
-
-        if(this.isCursor(current_position))
-        {
-          var active = ' ' + this.active;
-        }
-        else
-        {
-          var active = '';
-        }
       
         // going to the right:
         while((this.isSignifier(this.getNextEntity(current_position)))
               &(!this.isSpace(this.getNextEntity(current_position))))
         {
-          current_position = this.getNextEntity(current_position);
           
-          current_position.className = this.class_generator
-                                            .setPrefix('wet-')
-                                            .mainClass(current_position.innerHTML)
-                                            .space()
-                                            .subClass(current_position.innerHTML)
-                                            .space()
-                                            .unique(name)
-                                            .generate()
-                                            + active;
+          current_position = this.getNextEntity(current_position);
+
+          this.InheriteUniqueWith(current_position, name);
         }  
         
         return true;

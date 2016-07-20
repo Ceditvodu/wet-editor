@@ -23,6 +23,8 @@
     var code = '';
     var result_class = '';
     var prefix = '';
+    
+    var unique_index = new Unique_index.getInstance();
 
   /**
     * @public
@@ -175,16 +177,38 @@
     /**
       * @public
       * @function
-      * @name space
+      * @name unique
       * @mamberof Char_Class_Generator
       * @instance
-      * @desc adding space between classes.
+      * @desc giving unique class for element.
       * @param {String} class_name - class name thet will be unique.
       */
       function unique(class_name)
       {
         var unique_code = Math.round(Math.random()*1000000);
+        
+        unique_index.addIndex(unique_code, class_name);
+        
         result_class += prefix + class_name + "-" + unique_code;
+        
+        return this;
+      }
+    
+    /**
+      * @public
+      * @function
+      * @name inherite
+      * @mamberof Char_Class_Generator
+      * @instance
+      * @desc inherite unique class that in current status.
+      * @param {String} class_name - class name thet will be unique.
+      */
+      function inherite(class_name)
+      {
+        var unique_code = unique_index.getCurrentIndex();
+        
+        result_class += prefix + class_name + "-" + unique_code;
+        
         return this;
       }
 
@@ -207,6 +231,7 @@
         generate: generate,
         setPrefix: setPrefix,
         unique: unique,
+        inherite: inherite,
         space: space
       }
     }
