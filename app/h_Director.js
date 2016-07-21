@@ -25,6 +25,7 @@ var Director = (function()
     this.active = active;
     this.class_generator = new Char_Class_Generator(this.prefix);
     this.divider = new Divider();
+    this.unique_index = new Unique_index.getInstance();
 
 //////////////////////
 // Comparative section 
@@ -668,6 +669,7 @@ var Director = (function()
     this.getAllAfter = function(element)
     { 
       var elements = [];
+      
       if(element.nextSibling){
         while(element.nextSibling)
         {
@@ -785,7 +787,7 @@ var Director = (function()
           {
             current_position = this.getBeforeEntity(current_position);
 
-            final_object = final_object;
+            final_object = current_position;
           }
         }
         else if(position == 'right')
@@ -796,7 +798,7 @@ var Director = (function()
           {
             current_position = this.getNextEntity(current_position);
 
-            final_object = final_object;
+            final_object = current_position;
           }  
         }
         
@@ -806,6 +808,54 @@ var Director = (function()
       else
       {
         return false;
+      }
+    }
+    
+  /**
+    * @function getCurrentUnique
+    * @desc activate a cursor for an element.
+    * @param {object} element - html element from what wich will be generated unique 
+      class name.
+    * @param {staring} name - the name wich will be unique.
+    * @mamberof Director
+    * @instance
+    */
+    this.getCurrentUnique = function(name)
+    { 
+      var current_index = this.unique_index.getCurrentIndex();
+      
+      var current_position = concrete_entity
+                            .getElementsByClassName(this.prefix 
+                                                    + name 
+                                                    + '-'
+                                                    + current_index);
+
+      return current_position;
+    }
+    
+  /**
+    * @function getElementsAfter
+    * @desc clean line content from unneccesary elements 
+    * @mamberof Director
+    * @instance
+    * @param {Object} word - container that contain separated characters with word
+      that must be exploded.
+    * @return {Array} - string with word.
+    */
+    this.getElementsAfter = function(element)
+    {
+      var result = '';
+      
+      var current_position = element;
+      
+      if(current_position)
+      {
+        while(current_position.nextSibling != undefined)
+        {
+          result += current_position.nextSibling.outerHTML;
+             
+          current_position = current_position.nextSibling;
+        }
       }
     }
                   
@@ -1328,6 +1378,61 @@ var Director = (function()
       return elements;
     }
     
+  /**
+    * @function deleteElementsAfter
+    * @desc clean line content from unneccesary elements 
+    * @mamberof Director
+    * @instance
+    * @param {Object} word - container that contain separated characters with word
+      that must be exploded.
+    * @return {Array} - string with word.
+    */
+    this.deleteElementsAfter = function(element)
+    {
+      var result = '';
+      
+      var current_position = element;
+      
+      var parent = element.parentNode;
+      
+      if(current_position)
+      {
+        while(current_position.nextSibling != undefined)
+        {
+          parent.removeChild(current_position.nextSibling);
+        }
+      }
+    }
+    
+  /**
+    * @function cutElementsAfter
+    * @desc clean line content from unneccesary elements 
+    * @mamberof Director
+    * @instance
+    * @param {Object} word - container that contain separated characters with word
+      that must be exploded.
+    * @return {Array} - string with word.
+    */
+    this.cutElementsAfter = function(element)
+    {
+      var result = '';
+      
+      var current_position = element;
+      
+      var parent = element.parentNode;
+      
+      if(current_position)
+      {
+        while(current_position.nextSibling != undefined)
+        {          
+          result += current_position.nextSibling.outerHTML;
+          
+          parent.removeChild(current_position.nextSibling);
+        }
+      }
+      
+      return result;
+    }
 /////////////////
 // Delete section 
 /////////////////
@@ -1366,6 +1471,10 @@ var Director = (function()
       else if(type == 'line')
       {
         return this.createLine(content, status);
+      }
+      else if(type == 'lineComment')
+      {
+        return this.createLineComment(content, status);
       }
       
     }
@@ -1535,9 +1644,8 @@ var Director = (function()
     {
       var line = document.createElement('li');
       
-      line.className = this.prefix + 'line';
       
-      line.setAttribute('line_number', index);
+      line.className = this.prefix + 'line';
       
       if(typeof(content) == 'string')
       {
@@ -1549,6 +1657,35 @@ var Director = (function()
       }
         
       return line;    
+    }
+    
+  /**
+    * @function createlineComment
+    * @desc create line coment entity.
+    * @param {String} content - text wich will be in content when it will be created. 
+    * @param {String} status - status of comment. 
+    * @return {object} - entity of created object.
+    * @mamberof Director
+    * @instance
+    */
+    this.createLineComment = function(content, status)
+    {
+      var line_comment = document.createElement('span');
+      
+      var index = this.unique_index.getCurrentIndex();
+      
+      line_comment.className = this.prefix + 'line_comment-' + index;
+      
+      if(typeof(content) == 'string')
+      {
+        line_comment.innerHTML = content;
+      }
+      else
+      {
+        line_comment.appendChild(content);
+      }
+        
+      return line_comment;    
     }
     
 ///////////////////

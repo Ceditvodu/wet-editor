@@ -29,7 +29,16 @@ var Divider = (function()
     */
     this.divide = function(word)
     {
-      var content = word.innerHTML;
+      // if is word object
+      if(typeof(word) == 'object')
+      {
+        var content = word.innerHTML;
+      }
+      // if string
+      else if(typeof(word) == 'string')
+      {
+        var content = word;
+      }
       
       var final_content = '';
       
@@ -50,6 +59,8 @@ var Divider = (function()
                         + array_of_chars[i]
                         + '</span>';
       }
+      
+
       
       return final_content;
     }
@@ -177,6 +188,37 @@ var Divider = (function()
       {
         return result;
       }
+    }
+    
+  /**
+    * @function getElementsAfter
+    * @desc clean line content from unneccesary elements 
+    * @mamberof Divider
+    * @instance
+    * @param {Object} word - container that contain separated characters with word
+      that must be exploded.
+    * @return {Array} - string with word.
+    */
+    this.getElementsAfter = function(element)
+    {
+      var result = '';
+      
+      var current_position = element;
+      
+      if(current_position)
+      {
+        while(current_position.nextSibling != undefined)
+        {
+          result += current_position.nextSibling.outerHTML;
+             
+          current_position = current_position.nextSibling;
+          
+          console.log(this.concat(result))
+
+        }
+      }
+      
+      return result;
     }
   }
   return Divider;

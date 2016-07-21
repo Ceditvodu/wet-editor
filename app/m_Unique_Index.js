@@ -25,7 +25,7 @@
     {
           
       var indexes = [];
-      var current_index = [];
+      var current_index = '';
       
     /**
       * @public
@@ -44,11 +44,15 @@
           if(_compareIndexes(index, indexes) < 0)
           {
             indexes.push([index, name]);
+            
+            setCurrentIndex(index);
           }
         }
         else
         {
           indexes.push([index, name]);
+          
+          setCurrentIndex(index);
         }
       }
       
@@ -60,11 +64,10 @@
       * @mamberof Key_Scope
       * @instance
       * @param {numeral} index - unique index.
-      * @param {String} name - name of class to wich will be added this index.
       */
-      function setCurrentIndex(index, name) 
+      function setCurrentIndex(index) 
       {
-        current_index = [index, name];
+        current_index = index;
       }
       
     /**
@@ -109,7 +112,8 @@
       }
  		    
       return {
-        addIndex: addIndex
+        addIndex: addIndex,
+        getCurrentIndex: getCurrentIndex
       };
     }
 

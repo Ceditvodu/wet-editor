@@ -21,6 +21,10 @@ var Combination_Actions = (function()
   function Combination_Actions(concrete_entity, prefix, active)
   {
     var director = new Director(concrete_entity, prefix, active);
+    
+    var divider = new Divider();
+    
+    var unique_index = new Unique_index.getInstance();
         
     this.keyword = function(argument)
     {
@@ -40,9 +44,35 @@ var Combination_Actions = (function()
 
       var cursor = director.getCursorEntity("active");
       
+      var utmost_element = director.getLastNonSpaceSignifier(cursor, 'left');
+      
+      var previous_for_utmost = director.getBeforeEntity(utmost_element);
+      
+      var line = cursor.parentNode;
+      
       director.makeAllUniqueWith(cursor, 'lineComment'+argument);
       
-      console.log(cursor);
+      var content = divider.getElementsAfter(cursor);
+      
+      content = divider.concat(content);
+      
+      content = divider.divide(content);
+      
+      director.deleteElementsAfter(cursor);
+      
+      var combination = director.cutElementsAfter(previous_for_utmost);
+      
+      console.log(combination);
+      
+      var comment = director.create('lineComment', 'active');
+      
+      var coments_content = document.createTextNode(combination + content);
+      
+      comment.appendChild(coments_content);
+      
+      line.appendChild(comment);
+      
+      
     }
 
     this.clear = function()
