@@ -39,3 +39,7 @@
   color: #CC0307;
 }
 
+[class^='wet-line_comment']>*{
+  color: #eee;
+  
+}

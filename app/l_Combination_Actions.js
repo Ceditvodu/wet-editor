@@ -56,12 +56,9 @@ var Combination_Actions = (function()
       
       content = divider.concat(content);
       
-      
       director.deleteElementsAfter(cursor);
       
       var combination = director.cutElementsAfter(previous_for_utmost);
-      
-      console.log(combination);
       
       var coments_content = document.createTextNode(content);
       
