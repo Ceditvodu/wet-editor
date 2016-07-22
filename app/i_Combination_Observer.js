@@ -89,12 +89,23 @@
       
       var parents_content = divider.concat(parent);
       
-
+      
       
       if(cursor_class == 'signifier')
       {
         var signifiers = director.collectSignifier(cursor);
         
+        var url = "http://yandex.ru/yandsearch?text=wwww&lr=187"; // юрл в котором происходит поиск
+var regV = /yandex\.ru/gi;     // шаблон
+var result = url.match(regV);  // поиск шаблона в юрл
+
+// вывод результата
+if (result) {
+    console.log(signifiers);
+} else {
+   console.log(signifiers);
+}
+
         combination.runCombination(signifiers);
         
         

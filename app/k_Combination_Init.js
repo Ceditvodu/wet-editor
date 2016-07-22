@@ -32,7 +32,13 @@
                   
       // combination map that in future will be loading from file 
       // according languadge
-      var combinations_map = javascript_keywords;      
+      var combinations_map = new Array();
+      
+      // file javascript_keywords.js
+      combinations_map.push(javascript_keywords);
+      // file javascript_operators.js
+      combinations_map.push(javascript_operators);
+      
       
       init();
       
@@ -46,21 +52,24 @@
       */
       function init()
       {
-        // loop for combination map
-        // converting from human readable type to some
-        for(var type in combinations_map)
-        { 
-          if(combinations_map[type].type.start)
-          {
-            addCombination(type, 'start');
-          }
-          if(combinations_map[type].type.end)
-          {
-            addCombination(type, 'end');
-          }
-          if(combinations_map[type].type.startEnd)
-          {
-            addCombination(type, 'startEnd');
+        for(var i=0; i<combinations_map.length; i++)
+        {
+          // loop for combination map
+          // converting from human readable type to some
+          for(var type in combinations_map[i])
+          { 
+            if(combinations_map[i][type].type.start)
+            {
+              addCombination(type, 'start');
+            }
+            if(combinations_map[i][type].type.end)
+            {
+              addCombination(type, 'end');
+            }
+            if(combinations_map[i][type].type.startEnd)
+            {
+              addCombination(type, 'startEnd');
+            }
           }
         }
 //            console.log(editors_combination_map.f.u.n.c.t.i.o.n);
@@ -92,7 +101,13 @@
       */
       function addCombination(combination, diraction)
       {
-        var combination_symbols = combinations_map[combination].type[diraction].split('');
+        for(var i=0; i<combinations_map.length; i++)
+        {
+          if(combinations_map[i][combination])
+          {
+            var combination_symbols = combinations_map[i][combination].type[diraction].split('');
+          }
+        }        
 
         var current_position = editors_combination_map;
 

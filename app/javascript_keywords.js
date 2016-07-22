@@ -917,27 +917,5 @@ var javascript_keywords = {
     "type":{
       "start":"onsubmit"
     }
-  },
-  
-  "lineComment":{
-    "type":{
-      "start":"//"
-    }
-  },
-  "comment":{
-    "type":{
-      "start":"/*",
-      "end":"*/"
-    }
-  },
-  "string-1":{
-    "type":{
-      "startEnd":"'"
-    }
-  },
-  "string-2":{
-    "type":{
-      "startEnd":'"'
-    }
   }
 }
