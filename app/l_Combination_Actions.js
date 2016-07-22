@@ -56,7 +56,6 @@ var Combination_Actions = (function()
       
       content = divider.concat(content);
       
-      content = divider.divide(content);
       
       director.deleteElementsAfter(cursor);
       
@@ -64,11 +63,13 @@ var Combination_Actions = (function()
       
       console.log(combination);
       
-      var comment = director.create('lineComment', 'active');
+      var coments_content = document.createTextNode(content);
       
-      var coments_content = document.createTextNode(combination + content);
+      var comment = director.create('lineComment', coments_content, 'active');
       
-      comment.appendChild(coments_content);
+      comment.innerHTML = combination + divider.divide(comment.innerHTML);
+      
+      //comment.appendChild(coments_content);
       
       line.appendChild(comment);
       
