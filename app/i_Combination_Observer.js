@@ -48,8 +48,7 @@
         
         if(key_holding_count != 1)
         {
-          this.doActionForCombination(); 
-            
+          this.doActionForCombination();    
         }
   
       }
@@ -95,17 +94,15 @@
       {
         var signifiers = director.collectSignifier(cursor);
         
-        var url = "http://yandex.ru/yandsearch?text=wwww&lr=187"; // юрл в котором происходит поиск
-var regV = /yandex\.ru/gi;     // шаблон
-var result = url.match(regV);  // поиск шаблона в юрл
-
-// вывод результата
-if (result) {
-    console.log(signifiers);
-} else {
-   console.log(signifiers);
-}
-
+        // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! 
+        // it is very bad need something else 
+        // for example in Combination init we need to create new array in which 
+        // we will collect assotial array [combination] for searching (signifiers.indexof())
+        // and then starting action
+        for(var name in javascript_operators)
+        {
+          javascript_operators[name][fu]
+        }
         combination.runCombination(signifiers);
         
         
