@@ -101,9 +101,47 @@
         // and then starting action
         for(var name in javascript_operators)
         {
-          javascript_operators[name][fu]
+            if(javascript_operators[name].type.start)
+            {
+              if(signifiers.indexOf(javascript_operators[name].type.start)>=0)
+              {
+                var start_point = signifiers.indexOf(javascript_operators[name].type.start);
+                
+                combination.runCombination(javascript_operators[name].type.start);
+                
+                console.log(start_point);
+                console.log(signifiers);
+                console.log(javascript_operators[name].type.start);
+              }
+            }
+            if(javascript_operators[name].type.end)
+            {
+              if(signifiers.indexOf(javascript_operators[name].type.end)>=0)
+              {
+                var start_point = signifiers.indexOf(javascript_operators[name].type.end);
+                
+                combination.runCombination(javascript_operators[name].type.end);
+                
+                console.log(start_point);
+                console.log(signifiers);
+                console.log(javascript_operators[name].type.end);
+              }
+            }
+            if(javascript_operators[name].type.startEnd)
+            {
+              if(signifiers.indexOf(javascript_operators[name].type.startend)>=0)
+              {
+                var start_point = signifiers.indexOf(javascript_operators[name].type.startend);
+                
+                combination.runCombination(javascript_operators[name].type.startend);
+                
+                console.log(start_point);
+                console.log(signifiers);
+                console.log(javascript_operators[name].type.startend);
+              }
+            }         
         }
-        combination.runCombination(signifiers);
+
         
         
       }
