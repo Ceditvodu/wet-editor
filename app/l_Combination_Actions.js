@@ -25,7 +25,13 @@ var Combination_Actions = (function()
     var divider = new Divider();
     
     var unique_index = new Unique_index.getInstance();
-        
+    
+  /**
+    * @function keyword
+    * @desc start process of combination manipulations.
+    * @mamberof Combination_Actions
+    * @instance
+    */
     this.keyword = function(argument)
     {
       var cursor = director.getCursorEntity("active");
@@ -35,6 +41,12 @@ var Combination_Actions = (function()
       parent.classList.add('keyword');
     }
     
+  /**
+    * @function lineComment
+    * @desc start process of combination manipulations.
+    * @mamberof Combination_Actions
+    * @instance
+    */
     this.lineComment = function(argument)
     {
       if(!argument)
@@ -70,9 +82,14 @@ var Combination_Actions = (function()
       
       line.appendChild(comment);
       
-      
     }
-
+    
+  /**
+    * @function clear
+    * @desc start process of combination manipulations.
+    * @mamberof Combination_Actions
+    * @instance
+    */
     this.clear = function()
     {
       var cursor = director.getCursorEntity("active");

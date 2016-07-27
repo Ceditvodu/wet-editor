@@ -8,7 +8,7 @@
   * @license cc-by-nc-sa 4.0
   * @class
   * @classdesc it is reaction under some code combinations.
-  * @namespace Key_Observer
+  * @namespace Combination_Observer
   * @constructs
   * @param {Editor} data - getting main object
   * @param {Key_Scope} scope - key map singelton 
@@ -69,9 +69,9 @@
     }
     
   /**
-    * @function init
+    * @function doActionForCombination
     * @desc start process of combination manipulations.
-    * @mamberof Director
+    * @mamberof Combination_Observer
     * @instance
     */
     this.doActionForCombination = function()
@@ -107,9 +107,12 @@
               {
                 var start_point = signifiers.indexOf(javascript_operators[name].type.start);
                 
+                var end_point = start_point + javascript_operators[name].type.start.length-1;
+                
                 combination.runCombination(javascript_operators[name].type.start);
                 
                 console.log(start_point);
+                console.log(end_point);
                 console.log(signifiers);
                 console.log(javascript_operators[name].type.start);
               }
@@ -120,9 +123,12 @@
               {
                 var start_point = signifiers.indexOf(javascript_operators[name].type.end);
                 
+                var end_point = start_point + javascript_operators[name].type.end.length-1;
+                
                 combination.runCombination(javascript_operators[name].type.end);
                 
                 console.log(start_point);
+                console.log(end_point);
                 console.log(signifiers);
                 console.log(javascript_operators[name].type.end);
               }
@@ -133,9 +139,14 @@
               {
                 var start_point = signifiers.indexOf(javascript_operators[name].type.startend);
                 
+                var end_point = start_point + javascript_operators[name].type.startend.length-1;
+                
                 combination.runCombination(javascript_operators[name].type.startend);
                 
+                
+                
                 console.log(start_point);
+                console.log(end_point);
                 console.log(signifiers);
                 console.log(javascript_operators[name].type.startend);
               }
