@@ -1229,35 +1229,84 @@ var Director = (function()
     * @mamberof Director
     * @instance
     */
-    this.makeAllUniqueWith = function(element, name)
+    this.makeAllUniqueWith = function(element, name, parametrs)
     { 
       if(element)
       {   
-        var current_position = element;
-        
-        this.makeItUniqueWith(current_position, name);
-        
-        // going to the left:
-        while((this.isSignifier(this.getBeforeEntity(current_position)))
-              &(!this.isSpace(this.getBeforeEntity(current_position))))
+        if(!parametrs)
         {
-          
-          current_position = this.getBeforeEntity(current_position);
+          var current_position = element;
 
-          this.InheriteUniqueWith(current_position, name);
+          this.makeItUniqueWith(current_position, name);
+
+          // going to the left:
+          while((this.isSignifier(this.getBeforeEntity(current_position)))
+                &(!this.isSpace(this.getBeforeEntity(current_position))))
+          {
+
+            current_position = this.getBeforeEntity(current_position);
+
+            this.InheriteUniqueWith(current_position, name);
+          }
+
+          current_position = element;
+
+          // going to the right:
+          while((this.isSignifier(this.getNextEntity(current_position)))
+                &(!this.isSpace(this.getNextEntity(current_position))))
+          {
+
+            current_position = this.getNextEntity(current_position);
+
+            this.InheriteUniqueWith(current_position, name);
+          }       
         }
-        
-        current_position = element;
-      
-        // going to the right:
-        while((this.isSignifier(this.getNextEntity(current_position)))
-              &(!this.isSpace(this.getNextEntity(current_position))))
+        else
         {
+          var current_position = element;
           
-          current_position = this.getNextEntity(current_position);
-
-          this.InheriteUniqueWith(current_position, name);
-        }  
+          var positions = new Array();
+          
+          // going to the right:
+          while((this.isSignifier(this.getNextEntity(current_position)))
+                &(!this.isSpace(this.getNextEntity(current_position))))
+          {
+            current_position = this.getBeforeEntity(current_position);
+            
+            positions.push(current_position);
+          }   
+          
+          current_position = element;
+          positions.push(element);
+          
+          // going to the left:
+          while((this.isSignifier(this.getBeforeEntity(current_position)))
+                &(!this.isSpace(this.getBeforeEntity(current_position))))
+          {
+            current_position = this.getBeforeEntity(current_position);
+            
+            positions.unshift(current_position);
+          }
+          
+          var single_time_flag = true;          
+          for(var i=parametrs.start; i<=parametrs.end; i++)
+          {
+            if(single_time_flag)
+            {
+              this.makeItUniqueWith(positions[i], name);
+              
+              single_time_flag = false;
+            }
+            else
+            {
+              this.InheriteUniqueWith(positions[i], name);
+            }
+          }
+          
+          console.log(positions);
+          
+          
+        }
         
         return true;
       }

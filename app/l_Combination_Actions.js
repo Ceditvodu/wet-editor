@@ -47,7 +47,7 @@ var Combination_Actions = (function()
     * @mamberof Combination_Actions
     * @instance
     */
-    this.lineComment = function(argument)
+    this.lineComment = function(argument, parametrs)
     {
       if(!argument)
       {
@@ -62,7 +62,7 @@ var Combination_Actions = (function()
       
       var line = cursor.parentNode;
       
-      director.makeAllUniqueWith(cursor, 'lineComment'+argument);
+      director.makeAllUniqueWith(cursor, 'lineComment'+argument, parametrs);
       
       var content = divider.getElementsAfter(cursor);
       

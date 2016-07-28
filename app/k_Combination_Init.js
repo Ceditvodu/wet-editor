@@ -148,7 +148,7 @@
       * @mamberof Combination_Init
       * @instance
       */
-      function runCombination(combination)
+      function runCombination(combination, parametrs)
       {
         if(combination != undefined)
         {
@@ -188,7 +188,7 @@
                 
                 argument = func[2];
                 
-                action[function_name](argument)
+                action[function_name](argument, parametrs)
               }
               else
               {

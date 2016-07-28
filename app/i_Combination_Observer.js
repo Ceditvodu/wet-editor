@@ -109,7 +109,7 @@
                 
                 var end_point = start_point + javascript_operators[name].type.start.length-1;
                 
-                combination.runCombination(javascript_operators[name].type.start);
+                combination.runCombination(javascript_operators[name].type.start, {'start':start_point,'end':end_point});
                 
                 console.log(start_point);
                 console.log(end_point);
@@ -125,7 +125,7 @@
                 
                 var end_point = start_point + javascript_operators[name].type.end.length-1;
                 
-                combination.runCombination(javascript_operators[name].type.end);
+                combination.runCombination(javascript_operators[name].type.end, {'start':start_point,'end':end_point});
                 
                 console.log(start_point);
                 console.log(end_point);
@@ -141,7 +141,7 @@
                 
                 var end_point = start_point + javascript_operators[name].type.startend.length-1;
                 
-                combination.runCombination(javascript_operators[name].type.startend);
+                combination.runCombination(javascript_operators[name].type.startend, {'start':start_point,'end':end_point});
                 
                 
                 
