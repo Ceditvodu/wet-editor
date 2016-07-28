@@ -858,6 +858,74 @@ var Director = (function()
         }
       }
     }
+    
+ /**
+    * @function getLeftUniqueElement 
+    * @desc activate a cursor for an element.
+    * @param {object} element - html element from what wich will be generated unique 
+      class name.
+    * @param {staring} name - the name wich will be unique.
+    * @mamberof Director
+    * @instance
+    */
+    this.getLeftUniqueElement = function(element, parametrs)
+    { 
+      if(element)
+      {   
+        if(!parametrs)
+        {
+          var current_position = element;
+
+          // going to the left:
+          while((this.isSignifier(this.getBeforeEntity(current_position)))
+                &(!this.isSpace(this.getBeforeEntity(current_position)))
+                &(!this.isStart(this.getBeforeEntity(current_position))))
+          {
+
+            current_position = this.getBeforeEntity(current_position);
+
+          }
+     
+        }
+        else
+        {
+          var current_position = element;
+          
+          var positions = new Array();
+                    
+          // add class to cursor element
+          current_position = element;
+          positions.push(element);
+                    
+          // going to the left:
+          while((this.isSignifier(this.getBeforeEntity(current_position)))
+                &(!this.isSpace(this.getBeforeEntity(current_position)))
+                &(!this.isStart(this.getBeforeEntity(current_position))))
+          {
+            current_position = this.getBeforeEntity(current_position);
+            
+            positions.push(current_position);
+          }
+          
+          for(var i=parametrs.start; i<=parametrs.end; i++)
+          {
+            current_position = positions[i];
+            
+            console.log(positions[i]);
+          }
+          
+          //console.log(positions);
+          
+        }
+        
+        return current_position;
+      }
+      else
+      {
+        return false;
+      }
+    
+    }
                   
 //////////////////
 // Getting section 
@@ -1272,17 +1340,15 @@ var Director = (function()
                 &(!this.isSpace(this.getNextEntity(current_position)))
                 &(!this.isStart(this.getNextEntity(current_position))))
           {
-            console.log((this.isSignifier(this.getBeforeEntity(current_position))))
-            console.log((!this.isSpace(this.getBeforeEntity(current_position))))
-            console.log((!this.isStart(this.getBeforeEntity(current_position))))
             current_position = this.getNextEntity(current_position);
             
             positions.push(current_position);
           }   
+          
+          // add class to cursor element
           current_position = element;
           positions.unshift(element);
-          
-          
+                    
           // going to the left:
           while((this.isSignifier(this.getBeforeEntity(current_position)))
                 &(!this.isSpace(this.getBeforeEntity(current_position)))

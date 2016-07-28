@@ -64,6 +64,8 @@ var Combination_Actions = (function()
       
       director.makeAllUniqueWith(cursor, 'lineComment'+argument, parametrs);
       
+      console.log(director.getLeftUniqueElement(cursor, parametrs));
+      
       var content = divider.getElementsAfter(cursor);
       
       content = divider.concat(content);
