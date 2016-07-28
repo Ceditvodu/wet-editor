@@ -1269,24 +1269,30 @@ var Director = (function()
           
           // going to the right:
           while((this.isSignifier(this.getNextEntity(current_position)))
-                &(!this.isSpace(this.getNextEntity(current_position))))
+                &(!this.isSpace(this.getNextEntity(current_position)))
+                &(!this.isStart(this.getNextEntity(current_position))))
           {
-            current_position = this.getBeforeEntity(current_position);
+            console.log((this.isSignifier(this.getBeforeEntity(current_position))))
+            console.log((!this.isSpace(this.getBeforeEntity(current_position))))
+            console.log((!this.isStart(this.getBeforeEntity(current_position))))
+            current_position = this.getNextEntity(current_position);
             
             positions.push(current_position);
           }   
-          
           current_position = element;
-          positions.push(element);
+          positions.unshift(element);
+          
           
           // going to the left:
           while((this.isSignifier(this.getBeforeEntity(current_position)))
-                &(!this.isSpace(this.getBeforeEntity(current_position))))
+                &(!this.isSpace(this.getBeforeEntity(current_position)))
+                &(!this.isStart(this.getBeforeEntity(current_position))))
           {
             current_position = this.getBeforeEntity(current_position);
             
             positions.unshift(current_position);
           }
+
           
           var single_time_flag = true;          
           for(var i=parametrs.start; i<=parametrs.end; i++)
