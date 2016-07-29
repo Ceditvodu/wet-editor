@@ -56,15 +56,14 @@ var Combination_Actions = (function()
 
       var cursor = director.getCursorEntity("active");
       
-      var utmost_element = director.getLastNonSpaceSignifier(cursor, 'left');
+      var left_element_of_combination = director.getLeftUniqueElement(cursor, parametrs);
       
-      var previous_for_utmost = director.getBeforeEntity(utmost_element);
+      var previous_for_combination = director.getBeforeEntity(left_element_of_combination);
       
       var line = cursor.parentNode;
       
       director.makeAllUniqueWith(cursor, 'lineComment'+argument, parametrs);
       
-      console.log(director.getLeftUniqueElement(cursor, parametrs));
       
       var content = divider.getElementsAfter(cursor);
       
@@ -72,7 +71,7 @@ var Combination_Actions = (function()
       
       director.deleteElementsAfter(cursor);
       
-      var combination = director.cutElementsAfter(previous_for_utmost);
+      var combination = director.cutElementsAfter(previous_for_combination);
       
       var coments_content = document.createTextNode(content);
       

@@ -904,17 +904,10 @@ var Director = (function()
           {
             current_position = this.getBeforeEntity(current_position);
             
-            positions.push(current_position);
+            positions.unshift(current_position);
           }
           
-          for(var i=parametrs.start; i<=parametrs.end; i++)
-          {
-            current_position = positions[i];
-            
-            console.log(positions[i]);
-          }
-          
-          //console.log(positions);
+          current_position = positions[parametrs.start];
           
         }
         
