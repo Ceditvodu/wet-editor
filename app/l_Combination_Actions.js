@@ -62,18 +62,25 @@ var Combination_Actions = (function()
       
       var line = cursor.parentNode;
       
-      director.makeAllUniqueWith(cursor, 'lineComment'+argument, parametrs);
+      director.makeAllUniqueWith(cursor, 'line_Comment'+argument, parametrs);
       
       
       var content = divider.getElementsAfter(cursor);
       
-      content = divider.concat(content);
-      
-      director.deleteElementsAfter(cursor);
-      
+      if(content)
+      {
+        content = divider.concat(content);
+
+        director.deleteElementsAfter(cursor);
+
+        var coments_content = document.createTextNode(content);
+
+      }
+      else
+      {
+        coments_content = '';
+      }
       var combination = director.cutElementsAfter(previous_for_combination);
-      
-      var coments_content = document.createTextNode(content);
       
       var comment = director.create('lineComment', coments_content, 'active');
       

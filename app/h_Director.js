@@ -1368,7 +1368,7 @@ var Director = (function()
             }
           }
           
-          console.log(positions);
+//          console.log(positions);
           
           
         }
