@@ -81,17 +81,26 @@ Module.getInstance().backspase = function(options)
     
     var word = director.getParentWord();
     
-    word.innerHTML = divider.concat(word);
-    
     var previous_entity = director.getBeforeEntity(word);
     
+    if(word.innerHTML != '')
+    {
+      word.innerHTML = divider.concat(word);
+    }
+    else
+    {
+      director.delete(word);
+    }
+    
     director.activate(previous_entity);
+    
+    
 
   }
   // deleting word when it not on start of line
   // !!!!!!!!!!!!!!!!!!!!!!!!!!!
   else if((director.getParentWord() != false)
-          &&(director.getParentWord().previousSibling.className != 'wet-line-start'))
+          &&(!director.isStart(director.getParentWord().previousSibling)))
   {
     var word = director.getParentWord();
     var before_word = director.getBeforeEntity(word);
@@ -101,7 +110,7 @@ Module.getInstance().backspase = function(options)
   // deleting word when it is on start of line
   // !!!!!!!!!!!!!!!!!!!!!!!!!!!!
   else if((director.getParentWord() != false)
-          &&(director.getParentWord().previousSibling.className == 'wet-line-start'))
+          &&(director.isStart(director.getParentWord().previousSibling)))
   {
     var word = director.getParentWord(); 
     var before_word = director.getBeforeEntity(word);
