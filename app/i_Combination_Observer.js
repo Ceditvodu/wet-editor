@@ -88,17 +88,11 @@
       
       var parents_content = divider.concat(parent);
       
-      
-      
       if(cursor_class == 'signifier')
       {
         var signifiers = director.collectSignifier(cursor);
         
-        // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! 
-        // it is very bad need something else 
-        // for example in Combination init we need to create new array in which 
-        // we will collect assotial array [combination] for searching (signifiers.indexof())
-        // and then starting action
+        // run action
         for(var name in javascript_operators)
         {
             if(javascript_operators[name].type.start)

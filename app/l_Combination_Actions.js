@@ -73,7 +73,6 @@ var Combination_Actions = (function()
         director.deleteElementsAfter(cursor);
 
         var coments_content = document.createTextNode(content);
-
       }
       else
       {

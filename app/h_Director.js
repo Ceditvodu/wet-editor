@@ -1433,6 +1433,10 @@ var Director = (function()
     */
     this.delete = function(element)
     { 
+      console.log(this.unique_index.isUnique(element))
+      
+      
+      
       element.parentNode.removeChild(element);
     }
 
