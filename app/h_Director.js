@@ -947,7 +947,7 @@ var Director = (function()
     * @function makeItWord 
     * @desc give the class name of word.
     * @param {object} element - element that must became a word.
-    * @param {Array} parameter - it is an additional parameter (keyword, parent)
+    * @param {Array} parameter - it is an additional parameter (keyword, parameter)
     * @mamberof Director
     * @instance
     */

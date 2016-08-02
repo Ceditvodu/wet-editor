@@ -21,7 +21,7 @@
     
     var director = new Director(concrete_entity, "wet-", "active");
     
-    var word = concrete_entity.getElementsByClassName('parent')[0];
+    var word = director.getParentWord();
     
     var active_char = director.getCursorEntity('active');
         
@@ -46,6 +46,9 @@
       // if cursor it is a last char:
       if(cursor_index == (chars-1))
       {
+        // deactivate previouse word
+        director.makeItWord(word,['keyword']);
+        
         // concat word
         word.innerHTML = divider.concat(word);
         
@@ -56,10 +59,7 @@
         word.parentNode.innerHTML = content_for_new_line[0];
         
         // delete previouse cursor
-        this.deletePrevioseCursor(concrete_entity);
-        
-        // deactivate previouse word
-        this.deletePrevioseParent(concrete_entity);
+        director.deactivate(active_char);
         
         // previouse line
         var prev_line_index = options.object.current_line[options.index];
