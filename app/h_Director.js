@@ -1433,9 +1433,11 @@ var Director = (function()
     */
     this.delete = function(element)
     { 
-      console.log(this.unique_index.isUnique(element))
-      
-      
+
+      if(this.unique_index.isUnique(element))
+      {
+        this.combination.removeLineComment();
+      }
       
       element.parentNode.removeChild(element);
     }

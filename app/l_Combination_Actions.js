@@ -91,6 +91,17 @@ var Combination_Actions = (function()
     }
     
   /**
+    * @function lineComment
+    * @desc start process of combination manipulations.
+    * @mamberof Combination_Actions
+    * @instance
+    */    
+    this.removeLineComment = function()
+    {
+      
+    }
+    
+  /**
     * @function clear
     * @desc start process of combination manipulations.
     * @mamberof Combination_Actions

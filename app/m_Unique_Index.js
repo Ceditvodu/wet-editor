@@ -163,7 +163,7 @@
     /**
       * @public
       * @function
-      * @name getIndexFunction
+      * @name getIndex
       * @desc comparing two unique indexes.
       * @mamberof Key_Scope
       * @instance
@@ -172,7 +172,40 @@
         be added this index.
       * @return {numeral} index of arrays element.
       */
-      function getIndexFunction(entity) 
+      function getIndex(entity) 
+      {
+        if(typeof(entity) === "string")
+        {
+          var class_name = entity;
+        }
+        else if(typeof(entity) === "object")
+        {
+          var class_name = entity.className;
+        }
+        for(var i=0; i < indexes.length; i++)
+        {
+          if(class_name.indexOf(indexes[i][0]) >= 0)
+          {
+            return indexes[i];
+          }
+        }
+        
+        return false;
+      }
+      
+    /**
+      * @public
+      * @function
+      * @name getIndexName
+      * @desc comparing two unique indexes.
+      * @mamberof Key_Scope
+      * @instance
+      * @param {Array} index - unique index.
+      * @param {Array} collection - Array with indexes - name of class to wich will.
+        be added this index.
+      * @return {numeral} index of arrays element.
+      */
+      function getIndexName(entity) 
       {
         if(typeof(entity) === "string")
         {
@@ -193,12 +226,47 @@
         return false;
       }
  		    
+    /**
+      * @public
+      * @function
+      * @name getIndexCode
+      * @desc comparing two unique indexes.
+      * @mamberof Key_Scope
+      * @instance
+      * @param {Array} index - unique index.
+      * @param {Array} collection - Array with indexes - name of class to wich will.
+        be added this index.
+      * @return {numeral} index of arrays element.
+      */
+      function getIndexCode(entity) 
+      {
+        if(typeof(entity) === "string")
+        {
+          var class_name = entity;
+        }
+        else if(typeof(entity) === "object")
+        {
+          var class_name = entity.className;
+        }
+        for(var i=0; i < indexes.length; i++)
+        {
+          if(class_name.indexOf(indexes[i][0]) >= 0)
+          {
+            return indexes[i][0];
+          }
+        }
+        
+        return false;
+      }
+ 		    
       return {
         addIndex: addIndex,
         getCurrentIndex: getCurrentIndex,
         getIndexes: getIndexes,
         isUnique: isUnique,
-        getIndexFunction: getIndexFunction
+        getIndex: getIndex,
+        getIndexName: getIndexName,
+        getIndexCode: getIndexCode
         
       };
     }
