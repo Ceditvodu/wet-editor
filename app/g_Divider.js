@@ -192,12 +192,11 @@ var Divider = (function()
     
   /**
     * @function getElementsAfter
-    * @desc clean line content from unneccesary elements 
+    * @desc returns all elements that lie after current element 
     * @mamberof Divider
     * @instance
-    * @param {Object} word - container that contain separated characters with word
-      that must be exploded.
-    * @return {Array} - string with word.
+    * @param {Object} element - html element, after which one we must get all other elements.
+    * @return {Array} - collection of elements.
     */
     this.getElementsAfter = function(element)
     {

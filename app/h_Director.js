@@ -54,12 +54,17 @@ var Director = (function()
     
   /**
     * @function isCursorFirstOnALine 
-    * @desc chacking is cursor plased on start of line.
+    * @desc checking is cursor placed on start of line.
     * @param {String} cursor_marker - marker of cursor.
-    * @return {bool} - entity of previouse for active element.
+    * @return {bool} - is first on a line or not.
     * @mamberof Director
     * @instance
     */
+    // !!!!!!!!!!!
+    // !!!!!!!!!!!
+    // NOT VERY USEFULL
+    // !!!!!!!!!!!
+    // !!!!!!!!!!!
     this.isCursorFirstOnALine = function(cursor_marker)
     { 
       var active_char = this.getCursorEntity(cursor_marker);
@@ -88,8 +93,8 @@ var Director = (function()
   /**
     * @function isCursorBeforeWord 
     * @desc chacking, is cursor placed before word.
-    * @param {object} cursor_marker - marker of active element.
-    * @return {bool}
+    * @param {object} cursor_entity - marker of active element.
+    * @return {bool} - is before or not
     * @mamberof Director
     * @instance
     */
@@ -116,7 +121,7 @@ var Director = (function()
     * @function isStart 
     * @desc chacking element, is it start one.
     * @param {object} element - html element for checking.
-    * @return {bool}
+    * @return {bool} - is it on start or not
     * @mamberof Director
     * @instance
     */
@@ -142,9 +147,9 @@ var Director = (function()
 
   /**
     * @function isSignifier 
-    * @desc chacking element is signifer.
+    * @desc chacking element is signifier.
     * @param {object} element - html element for checking.
-    * @return {bool}
+    * @return {bool} - is it signifier or not.
     * @mamberof Director
     * @instance
     */
@@ -172,10 +177,15 @@ var Director = (function()
     * @function isNumerial 
     * @desc chacking element is numeral.
     * @param {object} element - html element for checking.
-    * @return {bool}
+    * @return {bool} - is it numeral or not.
     * @mamberof Director
     * @instance
     */
+    //    !!!!!!!!!
+    //    !!!!!!!!!
+    //    rename with correction
+    //    !!!!!!!!!
+    //    !!!!!!!!!
     this.isNumeral = function(element)
     { 
       if(element)
@@ -200,7 +210,7 @@ var Director = (function()
     * @function isWord
     * @desc chacking element is it word.
     * @param {object} element - html element for checking.
-    * @return {bool}
+    * @return {bool} - is it word or a not.
     * @mamberof Director
     * @instance
     */
@@ -228,10 +238,16 @@ var Director = (function()
     * @function isParentWord
     * @desc chacking element is it word.
     * @param {object} element - html element for checking
-    * @return {bool}
+    * @return {bool} - is it parent  word or a not.
     * @mamberof Director
     * @instance
     */
+//    !!!!!!!!!
+//    !!!!!!!!!
+//    rename it as isParent and redo in that way in which it can chack not only words
+//    !!!!!!!!!
+//    !!!!!!!!!
+      
     this.isParentWord = function(element)
     { 
       if(element)
@@ -256,7 +272,7 @@ var Director = (function()
     * @function isCharacter
     * @desc checking element is it character.
     * @param {object} element - html element for checking.
-    * @return {bool}
+    * @return {bool} - is it character or a not.
     * @mamberof Director
     * @instance
     */
@@ -286,7 +302,7 @@ var Director = (function()
     * @function isLine
     * @desc checking element is it line.
     * @param {object} element - html element for checking.
-    * @return {bool}
+    * @return {bool} - is it line or a not.
     * @mamberof Director
     * @instance
     */
@@ -320,6 +336,11 @@ var Director = (function()
     * @mamberof Director
     * @instance
     */
+    // !!!!!!!!!!!
+    // !!!!!!!!!!!
+    // Already exist
+    // !!!!!!!!!!!
+    // !!!!!!!!!!!
     this.isCursoreBeforeWord = function(element)
     { 
       var equivalent = this.prefix + 'word';
@@ -346,7 +367,7 @@ var Director = (function()
     * @function isLineEmpty
     * @desc checking line is it empty.
     * @param {object} line - html element for checking.
-    * @return {bool}
+    * @return {bool} - is this line is empty or not.
     * @mamberof Director
     * @instance
     */
@@ -384,7 +405,7 @@ var Director = (function()
     * @function isCursorAtTheEndOfWord
     * @desc checking is cursor at the end of word.
     * @param {object} word - html element for checking.
-    * @return {bool}
+    * @return {bool} - is cursore on the ond of word or not.
     * @mamberof Director
     * @instance
     */
@@ -416,7 +437,7 @@ var Director = (function()
     * @function isCursorAtTheStartOfWord
     * @desc checking is cursor at the start of word.
     * @param {object} word - html element for checking.
-    * @return {bool}
+    * @return {bool} - is cursore on the start of word or not.
     * @mamberof Director
     * @instance
     */
@@ -447,7 +468,7 @@ var Director = (function()
     * @function isCursor
     * @desc checking is the element is cursor.
     * @param {object} element - html element for checking.
-    * @return {bool}
+    * @return {bool} - is it cursor or not.
     * @mamberof Director
     * @instance
     */
@@ -475,7 +496,7 @@ var Director = (function()
     * @function isSpace
     * @desc checking is the element is space.
     * @param {object} element - html element for checking.
-    * @return {bool}
+    * @return {bool} - is it space or not.
     * @mamberof Director
     * @instance
     */
@@ -666,6 +687,11 @@ var Director = (function()
     * @mamberof Director
     * @instance
     */
+//    !!!!!!!!!!!
+//    !!!!!!!!!!!
+//    its already exist
+//    !!!!!!!!!!!
+//    !!!!!!!!!!!
     this.getAllAfter = function(element)
     { 
       var elements = [];
@@ -720,9 +746,9 @@ var Director = (function()
     
   /**
     * @function collectSignifier 
-    * @desc get signifier neighbor.
+    * @desc get signifiers string that lie in cursors area.
     * @param {Object} element - class of searching element.
-    * @return {numeral} - string with signifier.
+    * @return {numeral} - string with signifiers.
     * @mamberof Director
     * @instance
     */
@@ -813,10 +839,8 @@ var Director = (function()
     
   /**
     * @function getCurrentUnique
-    * @desc activate a cursor for an element.
-    * @param {object} element - html element from what wich will be generated unique 
-      class name.
-    * @param {staring} name - the name wich will be unique.
+    * @desc returning current unique index.
+    * @param {String} name - the name wich will be unique.
     * @mamberof Director
     * @instance
     */
@@ -842,6 +866,11 @@ var Director = (function()
       that must be exploded.
     * @return {Array} - string with word.
     */
+//    !!!!!!!!!!
+//    !!!!!!!!!!
+//    This is already exist
+//    !!!!!!!!!!
+//    !!!!!!!!!!
     this.getElementsAfter = function(element)
     {
       var result = '';
