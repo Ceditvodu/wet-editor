@@ -15,7 +15,7 @@
   * @classdesc It is main class with constructor. Need for initialization of 
   work space of code editor.
   * @example var spoiler = new Spoiler('spoiler','opened', 1);
-  * @param {String} className - class of div wich containe spoiler child elements.
+  * @param {String} className - Class of div wich containe spoiler child elements.
   */
   var Editor = (function()
   {
@@ -122,7 +122,7 @@
 
         /**
           * @event symbol_buffer#onkeyup
-          * @param {object} e - event wich will contain key code
+          * @param {object} e - Event wich will contain key code
           */
           this.symbol_buffer[i].onkeyup = function(event)
           {

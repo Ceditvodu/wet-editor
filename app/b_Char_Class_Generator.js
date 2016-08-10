@@ -9,7 +9,7 @@
   * @class
   * @namespace Char_Class_Generator
   * @constructs 
-  * @classdesc this class is returning string for elements class
+  * @classdesc This class is returning string for elements class.
   * @example class_generator
             .setPrefix('wet-')
             .mainClass(data.symbol_buffer[index].value)
@@ -33,7 +33,7 @@
     * @mamberof Char_Class_Generator
     * @instance
     * @desc adding main class.
-    * @param {String} user_char - char from cher buffer .
+    * @param {String} user_char - Char from cher buffer.
     */
     function mainClass(user_char)
     {
@@ -81,8 +81,8 @@
       * @name subClass
       * @mamberof Char_Class_Generator
       * @instance
-      * @desc adding subclass to main class.
-      * @param {String} user_char - char from character buffer.
+      * @desc Adding subclass to main class.
+      * @param {String} user_char - Char from character buffer.
       */
       function subClass(user_char)
       {
@@ -151,8 +151,8 @@
       * @name setPrefix
       * @mamberof Char_Class_Generator
       * @instance
-      * @desc setting prefix, which will be adding to every class
-      * @param {String} user_prefix - prefix for class
+      * @desc Setting prefix, which will be adding to every class.
+      * @param {String} user_prefix - Prefix for class.
       */
       function setPrefix(user_prefix)
       {
@@ -166,7 +166,7 @@
       * @name space
       * @mamberof Char_Class_Generator
       * @instance
-      * @desc adding space between classes.
+      * @desc Adding space between classes.
       */
       function space()
       {
@@ -180,8 +180,8 @@
       * @name unique
       * @mamberof Char_Class_Generator
       * @instance
-      * @desc giving unique class for element.
-      * @param {String} class_name - class name thet will be unique.
+      * @desc Giving unique class for element.
+      * @param {String} class_name - Class name thet will be unique.
       */
       function unique(class_name)
       {
@@ -200,8 +200,8 @@
       * @name inherite
       * @mamberof Char_Class_Generator
       * @instance
-      * @desc inherite unique class that in current status.
-      * @param {String} class_name - class name thet will be unique.
+      * @desc Inherite unique class that in current status.
+      * @param {String} class_name - Class name thet will be unique.
       */
       function inherite(class_name)
       {
@@ -218,7 +218,7 @@
       * @name generate
       * @mamberof Char_Class_Generator
       * @instance
-      * @desc builder function
+      * @desc Builder function.
       */
       function generate()
       {

@@ -7,14 +7,14 @@
   * @copyright Ivan Kaduk 2016.
   * @license cc-by-nc-sa 4.0
   * @class
-  * @classdesc it is reaction of observer on key event
+  * @classdesc It is reaction of observer on key event
   * @namespace Key_Observer
   * @constructs
-  * @param {Editor} data - getting main object
-  * @param {Key_Scope} scope - key map singelton 
-  * @param {int} index - index of current active editor element
-  * @param {event} event - object that contain event data
-  * @param {String} condition - condition of key: pressed or released 
+  * @param {Editor} data - Getting main object.
+  * @param {Key_Scope} scope - Key map singelton.
+  * @param {int} index - Index of current active editor element.
+  * @param {event} event - Object that contain event data.
+  * @param {String} condition - Condition of key: pressed or released.
   */
 
   var Key_Observer = function(data, scope, symbol, index, event, condition)
