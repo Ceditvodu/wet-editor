@@ -30,7 +30,7 @@
       * @function
       * @name setCurrentSymbol
       * @desc setting symbol.
-      * @mamberof Key_Scope
+      * @mamberof Symbol
       * @instance
       * @param {String} symbol - symbol from symbol buffer.
       */
@@ -43,9 +43,9 @@
       * @function
       * @name getCurrentSymbol
       * @desc getting symbol.
-      * @mamberof Key_Scope
+      * @mamberof Symbol
       * @instance
-      * @return {String} symbol from symbol buffer.
+      * @return {String} - symbol from symbol buffer.
       */
       function getCurrentSymbol() {
         return current_symbol;
