@@ -890,13 +890,18 @@ var Director = (function()
     
  /**
     * @function getLeftUniqueElement 
-    * @desc activate a cursor for an element.
-    * @param {object} element - html element from what wich will be generated unique 
-      class name.
-    * @param {staring} name - the name wich will be unique.
+    * @desc getting last signifier element in the row of it.
+    * @param {Object} element - html element in row of signifier elements.
+    * @param {String} parametrs.start - from where must start process.
+    * @param {String} parametrs.end - where process must stop.
     * @mamberof Director
     * @instance
     */
+//    !!!!!!!!
+//    !!!!!!!!
+//      need to rename according functions
+//    !!!!!!!!
+//    !!!!!!!!
     this.getLeftUniqueElement = function(element, parametrs)
     { 
       if(element)
@@ -964,6 +969,11 @@ var Director = (function()
     * @mamberof Director
     * @instance
     */
+//    !!!!!!!
+//    !!!!!!!
+//    make it for every objects
+//    !!!!!!!
+//    !!!!!!!
     this.makeItParentWord = function(before_entity)
     { 
       if(before_entity)
@@ -977,6 +987,7 @@ var Director = (function()
     * @desc give the class name of word.
     * @param {object} element - element that must became a word.
     * @param {Array} parameter - it is an additional parameter (keyword, parameter)
+      if you add keyword, than it remowve "parant" from class and the same for parametr.
     * @mamberof Director
     * @instance
     */
@@ -1127,12 +1138,17 @@ var Director = (function()
 
     /**
     * @function makeAllChildLess 
-    * @desc divide all elements in childless words.
+    * @desc divide all elements in words with undivided content.
     * @param {string} action - what we whant to do with line: divide, concat.
     * @param {object} line - line wich must be exploded.
     * @mamberof Director
     * @instance
     */
+    //    !!!!!!!
+    //    !!!!!!!
+    //    rename according functionality
+    //    !!!!!!!
+    //    !!!!!!!
     this.makeAllChildLess = function(action, line)
     {
       if(line)
@@ -1201,7 +1217,7 @@ var Director = (function()
 
   /**
     * @function implodeAllChildLess 
-    * @desc divide all elements in childless words.
+    * @desc concat all elements in childless words.
     * @param {object} line - line wich must be imploded.
     * @mamberof Director
     * @instance
@@ -1236,9 +1252,9 @@ var Director = (function()
     
   /**
     * @function makeItUniqueWith 
-    * @desc activate a cursor for an element.
+    * @desc add unique index to a word and paste it all to the elements class.
     * @param {object} element - html element for wich will be generated unique class name.
-    * @param {staring} name - the name wich will be unique.
+    * @param {string} name - the name wich will be unique.
     * @mamberof Director
     * @instance
     */
@@ -1271,51 +1287,15 @@ var Director = (function()
         return false;
       }
     }
-    
-  /**
-    * @function makeItUniqueWith 
-    * @desc activate a cursor for an element.
-    * @param {object} element - html element for wich will be generated unique class name.
-    * @param {staring} name - the name wich will be unique.
-    * @mamberof Director
-    * @instance
-    */
-    this.InheriteUniqueWith = function(element, name)
-    { 
-      if(element)
-      {
-        if(this.isCursor(element))
-        {
-          var active = ' ' + this.active;
-        }
-        else
-        {
-          var active = '';
-        }
         
-        element.className = this.class_generator
-                                .setPrefix('wet-')
-                                .mainClass(element.innerHTML)
-                                .space()
-                                .subClass(element.innerHTML)
-                                .space()
-                                .inherite(name)
-                                .generate()
-                                + active;  
-      }
-      else
-      {
-        console.log('activate - has error');
-        return false;
-      }
-    }
-    
   /**
     * @function makeAllUniqueWith 
-    * @desc activate a cursor for an element.
+    * @desc make an array of elements with unique class.
     * @param {object} element - html element from what wich will be generated unique 
       class name.
-    * @param {staring} name - the name wich will be unique.
+    * @param {String} name - the name wich will be unique.
+    * @param {String} parametrs.start - from where must start process.
+    * @param {String} parametrs.end - where process must stop.
     * @mamberof Director
     * @instance
     */
@@ -1426,6 +1406,11 @@ var Director = (function()
     * @mamberof Director
     * @instance
     */
+//    !!!!!!!
+//    !!!!!!!
+//    not realy necessary function 
+//    !!!!!!!
+//    !!!!!!!
     this.deactivatePreviouse = function()
     {
 			// element with class 'active' 
@@ -1536,6 +1521,11 @@ var Director = (function()
       that must be exploded.
     * @return {Array} - string with word.
     */
+//    !!!!!!!
+//    !!!!!!!
+//    such function already exist
+//    !!!!!!!
+//    !!!!!!!
     this.deleteElementsAfter = function(element)
     {
       var result = '';
@@ -1562,6 +1552,11 @@ var Director = (function()
       that must be exploded.
     * @return {Array} - string with word.
     */
+//    !!!!!!!
+//    !!!!!!!
+//    such function already exist
+//    !!!!!!!
+//    !!!!!!!
     this.cutElementsAfter = function(element)
     {
       var result = '';
