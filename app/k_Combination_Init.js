@@ -95,7 +95,6 @@
       * @desc adding combination to collection graph.
       * @param {String} combination - the word that must be compaired with combination map.
       * @param {String} dirapction - the role of word, is it start or is it end.
-      * @param {object} collection - combination map with element of what must be compared words.
       * @mamberof Combination_Init
       * @instance
       */
@@ -144,7 +143,6 @@
       * @desc adding combination to collection graph.
       * @param {String} combination - the word that must be compaired with combination map.
       * @param {String} dirapction - the role of word, is it start or is it end.
-      * @param {object} collection - combination map with element of what must be compared words.
       * @mamberof Combination_Init
       * @instance
       */

@@ -8,13 +8,14 @@
   * @copyright Ivan Kaduk 2016.
   * @license cc-by-nc-sa 4.0
   * @class
-  * @classdesc This class need for manipulating objects on code editors work space.
+  * @classdesc This class helps to convert elements t specific entities according
+    choosed languadge.
   * @param {object} concrete_entity - object with work space.
   * @param {String} prefix - prefix for elements classes.
   * @param {String} active - cursors active class name.
-  * @namespace Director
-  * @constructs Director
-  * @example director.getCursorEntity('active');
+  * @namespace Combination_Actions
+  * @constructs Combination_Actions
+  * @example action[function_name](argument, parametrs);
   */
 var Combination_Actions = (function()
 {
@@ -28,7 +29,7 @@ var Combination_Actions = (function()
     
   /**
     * @function keyword
-    * @desc start process of combination manipulations.
+    * @desc Adding keyword class to the word.
     * @mamberof Combination_Actions
     * @instance
     */
@@ -43,7 +44,7 @@ var Combination_Actions = (function()
     
   /**
     * @function lineComment
-    * @desc start process of combination manipulations.
+    * @desc creating line comment.
     * @mamberof Combination_Actions
     * @instance
     */
@@ -91,8 +92,8 @@ var Combination_Actions = (function()
     }
     
   /**
-    * @function lineComment
-    * @desc start process of combination manipulations.
+    * @function removeLineComment
+    * @desc removing line comment.
     * @mamberof Combination_Actions
     * @instance
     */    
@@ -103,7 +104,7 @@ var Combination_Actions = (function()
     
   /**
     * @function clear
-    * @desc start process of combination manipulations.
+    * @desc removing "specific" words from elements classname.
     * @mamberof Combination_Actions
     * @instance
     */
