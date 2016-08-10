@@ -14,8 +14,8 @@
   * @class
   * @classdesc it is singelton which contain all unique indexes, 
     and have functional to work with it.
-  * @namespace Symbol
-  * @constructs Symbol
+  * @namespace Unique_index
+  * @constructs Unique_index
   * @example var Symbol = Symbol.getInstance();
   */
   var Unique_index = (function () 
@@ -32,7 +32,7 @@
       * @function
       * @name addIndex
       * @desc adding index to collection.
-      * @mamberof Key_Scope
+      * @mamberof Unique_index
       * @instance
       * @param {numeral} index - unique index.
       * @param {String} name - name of class to wich will be added this index.
@@ -61,7 +61,7 @@
       * @function
       * @name setCurrentIndex
       * @desc setting index as a curent.
-      * @mamberof Key_Scope
+      * @mamberof Unique_index
       * @instance
       * @param {numeral} index - unique index.
       */
@@ -75,7 +75,7 @@
       * @function
       * @name getCurrentIndex
       * @desc getting current index.
-      * @mamberof Key_Scope
+      * @mamberof Unique_index
       * @instance
       */
       function getCurrentIndex() 
@@ -91,7 +91,7 @@
       * @function
       * @name getIndexes
       * @desc getting indexes.
-      * @mamberof Key_Scope
+      * @mamberof Unique_index
       * @instance
       */
       function getIndexes() 
@@ -107,12 +107,12 @@
       * @function
       * @name _compareIndexes
       * @desc comparing two unique indexes.
-      * @mamberof Key_Scope
+      * @mamberof Unique_index
       * @instance
       * @param {Array} index - unique index.
       * @param {Array} collection - Array with indexes - name of class to wich will.
         be added this index.
-      * @return {numeral} index of arrays element.
+      * @return {numeral} index of arrays element start from 0, and -1 is mean false.
       */
       function _compareIndexes(index, collection) 
       {
@@ -131,13 +131,11 @@
       * @public
       * @function
       * @name isUnique
-      * @desc comparing two unique indexes.
-      * @mamberof Key_Scope
+      * @desc checking is element unique.
+      * @mamberof Unique_index
       * @instance
-      * @param {Array} index - unique index.
-      * @param {Array} collection - Array with indexes - name of class to wich will.
-        be added this index.
-      * @return {numeral} index of arrays element.
+      * @param {Array} entity - element wich will be checked.
+      * @return {numeral} - is it unique or not.
       */
       function isUnique(entity) 
       {
@@ -164,13 +162,11 @@
       * @public
       * @function
       * @name getIndex
-      * @desc comparing two unique indexes.
-      * @mamberof Key_Scope
+      * @desc get index parametrs according element.
+      * @mamberof Unique_index
       * @instance
-      * @param {Array} index - unique index.
-      * @param {Array} collection - Array with indexes - name of class to wich will.
-        be added this index.
-      * @return {numeral} index of arrays element.
+      * @param {Array} entity - element from which will be getted index.
+      * @return {numeral} - unique index parametrs of element.
       */
       function getIndex(entity) 
       {
@@ -197,13 +193,11 @@
       * @public
       * @function
       * @name getIndexName
-      * @desc comparing two unique indexes.
-      * @mamberof Key_Scope
+      * @desc get name of index's name.
+      * @mamberof Unique_index
       * @instance
-      * @param {Array} index - unique index.
-      * @param {Array} collection - Array with indexes - name of class to wich will.
-        be added this index.
-      * @return {numeral} index of arrays element.
+      * @param {Array} entity - element from which will be getted index.
+      * @return {numeral} - index name of element.
       */
       function getIndexName(entity) 
       {
@@ -231,12 +225,10 @@
       * @function
       * @name getIndexCode
       * @desc comparing two unique indexes.
-      * @mamberof Key_Scope
+      * @mamberof Unique_index
       * @instance
-      * @param {Array} index - unique index.
-      * @param {Array} collection - Array with indexes - name of class to wich will.
-        be added this index.
-      * @return {numeral} index of arrays element.
+      * @param {Array} entity - element from which will be getted index.
+      * @return {numeral} - unique index of element.
       */
       function getIndexCode(entity) 
       {
