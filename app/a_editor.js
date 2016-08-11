@@ -113,7 +113,7 @@
           this.symbol_buffer[i].symbol = Symbol.getInstance();
           this.symbol_buffer[i].onkeydown = function(event)
           {
-            // observer innitialithation 
+            // observer initialithation 
             if(Observable != undefined)
             {
               this.object.publish(this.object, this.key_scope, this.symbol, this.index, event, 'pressed');
