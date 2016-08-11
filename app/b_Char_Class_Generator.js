@@ -89,7 +89,7 @@
         char = user_char;
         code = char.charCodeAt(0);
 
-        // signifires and uppercase code map 
+        // signifiers and uppercase code map 
         var codes = [
           {'start_code':9, 'end_code':9, 'desc':'tab'}, // tab 
           {'start_code':32, 'end_code':32, 'desc':'space'}, //
