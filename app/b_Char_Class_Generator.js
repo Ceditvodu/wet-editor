@@ -151,7 +151,7 @@
       * @name setPrefix
       * @mamberof Char_Class_Generator
       * @instance
-      * @desc Setting prefix, which will be adding to every class.
+      * @desc Setting prefix, which will be added to every class.
       * @param {String} user_prefix - Prefix for class.
       */
       function setPrefix(user_prefix)
