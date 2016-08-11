@@ -181,7 +181,7 @@
       * @mamberof Char_Class_Generator
       * @instance
       * @desc Giving unique class for element.
-      * @param {String} class_name - Class name thet will be unique.
+      * @param {String} class_name - Class name that will be unique.
       */
       function unique(class_name)
       {
@@ -201,7 +201,7 @@
       * @mamberof Char_Class_Generator
       * @instance
       * @desc Inherite unique class that in current status.
-      * @param {String} class_name - Class name thet will be unique.
+      * @param {String} class_name - Class name that will be unique.
       */
       function inherite(class_name)
       {
