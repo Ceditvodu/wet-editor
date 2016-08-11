@@ -47,7 +47,7 @@
           this.container[i] = document.getElementsByClassName(this.editor_name)[i];
           this.container[i].style.position = 'relative';
 
-          // textare tag for given symbols 
+          // textarea tag for given symbols 
           this.symbol_buffer[i] = document.createElement('textarea');
           this.symbol_buffer[i].className = 'symbol_buffer';
           this.symbol_buffer[i].cols = '1';
