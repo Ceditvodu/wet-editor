@@ -22,7 +22,7 @@
     function Editor(name, options){
       if(name != undefined)
       {
-        // innitialization global variables for 
+        // initialization global variables for 
 
         this.editor_name = name;
         this.container= new Array();
