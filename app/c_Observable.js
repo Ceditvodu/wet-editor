@@ -23,7 +23,7 @@
     * @desc Need for subscribing observers.
     * @mamberof Observable
     * @instance
-    * @param {Object} observer - Object wich containe observer instans.
+    * @param {Object} observer - Object which containe observer instans.
     */
     this.subscribe = function(observer)
     {
