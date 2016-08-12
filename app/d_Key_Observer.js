@@ -30,7 +30,7 @@
     
     var concrete_line = data.line[index][data.current_line[index]]
 
-    // initialization of words exloser
+    // initialization of words exploser
     var divider = new Divider();
     
     var director = new Director(concrete_entity, 'wet-');
