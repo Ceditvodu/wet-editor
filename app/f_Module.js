@@ -173,7 +173,7 @@
       */
       function runCombinationAction(operation)
       {
-        options = user_options;
+        
       }
 
       return {
