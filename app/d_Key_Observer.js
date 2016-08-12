@@ -11,7 +11,7 @@
   * @namespace Key_Observer
   * @constructs
   * @param {Editor} data - Getting main object.
-  * @param {Key_Scope} scope - Key map singelton.
+  * @param {Key_Scope} scope - Key map singleton.
   * @param {int} index - Index of current active editor element.
   * @param {event} event - Object that contain event data.
   * @param {String} condition - Condition of key: pressed or released.
