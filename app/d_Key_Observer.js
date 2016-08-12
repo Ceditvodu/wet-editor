@@ -36,7 +36,7 @@
     var director = new Director(concrete_entity, 'wet-');
       
     // if controlling key pressed 
-    // need to disabled browser hotkeys
+    // need to disable browser hotkeys
     if(((scope.getKeyMap()[0] < '46')&&(scope.getKeyMap()[0] != '16'))
        &(scope.getKeyMap()[0] != undefined))//16
     {
@@ -45,7 +45,7 @@
       
     
     
-    // if pressed enter pressed (undefined, 13)
+    // if pressed enter (undefined, 13)
     if((scope.getKeyMap()[0] != '13')&(scope.getKeyMap()[0] != undefined))
     {
       // keq pressed function goes here
