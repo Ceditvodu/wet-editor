@@ -37,7 +37,7 @@
     * @desc Need for unsubscribing observers.
     * @mamberof Observable
     * @instance
-    * @param {Object} observer - Object wich containe observer instans.
+    * @param {Object} observer - Object which containe observer instans.
     */
     this.unsubscribe = function(observer)
     {
