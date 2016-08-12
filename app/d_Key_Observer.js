@@ -56,7 +56,7 @@
       hotkey.runFunction('key');
     }
     
-    // addition char buffer cleaning for non decodeble signs
+    // addition char buffer cleaning for non decodable signs
     if((scope.getKeyMap()[0] == '13'))
     {
       data.symbol_buffer[index].value ='';
