@@ -1179,6 +1179,43 @@ var Director = (function()
         return false;
       }
     }  
+  
+  /**
+    * @function InheriteUniqueWith 
+    * @desc activate a cursor for an element.
+    * @param {object} element - html element for wich will be generated unique class name.
+    * @param {staring} name - the name wich will be unique.
+    * @mamberof Director
+    * @instance
+    */
+    this.InheriteUniqueWith = function(element, name)
+    { 
+      if(element)
+      {
+        if(this.isCursor(element))
+        {
+          var active = ' ' + this.active;
+        }
+        else
+        {
+          var active = '';
+        }
+        element.className = this.class_generator
+                                .setPrefix('wet-')
+                                .mainClass(element.innerHTML)
+                                .space()
+                                .subClass(element.innerHTML)
+                                .space()
+                                .inherite(name)
+                                .generate()
+                                + active;  
+      }
+      else
+      {
+        console.log('activate - has error');
+        return false;
+      }
+    }
     
   /**
     * @function explodeAllChildLess 

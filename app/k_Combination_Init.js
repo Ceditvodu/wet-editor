@@ -20,7 +20,7 @@
 
     function createInstance() 
     {
-      var editors_combination_map = {};
+      this.editors_combination_map = {};
       
       var concrete_entity;
       
@@ -42,7 +42,7 @@
       
       init();
       
-      console.log(editors_combination_map);
+      console.log(this.editors_combination_map);
 
     /**
       * @function init
@@ -72,14 +72,25 @@
             }
           }
         }
-//            console.log(editors_combination_map.f.u.n.c.t.i.o.n);
-//            console.log(editors_combination_map['/']['*']);
-//            console.log(editors_combination_map['*']['/']);
-//            console.log(editors_combination_map['"']);
+//            console.log(this.editors_combination_map.f.u.n.c.t.i.o.n);
+//            console.log(this.editors_combination_map['/']['*']);
+//            console.log(this.editors_combination_map['*']['/']);
+//            console.log(this.editors_combination_map['"']);
       }
-
+      
+    /**
+      * @function setUp
+      * @desc Setup all necessary dependencies.
+      * @param {Object} concrete_entity - Entity which will contain current editor element.
+      * @param {String} prefix - Prefix of all names in code.
+      * @param {String} active - Class name for cursor entity.
+      * @mamberof Combination_Init
+      * @instance
+      */
       function setUp(concrete_entity, prefix, active)
       {
+        car = concrete_entity;
+        
         concrete_entity = concrete_entity;
         
         prefix = prefix;
@@ -108,7 +119,7 @@
           }
         }        
 
-        var current_position = editors_combination_map;
+        var current_position = this.editors_combination_map;
 
         for(var i=0; i<combination_symbols.length; i++)
         {
@@ -195,6 +206,7 @@
             }
             catch(e)
             {
+              console.log(e);
               action['clear']();
             }
           }

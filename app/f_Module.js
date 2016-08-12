@@ -162,6 +162,19 @@
       {
         options = user_options;
       }
+      
+    /**
+      * @public
+      * @function runCombinationAction
+      * @desc Running action according operations that what was initialized.
+      * @mamberof Module
+      * @instance
+      * @param {Array} operation - name of operation.
+      */
+      function runCombinationAction(operation)
+      {
+        options = user_options;
+      }
 
       return {
         addFunction: addFunction,
