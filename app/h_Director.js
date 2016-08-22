@@ -964,7 +964,7 @@ var Director = (function()
     
   /**
     * @function makeItParentWord 
-    * @desc making a word an a parent word.
+    * @desc making a word as parent word.
     * @param {object} before_entity - element what must become a parent word.
     * @mamberof Director
     * @instance
@@ -1551,7 +1551,7 @@ var Director = (function()
     
   /**
     * @function deleteElementsAfter
-    * @desc clean line content from unneccesary elements 
+    * @desc clean line content from unnecessary elements 
     * @mamberof Director
     * @instance
     * @param {Object} word - container that contain separated characters with word
@@ -1582,7 +1582,7 @@ var Director = (function()
     
   /**
     * @function cutElementsAfter
-    * @desc clean line content from unneccesary elements 
+    * @desc clean line content from unnecessary elements 
     * @mamberof Director
     * @instance
     * @param {Object} word - container that contain separated characters with word
@@ -1946,7 +1946,7 @@ var Director = (function()
           }
         }
                 
-        // deseparating characters before cursor
+        // compound characters before cursor
         this.makeAllChildLess('concat', line);
         // or this.implodeAllChildLess('concat', line);
       }      
@@ -2016,7 +2016,7 @@ var Director = (function()
           }
         }
         
-        // deseparating characters before cursor
+        // compound characters before cursor
         this.makeAllChildLess('concat', line);
         // or this.implodeAllChildLess('concat', line);
         
