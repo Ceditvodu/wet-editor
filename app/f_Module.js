@@ -53,7 +53,7 @@
       * @private
       * @function
       * @name deletePrevioseCursor
-      * @desc it is need to delete previose cursor and it protect of making 
+      * @desc it is need to delete previos cursor and it protect of making 
         unnecessary multicursors.
       * @mamberof Module
       * @inner
