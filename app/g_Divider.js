@@ -23,7 +23,7 @@ var Divider = (function()
     * @desc separating word to a single characters in container.
     * @param {Object} word - container that contain string with word that must be 
       exploded.
-    * @return {String} - string with html code that containe separated characters.
+    * @return {String} - string with html code that contains separated characters.
     * @mamberof Divider
     * @instance
     */
