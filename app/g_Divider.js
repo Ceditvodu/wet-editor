@@ -8,7 +8,7 @@
   * @copyright Ivan Kaduk 2016.
   * @license cc-by-nc-sa 4.0
   * @class
-  * @classdesc this class is need to separating character by character or to 
+  * @classdesc this class is need to separate character by character or to 
     concate them into one word.
   * @namespace Divider
   * @constructs Divider
