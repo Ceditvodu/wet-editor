@@ -86,7 +86,7 @@
       * @private
       * @function
       * @name deletePrevioseParent
-      * @desc it is need to delete 'perent' class from object it gives oportunity 
+      * @desc it is need to delete 'parent' class from object it gives opportunity 
         to know in which exact container is word lie.
       * @mamberof Module
       * @inner
