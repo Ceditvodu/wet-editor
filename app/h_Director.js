@@ -630,9 +630,9 @@ var Director = (function()
     
   /**
     * @function getLastElement 
-    * @desc searching for an last element of word.
+    * @desc searching for an last element of the word.
     * @param {object} word - entity of word.
-    * @return {object} - entity of last element of word.
+    * @return {object} - entity of last element of the word.
     * @mamberof Director
     * @instance
     */
@@ -652,7 +652,7 @@ var Director = (function()
     
   /**
     * @function getCursorPosition 
-    * @desc returning position of cursor inside of word or etc.
+    * @desc returning position of cursor inside of the word or etc.
     * @param {object} cursor - cursor entity.
     * @return {number} - index of cursor.
     * @mamberof Director
@@ -662,7 +662,7 @@ var Director = (function()
     { 
       var active_char_index = 0;
       
-      // searching a position ow the word 
+      // searching a position of the word 
       for(var i=0; i<cursor.parentElement.childNodes.length-1; i++)
       {
         var char_class = cursor.parentElement.childNodes[i].className;
