@@ -558,7 +558,7 @@ var Director = (function()
     * @function getBeforeEntity
     * @desc getting entity that goes before element.
     * @param {String} entity - marker of active element.
-    * @return {object} - entity of previouse elemtnt of active element.
+    * @return {object} - entity of previous element of active element.
     * @mamberof Director
     * @instance
     */
