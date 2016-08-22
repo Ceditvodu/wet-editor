@@ -119,7 +119,7 @@ var Director = (function()
     
   /**
     * @function isStart 
-    * @desc chacking element, is it start one.
+    * @desc checking element, is it start one.
     * @param {object} element - html element for checking.
     * @return {bool} - is it on start or not
     * @mamberof Director
@@ -147,7 +147,7 @@ var Director = (function()
 
   /**
     * @function isSignifier 
-    * @desc chacking element is signifier.
+    * @desc checking element is signifier.
     * @param {object} element - html element for checking.
     * @return {bool} - is it signifier or not.
     * @mamberof Director
@@ -175,7 +175,7 @@ var Director = (function()
     
   /**
     * @function isNumerial 
-    * @desc chacking element is numeral.
+    * @desc checking element is numeral.
     * @param {object} element - html element for checking.
     * @return {bool} - is it numeral or not.
     * @mamberof Director
@@ -208,7 +208,7 @@ var Director = (function()
 
   /**
     * @function isWord
-    * @desc chacking element is it word.
+    * @desc checking element is it word.
     * @param {object} element - html element for checking.
     * @return {bool} - is it word or a not.
     * @mamberof Director
@@ -236,7 +236,7 @@ var Director = (function()
 
   /**
     * @function isParentWord
-    * @desc chacking element is it word.
+    * @desc checking element is it word.
     * @param {object} element - html element for checking
     * @return {bool} - is it parent  word or a not.
     * @mamberof Director
