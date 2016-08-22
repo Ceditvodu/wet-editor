@@ -494,7 +494,7 @@ var Director = (function()
     
     /**
     * @function isSpace
-    * @desc checking is the element is space.
+    * @desc checking if the element is space.
     * @param {object} element - html element for checking.
     * @return {bool} - is it space or not.
     * @mamberof Director
@@ -532,7 +532,7 @@ var Director = (function()
     
   /**
     * @function getCursorEntity 
-    * @desc geting cursor entity from code.
+    * @desc getting cursor entity from code.
     * @param {String} cursor_marker - marker of active element.
     * @return {object} - entity of active element.
     * @mamberof Director
