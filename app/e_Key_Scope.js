@@ -13,8 +13,7 @@
   * @copyright Ivan Kaduk 2016.
   * @license cc-by-nc-sa 4.0
   * @class
-<<<<<<< 96742364c3c8e9f4a69477943b0300cb54f07925
-  * @classdesc It is singelton which contain current key combinations, 
+  * @classdesc It is singleton which contain current key combinations, 
 =======
   * @classdesc it is singleton which contain current key combinations, 
 >>>>>>> 16 "Key_Scope" singleton
