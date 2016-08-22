@@ -840,7 +840,7 @@ var Director = (function()
   /**
     * @function getCurrentUnique
     * @desc returning current unique index.
-    * @param {String} name - the name wich will be unique.
+    * @param {String} name - the name which will be unique.
     * @mamberof Director
     * @instance
     */
@@ -859,7 +859,7 @@ var Director = (function()
     
   /**
     * @function getElementsAfter
-    * @desc clean line content from unneccesary elements 
+    * @desc clean line content from unnecessary elements 
     * @mamberof Director
     * @instance
     * @param {Object} word - container that contain separated characters with word
@@ -965,7 +965,7 @@ var Director = (function()
   /**
     * @function makeItParentWord 
     * @desc making a word an a parent word.
-    * @param {object} before_entity - element what must became a parent word.
+    * @param {object} before_entity - element what must become a parent word.
     * @mamberof Director
     * @instance
     */
@@ -985,7 +985,7 @@ var Director = (function()
   /**
     * @function makeItWord 
     * @desc give the class name of word.
-    * @param {object} element - element that must became a word.
+    * @param {object} element - element that must become a word.
     * @param {Array} parameter - it is an additional parameter (keyword, parameter)
       if you add keyword, than it remowve "parant" from class and the same for parametr.
     * @mamberof Director
@@ -1013,7 +1013,7 @@ var Director = (function()
   /**
     * @function activate 
     * @desc activate a cursor for an element.
-    * @param {object} element - html element for wich will be generated class name 
+    * @param {object} element - html element for which will be generated class name 
       with "active" ending.
     * @mamberof Director
     * @instance
@@ -1053,7 +1053,7 @@ var Director = (function()
   /**
     * @function deactivate 
     * @desc deactivate a cursor for an element
-    * @param {object} element - html element for wich will be generated class name.
+    * @param {object} element - html element for which will be generated class name.
     * @mamberof Director
     * @instance
     */
@@ -1100,7 +1100,7 @@ var Director = (function()
   /**
     * @function setClass 
     * @desc give class according an element.
-    * @param {object} element - html element for wich will be generated class name. 
+    * @param {object} element - html element for which will be generated class name. 
     * @mamberof Director
     * @instance
     */
@@ -1125,7 +1125,7 @@ var Director = (function()
   /**
     * @function plus 
     * @desc add some element after this, if this have a next element.
-    * @param {object} element - element after wich will be added content.
+    * @param {object} element - element after which will be added content.
     * @param {String} content - content wich will be added after element.
     * @mamberof Director
     * @instance
@@ -1140,7 +1140,7 @@ var Director = (function()
     * @function makeAllChildLess 
     * @desc divide all elements in words with undivided content.
     * @param {string} action - what we whant to do with line: divide, concat.
-    * @param {object} line - line wich must be exploded.
+    * @param {object} line - line which must be exploded.
     * @mamberof Director
     * @instance
     */
@@ -1184,7 +1184,7 @@ var Director = (function()
     * @function InheriteUniqueWith 
     * @desc activate a cursor for an element.
     * @param {object} element - html element for wich will be generated unique class name.
-    * @param {staring} name - the name wich will be unique.
+    * @param {staring} name - the name which will be unique.
     * @mamberof Director
     * @instance
     */
@@ -1220,7 +1220,7 @@ var Director = (function()
   /**
     * @function explodeAllChildLess 
     * @desc divide all elements in childless words.
-    * @param {object} line - line wich must be exploded.
+    * @param {object} line - line which must be exploded.
     * @mamberof Director
     * @instance
     */
@@ -1255,7 +1255,7 @@ var Director = (function()
   /**
     * @function implodeAllChildLess 
     * @desc concat all elements in childless words.
-    * @param {object} line - line wich must be imploded.
+    * @param {object} line - line which must be imploded.
     * @mamberof Director
     * @instance
     */
@@ -1290,8 +1290,8 @@ var Director = (function()
   /**
     * @function makeItUniqueWith 
     * @desc add unique index to a word and paste it all to the elements class.
-    * @param {object} element - html element for wich will be generated unique class name.
-    * @param {string} name - the name wich will be unique.
+    * @param {object} element - html element for which will be generated unique class name.
+    * @param {string} name - the name which will be unique.
     * @mamberof Director
     * @instance
     */
@@ -1328,9 +1328,9 @@ var Director = (function()
   /**
     * @function makeAllUniqueWith 
     * @desc make an array of elements with unique class.
-    * @param {object} element - html element from what wich will be generated unique 
+    * @param {object} element - html element from what which will be generated unique 
       class name.
-    * @param {String} name - the name wich will be unique.
+    * @param {String} name - the name which will be unique.
     * @param {String} parametrs.start - from where must start process.
     * @param {String} parametrs.end - where process must stop.
     * @mamberof Director
@@ -1478,7 +1478,7 @@ var Director = (function()
   /**
     * @function delete 
     * @desc delete some element.
-    * @param {object} element - html element wich will be deleted.
+    * @param {object} element - html element which will be deleted.
     * @mamberof Director
     * @instance
     */
@@ -1624,8 +1624,8 @@ var Director = (function()
   /**
     * @function create 
     * @desc create some element.
-    * @param {String} type - wich element must be created.
-    * @param {String} content - text wich will be in content when it will be created. 
+    * @param {String} type - which element must be created.
+    * @param {String} content - text which will be in content when it will be created. 
     * @param {String} status - is element active or not.
     * @return {object} - entity of created object.
     * @mamberof Director
@@ -1663,7 +1663,7 @@ var Director = (function()
   /**
     * @function createLineStart 
     * @desc create start element.
-    * @param {String} content - text wich will be in content when it will be created. 
+    * @param {String} content - text which will be in content when it will be created. 
     * @param {String} status - is element active or not.
     * @return {object} - entity of created object.
     * @mamberof Director
@@ -1690,7 +1690,7 @@ var Director = (function()
   /**
     * @function createWord 
     * @desc create word entity.
-    * @param {String} content - text wich will be in content when it will be created.
+    * @param {String} content - text which will be in content when it will be created.
     * @param {String} status - is element active or not.
     * @return {object} - entity of created object.
     * @mamberof Director
@@ -1747,7 +1747,7 @@ var Director = (function()
   /**
     * @function createChar 
     * @desc create character entity.
-    * @param {String} content - text wich will be in content when it will be created.
+    * @param {String} content - text which will be in content when it will be created.
     * @param {String} status - is element active or not. 
     * @return {object} - entity of created object.
     * @mamberof Director
@@ -1815,7 +1815,7 @@ var Director = (function()
   /**
     * @function createLine
     * @desc create line entity.
-    * @param {String} content - text wich will be in content when it will be created. 
+    * @param {String} content - text which will be in content when it will be created. 
     * @param {number} index - lines index number. 
     * @return {object} - entity of created object.
     * @mamberof Director
@@ -1843,7 +1843,7 @@ var Director = (function()
   /**
     * @function createlineComment
     * @desc create line coment entity.
-    * @param {String} content - text wich will be in content when it will be created. 
+    * @param {String} content - text which will be in content when it will be created. 
     * @param {String} status - status of comment. 
     * @return {object} - entity of created object.
     * @mamberof Director
@@ -1880,11 +1880,11 @@ var Director = (function()
     
   /**
     * @function findCursorPosition
-    * @desc searching for an number of char position on wich cursor is stand on 
+    * @desc searching for an number of char position on which cursor is stand on 
       line, if it dont find a cursor, it simply return a length of line.
     * @param {object} cursor - entity of cursor. 
     * @param {object} line - line on which we must search a cursor. 
-    * @return {number} - number of char position on wich cursor is stand on line.
+    * @return {number} - number of char position on which cursor is stand on line.
     * @mamberof Director
     * @instance
     */
