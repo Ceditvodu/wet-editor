@@ -1126,7 +1126,7 @@ var Director = (function()
     * @function plus 
     * @desc add some element after this, if this have a next element.
     * @param {object} element - element after which will be added content.
-    * @param {String} content - content wich will be added after element.
+    * @param {String} content - content which will be added after element.
     * @mamberof Director
     * @instance
     */
@@ -1955,7 +1955,7 @@ var Director = (function()
     
  /**
     * @function setCursorOnPosition
-    * @desc seting cursor on som position.
+    * @desc seting cursor on some position.
     * @param {object} position - entity of cursor. 
     * @param {object} line - line on which we must search a cursor. 
     * @mamberof Director
