@@ -8,8 +8,8 @@
   * @copyright Ivan Kaduk 2016.
   * @license cc-by-nc-sa 4.0
   * @class
-  * @classdesc it is solution that helps to create additional mudules more 
-    easely and implement it to application.
+  * @classdesc it is solution that helps to create additional modules more 
+    easily and implement it to application.
   * @namespace Module
   * @constructs Module
   * @example     Module.getInstance().modules_name = function(options)
