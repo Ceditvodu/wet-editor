@@ -64,7 +64,7 @@
         var active_element = concrete_entity.getElementsByClassName("active")[0]; 
         var class_generator = new Char_Class_Generator('wet-');
         
-        // if element is exist than change his class to native without 'active' mark
+        // if element is exist then change his class to native without 'active' mark
         if(active_element != undefined)
         {
           if(active_element.className.split(" ").indexOf('wet-line-start') >= 0)
