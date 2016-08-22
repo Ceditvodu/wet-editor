@@ -152,7 +152,7 @@ var Divider = (function()
     }
   /**
     * @function trim
-    * @desc clean line content from unneccesary elements 
+    * @desc clean line content from unnecessary elements 
     * @mamberof Divider
     * @instance
     * @param {Object} word - container that contain separated characters with word
