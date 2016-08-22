@@ -580,7 +580,7 @@ var Director = (function()
     * @function getNextEntity
     * @desc getting entity that goes after element.
     * @param {String} entity - marker of active element.
-    * @return {object} - entity of previouse elemtnt of active element.
+    * @return {object} - entity of previous element of active element.
     * @mamberof Director
     * @instance
     */
@@ -607,7 +607,7 @@ var Director = (function()
     
   /**
     * @function getParentWord 
-    * @desc getting parent word entity if it hase.
+    * @desc getting parent word entity if it has.
     * @return {object} - entity of parent word.
     * @mamberof Director
     * @instance
