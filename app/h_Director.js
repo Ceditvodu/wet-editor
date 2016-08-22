@@ -681,9 +681,9 @@ var Director = (function()
 
   /**
     * @function getAllAfter 
-    * @desc return array of elements, that lie after current element
+    * @desc return array of elements, that line after current element
     * @param {object} element - after that element we starting to searching another
-    * @return {Array} - elements that will be cutted from a linne
+    * @return {Array} - elements that will be cutted from a line
     * @mamberof Director
     * @instance
     */
