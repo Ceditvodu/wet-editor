@@ -54,7 +54,7 @@ var Director = (function()
     
   /**
     * @function isCursorFirstOnALine 
-    * @desc checking is cursor placed on start of line.
+    * @desc checking if cursor placed on start of line.
     * @param {String} cursor_marker - marker of cursor.
     * @return {bool} - is first on a line or not.
     * @mamberof Director
