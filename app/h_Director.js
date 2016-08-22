@@ -92,7 +92,7 @@ var Director = (function()
     
   /**
     * @function isCursorBeforeWord 
-    * @desc chacking, is cursor placed before word.
+    * @desc chacking, if cursor placed before word.
     * @param {object} cursor_entity - marker of active element.
     * @return {bool} - is before or not
     * @mamberof Director
