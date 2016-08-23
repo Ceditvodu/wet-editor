@@ -35,7 +35,7 @@
       * @mamberof Unique_index
       * @instance
       * @param {numeral} index - unique index.
-      * @param {String} name - name of class to wich will be added this index.
+      * @param {String} name - name of class to which will be added this index.
       */
       function addIndex(index, name) 
       {
