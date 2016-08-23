@@ -35,7 +35,7 @@
     // add some values to combination
     combination.setUp(concrete_entity, 'wet-', 'active');
           
-    // if key is pressed or relissed add event to singleton
+    // if key is pressed or released add event to singleton
     if((condition == 'pressed'))
     {
       if(current_symbol == '')
