@@ -128,7 +128,7 @@
           var character_holder = director.create('char', character_from_Buffer, 'active');
           // so we must to delete cursor on first
           director.deactivatePreviouse();
-          // if cursor lie on the end of word we simpli adding char in the ond of word
+          // if cursor lie on the end of word we simply adding char in the end of word
           if(active_char.nextSibling == null)
           {
             word.appendChild(character_holder);
