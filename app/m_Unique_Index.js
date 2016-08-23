@@ -12,7 +12,7 @@
   * @copyright Ivan Kaduk 2016.
   * @license cc-by-nc-sa 4.0
   * @class
-  * @classdesc it is singelton which contain all unique indexes, 
+  * @classdesc it is singleton which contain all unique indexes, 
     and have functional to work with it.
   * @namespace Unique_index
   * @constructs Unique_index
