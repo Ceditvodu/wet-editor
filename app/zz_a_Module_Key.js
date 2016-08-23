@@ -27,7 +27,7 @@
     var current_symbol = symbol.setCurrentSymbol(character_from_Buffer);
     var concrete_line = options.object.line[options.index][line_number];
     
-    // initialization of words exloser 
+    // initialization of words exploser 
     var divider = new Divider();
     var director = new Director(concrete_entity, 'wet-', 'active');
     // if that key pressed on new line
