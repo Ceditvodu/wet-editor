@@ -247,7 +247,7 @@
         
       }
       
-      // this an exception element that dont have auto generative class 
+      // this an exception element that dont have auto generated class 
       // that is why whe need to give our own
       if((previouse_element_class == 'wet-line-start'))
       {  
