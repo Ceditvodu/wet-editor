@@ -31,7 +31,7 @@
       var action;
                   
       // combination map that in future will be loading from file 
-      // according languadge
+      // according language
       var combinations_map = new Array();
       
       // file javascript_keywords.js
