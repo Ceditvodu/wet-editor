@@ -34,7 +34,7 @@
     if(concrete_line.innerHTML == '')
     {
       
-    // deleting previose cursor 
+    // deleting previos cursor 
     //director.deactivatePreviouse();
     director.deactivatePreviouse();
 
@@ -48,7 +48,7 @@
     // if pressed key is not null 
     if(character_from_Buffer != '')
     {
-      // detecting previouse element with 'active' class name
+      // detecting previous element with 'active' class name
       var previouse_element = director.getCursorEntity('active');
       // deactivate
       // !!!!!!!!!!!!!!!!!!!! standart deactivation, dont work 
