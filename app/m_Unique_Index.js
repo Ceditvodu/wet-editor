@@ -110,7 +110,7 @@
       * @mamberof Unique_index
       * @instance
       * @param {Array} index - unique index.
-      * @param {Array} collection - Array with indexes - name of class to wich will.
+      * @param {Array} collection - Array with indexes - name of class to which will.
         be added this index.
       * @return {numeral} index of arrays element start from 0, and -1 is mean false.
       */
@@ -134,7 +134,7 @@
       * @desc checking is element unique.
       * @mamberof Unique_index
       * @instance
-      * @param {Array} entity - element wich will be checked.
+      * @param {Array} entity - element which will be checked.
       * @return {numeral} - is it unique or not.
       */
       function isUnique(entity) 
