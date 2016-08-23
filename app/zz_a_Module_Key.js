@@ -133,7 +133,7 @@
           {
             word.appendChild(character_holder);
           }
-          // if cursore lie in the middle of word, we adding after active element
+          // if cursor lie in the middle of word, we adding after active element
           else if(active_char.nextSibling != null)
           {
             director.plus(active_char, character_holder);
