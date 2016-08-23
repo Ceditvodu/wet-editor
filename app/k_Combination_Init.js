@@ -104,7 +104,7 @@
     /**
       * @function addCombination
       * @desc adding combination to collection graph.
-      * @param {String} combination - the word that must be compaired with combination map.
+      * @param {String} combination - the word that must be compared with combination map.
       * @param {String} dirapction - the role of word, is it start or is it end.
       * @mamberof Combination_Init
       * @instance
