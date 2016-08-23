@@ -118,7 +118,7 @@
         {
           // getting active character after what we planning to paste new one
           var active_char = director.getCursorEntity('active');
-          // deactive previose char
+          // deactivate previous char
           director.deactivate(previouse_element);
           // find ready for children word
           word = director.getParentWord();
