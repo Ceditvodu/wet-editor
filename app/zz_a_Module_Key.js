@@ -78,7 +78,7 @@
         {
           if(next_element == null)
           {
-            // geting activ character after what we planing to paste new one
+            // getting active character after what we planning to paste new one
             var active_char = director.getBeforeEntity("active");
             // create a word object 
             var word = director.create('word', character_from_Buffer, 'active');
@@ -116,7 +116,7 @@
         // if we in the word:
         else
         {
-          // geting activ character after what we planing to paste new one
+          // getting active character after what we planning to paste new one
           var active_char = director.getCursorEntity('active');
           // deactive previose char
           director.deactivate(previouse_element);
