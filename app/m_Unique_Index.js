@@ -162,11 +162,11 @@
       * @public
       * @function
       * @name getIndex
-      * @desc get index parametrs according element.
+      * @desc get index parameters according element.
       * @mamberof Unique_index
       * @instance
       * @param {Array} entity - element from which will be getted index.
-      * @return {numeral} - unique index parametrs of element.
+      * @return {numeral} - unique index parameters of element.
       */
       function getIndex(entity) 
       {
