@@ -12,7 +12,7 @@
   * @copyright Ivan Kaduk 2016.
   * @license cc-by-nc-sa 4.0
   * @class
-  * @classdesc it is singelton which contain current symbol, 
+  * @classdesc it is singleton which contain current symbol, 
     and have functional to work with it.
   * @namespace Symbol
   * @constructs Symbol
