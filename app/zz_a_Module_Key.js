@@ -68,7 +68,7 @@
                                     .mainClass(character_from_Buffer)
                                     .generate();  
 
-      // now we press an character button:
+      // now we press a character button:
       if((class_of_char_in_buffer == "character")
          |(class_of_char_in_buffer == "numeral"))
       {
