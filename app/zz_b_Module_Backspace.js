@@ -21,7 +21,7 @@ Module.getInstance().backspase = function(options)
   // getting active element that must be deleted
   var active_char = director.getCursorEntity('active');
 
-  // getting previose element thet will be active after key pressed
+  // getting previos element that will be active after key pressed
   var previous_entity = director.getBeforeEntity(active_char);
   
   var next_entity = active_char.nextSibling;
