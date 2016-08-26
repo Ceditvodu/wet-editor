@@ -43,16 +43,16 @@ Module.getInstance().backspase = function(options)
       // take last character in this word
       var previouse_word_char = director.getLastElement(word);
       
-      // making previouse character as active one
+      // making previous character as active one
       director.activate(previouse_word_char);
       
       // if next element is word too:
       if(director.isWord(next_entity))
       {
-        // get additional content for previouse word from next word
+        // get additional content for previous word from next word
         var additional_content = divider.divide(next_entity);
         
-        // add this content to previouse word
+        // add this content to previous word
         word.innerHTML += additional_content;
                 
         // delete next word
@@ -134,7 +134,7 @@ Module.getInstance().backspase = function(options)
           var last_element = line_elements[line_elements.length-1];
           var additional_content = '';
           
-          // if last element on previouse line is word:
+          // if last element on previous line is word:
           if(director.isWord(last_element))
           {
             // and first element on deleting line is word too:
@@ -157,17 +157,17 @@ Module.getInstance().backspase = function(options)
           
         }
         
-        // deleting previouse line
+        // deleting previous line
         director.delete(parent_s);
         
         // !!!!!!!!!! change this.current_line 
         // deleting 'enter' pseudo sign
         options.object.current_line[options.index]--;
         
-        // last word on previouse line
+        // last word on previous line
         word = previous_line.childNodes[previous_line.childNodes.length-1];
         
-        // if last element in previouse line not a word:
+        // if last element in previous line not a word:
         if(!director.isSignifier(word))
         {
           // exploded content
@@ -179,7 +179,7 @@ Module.getInstance().backspase = function(options)
           // activete this char 
           director.activate(last_word_char);
           
-          // add additional content to the previouse word
+          // add additional content to the previous word
           last_element.innerHTML += additional_content;
         }
         // make active last word of line 
@@ -187,7 +187,7 @@ Module.getInstance().backspase = function(options)
         
         director.activate(last_word_on_previose_line);
         
-        // add content from previouse line to current line 
+        // add content from previous line to current line 
         // if line not empty:
         if(!director.isLineEmpty(parent_s))
         {
@@ -197,10 +197,10 @@ Module.getInstance().backspase = function(options)
         // getting active element that must be deleted
         var active_char = director.getCursorEntity('active');
         
-        // getting previose element thet will be active after key pressed
+        // getting previos element thet will be active after key pressed
         var previous_char = director.getBeforeEntity(active_char);
         
-        // if we have previouse element:
+        // if we have previous element:
         if(previous_char != false)
         {
           // if active element is word:
