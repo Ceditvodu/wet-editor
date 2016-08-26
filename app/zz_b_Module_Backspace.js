@@ -33,7 +33,7 @@ Module.getInstance().backspase = function(options)
     // if before element is a word:
     if(director.isCursorBeforeWord(active_char))
     {
-      // saing that this word now is parent
+      // saying that this word now is parent
       director.makeItParentWord(previous_entity);
       var word = director.getParentWord();
       
