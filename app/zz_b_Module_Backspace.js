@@ -176,7 +176,7 @@ Module.getInstance().backspase = function(options)
           // take last word char
           var last_word_char = director.getLastElement(word);
           
-          // activete this char 
+          // activate this char 
           director.activate(last_word_char);
           
           // add additional content to the previous word
