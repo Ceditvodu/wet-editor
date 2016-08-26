@@ -27,7 +27,7 @@ Module.getInstance().backspase = function(options)
   var next_entity = active_char.nextSibling;
   
   // analyzing what before active element
-  // and if it has previouse elements:  
+  // and if it has previous elements:  
   if(previous_entity)
   {
     // if before element is a word:
