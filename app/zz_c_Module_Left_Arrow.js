@@ -28,10 +28,10 @@ Module.getInstance().left_arrow = function(options)
   var previous_element = director.getBeforeEntity(active_element);
 
   // analyzing what before active element
-  // and if it has previouse elements:  
+  // and if it has previous elements:  
   if(previous_element != false)
   {
-    // if previouse element is start of line:
+    // if previous element is start of line:
     if(director.isStart(previous_element))
     {
       // deactivating active element
@@ -42,7 +42,7 @@ Module.getInstance().left_arrow = function(options)
     // if it is a word:
     else if(director.isWord(previous_element))
     {
-      // saing that this word now is parent
+      // saying that this word now is parent
       director.makeItParentWord(previous_element);
       word = director.getParentWord();
       
