@@ -52,7 +52,7 @@ Module.getInstance().left_arrow = function(options)
       // take last character in this word
       var previouse_word_char = director.getLastElement(previous_element);
       
-      // making previouse character as active one
+      // making previous character as active one
       director.activate(previouse_word_char);
       
       // deactivate active element
@@ -144,7 +144,7 @@ Module.getInstance().left_arrow = function(options)
         // make active last char of word
         var last_word_in_line = director.getLastElement(previous_line);
         
-        // if last element in a line is a word, then make it perent with active last 
+        // if last element in a line is a word, then make it parent with active last 
         // child:
         if(director.isWord(last_word_in_line))
         {
