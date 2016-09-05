@@ -27,7 +27,7 @@ Module.getInstance().left_arrow = function(options)
   // getting previos element that will be active after key pressed
   var previous_element = director.getBeforeEntity(active_element);
 
-  // anylizing what before active element
+  // analyzing what before active element
   // and if it has previouse elements:  
   if(previous_element != false)
   {
