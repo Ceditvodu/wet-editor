@@ -46,7 +46,7 @@ Module.getInstance().left_arrow = function(options)
       director.makeItParentWord(previous_element);
       word = director.getParentWord();
       
-      // explode one word to a diferent characters
+      // explode one word to a different characters
       word.innerHTML = divider.divide(word);
       
       // take last character in this word
