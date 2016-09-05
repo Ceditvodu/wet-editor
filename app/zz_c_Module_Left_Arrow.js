@@ -164,7 +164,7 @@ Module.getInstance().left_arrow = function(options)
         // getting active element that must be deactivated
         var active_element = director.getCursorEntity('active');
         
-        // getting previose element thet will be active after key pressed
+        // getting previos element that will be active after key pressed
         var previous_element = director.getBeforeEntity(active_element);
         
         // if we are not at start of previouse line:
