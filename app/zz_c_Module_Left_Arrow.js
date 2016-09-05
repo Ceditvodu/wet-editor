@@ -154,7 +154,7 @@ Module.getInstance().left_arrow = function(options)
             
           director.activate(last_char_in_word);
         }
-        // if not, than just activate it
+        // if not, than just activated it
         else
         {
           director.activate(last_word_in_line);
