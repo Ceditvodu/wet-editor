@@ -135,7 +135,7 @@ Module.getInstance().left_arrow = function(options)
         word = previous_line.childNodes[previous_line.childNodes.length-1];
         
         
-        // if last element in previouse line not a word
+        // if last element in previous line not a word
         if(director.isSignifier(word) == false)
         {
           // explode content
@@ -167,7 +167,7 @@ Module.getInstance().left_arrow = function(options)
         // getting previos element that will be active after key pressed
         var previous_element = director.getBeforeEntity(active_element);
         
-        // if we are not at start of previouse line:
+        // if we are not at start of previous line:
         if(previous_element != false)
         {
           // if the last entity of line is word
