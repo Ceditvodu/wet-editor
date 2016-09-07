@@ -28,7 +28,7 @@
     // if we are in parent word:
     if(director.isThereAnyActiveWords('parent'))
     {
-      // geting a cursor position 
+      // getting a cursor position 
       var cursor_index = 0;
   
       var chars = active_char.parentElement.childNodes.length || false;
