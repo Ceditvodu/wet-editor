@@ -59,7 +59,7 @@ Module.getInstance().up_arrow = function(options)
 
       director.makeItWord(word);
       
-      // with word going something wrong so i must make decremating for prevent it
+      // with word going something wrong so i must make decrementing for prevent it
       director.setCursorOnPosition(cursor_position, previose_line);
     }
     // if we going not from word:
