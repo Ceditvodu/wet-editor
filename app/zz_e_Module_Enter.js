@@ -115,7 +115,7 @@
         second_half.innerHTML = divider.concat(second_half);
         var new_line_content = second_half.outerHTML + after_word;
         
-        // previouse line
+        // previous line
         var prev_line_index = options.object.current_line[options.index];
         var prev_line = options
                         .object
@@ -140,12 +140,12 @@
 //        .appendChild(line);
         director.plus(prev_line, line);
         
-        // delete previouse cursor
+        // delete previous cursor
         this.deletePrevioseCursor(concrete_entity);
         
         word.innerHTML = divider.concat(word);
         
-        // deactivate previouse word
+        // deactivate previous word
         this.deletePrevioseParent(concrete_entity);
         
       }
@@ -160,10 +160,10 @@
       var after_cursor = director.getAllAfter(active_char);
       after_cursor = after_cursor.join('');
       
-      // delete previouse cursor
+      // delete previous cursor
       this.deletePrevioseCursor(concrete_entity);
       
-      // previouse line
+      // previous line
       var prev_line_index = options.object.current_line[options.index];
       var prev_line = options
       .object
@@ -196,7 +196,7 @@
 
       this.deletePrevioseParent(concrete_entity);
       
-      // previouse line
+      // previous line
       var prev_line_index = options.object.current_line[options.index];
       var prev_line = options.object.line[options.index][prev_line_index];
 
