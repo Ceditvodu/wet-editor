@@ -46,7 +46,7 @@
       // if cursor it is a last char:
       if(cursor_index == (chars-1))
       {
-        // deactivate previouse word
+        // deactivate previous word
         director.makeItWord(word,['keyword']);
         
         // concat word
@@ -55,7 +55,7 @@
         // content for a new line
         var content_for_new_line = divider.trim(word.parentNode, 'parent');
         
-        // refreshing content without, meved to a new line, content
+        // refreshing content without, moved to a new line, content
         word.parentNode.innerHTML = content_for_new_line[0];
         
         // delete previouse cursor
