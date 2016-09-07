@@ -132,7 +132,7 @@
         word.innerHTML = divider.concat(first_part_word);
         
       
-        // renew active alement for space after word
+        // renew active element for space after word
         active_char = concrete_entity.getElementsByClassName('active')[0];
 
       
