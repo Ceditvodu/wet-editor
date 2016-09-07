@@ -71,7 +71,7 @@
 
         this.deletePrevioseParent(concrete_entity);
 
-        // adding space objecto to an active line
+        // adding space object to an active line
         word.parentNode.insertBefore(tab, word.nextSibling);
 
       }
