@@ -11,7 +11,7 @@
   */
 Module.getInstance().delete = function(options)
 {
-  // standart block of initialization of dependencies		
+  // standard block of initialization of dependencies		
   var class_generator = new Char_Class_Generator('wet-');
   var concrete_entity = options.object.container[options.index];
   var divider = new Divider();
