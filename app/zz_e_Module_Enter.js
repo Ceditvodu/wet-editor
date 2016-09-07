@@ -58,10 +58,10 @@
         // refreshing content without, moved to a new line, content
         word.parentNode.innerHTML = content_for_new_line[0];
         
-        // delete previouse cursor
+        // delete previous cursor
         director.deactivate(active_char);
         
-        // previouse line
+        // previous line
         var prev_line_index = options.object.current_line[options.index];
         var prev_line = options
                         .object
@@ -110,7 +110,7 @@
         // delete it from this line 
         director.deleteAllAfter(word);
         
-        // concate all the gathered info in to one string 
+        // concat all the gathered info in to one string 
         second_half = director.create('word', second_half);
         second_half.innerHTML = divider.concat(second_half);
         var new_line_content = second_half.outerHTML + after_word;
