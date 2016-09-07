@@ -21,7 +21,7 @@
     
     var director = new Director(concrete_entity, 'wet-', 'active');
   
-    // prepare previose element for next work
+    // prepare previous element for next work
     var word = director.getParentWord();
 
     var active_char = director.getCursorEntity('active');
